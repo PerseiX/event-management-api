@@ -1,0 +1,8 @@
+services:
+    api.main_transformer:
+        class: ApiBundle\Transformer\Transformer
+
+    example.transformer:
+        class: ApiBundle\Transformer\ExampleTransformer
+        tags:
+            - { name: api.transformer }
