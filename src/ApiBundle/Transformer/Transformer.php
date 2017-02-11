@@ -1,13 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: persei
- * Date: 06.02.17
- * Time: 20:02
- */
-
 namespace ApiBundle\Transformer;
 
+use ApiBundle\Representation\RepresentationInterface;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
@@ -31,7 +25,7 @@ class Transformer
 	/**
 	 * @param TransformerInterface $transformer
 	 */
-	public function addTransformer($transformer)
+	public function addTransformer(TransformerInterface $transformer): void
 	{
 		if (true === in_array($transformer, $this->transformers)) {
 			throw new Exception('This transformer is already added to transformers collection');
@@ -42,9 +36,9 @@ class Transformer
 	/**
 	 * @param $input
 	 *
-	 * @return mixed
+	 * @return RepresentationInterface
 	 */
-	public function transform($input)
+	public function transform($input): RepresentationInterface
 	{
 		$transformer = $this->getTransformer($input);
 
@@ -54,15 +48,15 @@ class Transformer
 	/**
 	 * @param $input
 	 *
-	 * @return mixed
+	 * @return TransformerInterface
 	 */
-	protected function getTransformer($input)
+	public function getTransformer($input): TransformerInterface
 	{
 		foreach ($this->transformers as $transformer) {
 			if ($transformer->support($input)) {
 				return $transformer;
 			}
 		}
-		throw new NotFoundResourceException(sprintf('Looked for transformer %s doesn\'t found!"', $input));
+		throw new NotFoundResourceException(sprintf('Looked for transformer %s doesn\'t found!"', get_class($input)));
 	}
 }
