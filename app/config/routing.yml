@@ -1,5 +1,3 @@
-api:
-    resource: "@ApiBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
+api.bundle:
+    resource: "@ApiBundle/Resources/config/routing/routing.yml"
+    prefix: "/api"

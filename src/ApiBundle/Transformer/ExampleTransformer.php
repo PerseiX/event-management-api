@@ -30,7 +30,10 @@ class ExampleTransformer implements TransformerInterface
 	public function transform($input): RepresentationInterface
 	{
 		$example = new ExampleRepresentation();
-		$example->setId($input->getId());
+
+		/** @var ExampleRepresentation $input */
+		$example->setId($input->getId())
+		        ->setName($input->getName());
 
 		return $example;
 	}

@@ -2,27 +2,23 @@
 
 namespace ApiBundle\Controller;
 
-use ApiBundle\Entity\Example;
 use ApiBundle\Model\ExampleModel;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Component\HttpFoundation\Response;
 
-class DefaultController extends Controller
+class DefaultController extends FOSRestController
 {
 	/**
-	 * @Route("/")
+	 * @return Response
 	 */
-	public function indexAction()
+	public function getExampleAction()
 	{
-		$example = new Example();
-		$example->setId(123);
+		$examples       = $this->getDoctrine()->getRepository('ApiBundle:Example')
+		                       ->findAll();
+		$representation = $this->get('api.main_transformer')->transform(new ExampleModel($examples));
 
-		$example2 = new Example();
-		$example2->setId(321);
+		$view = $this->view($representation, Response::HTTP_OK);
 
-		$representation = $this->get('api.main_transformer')->transform(new ExampleModel([$example, $example2]));
-
-		return new JsonResponse($representation);
+		return $this->handleView($view);
 	}
 }
