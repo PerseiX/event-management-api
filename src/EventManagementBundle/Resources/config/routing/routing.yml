@@ -1,0 +1,7 @@
+get.events:
+    path:      /events.{_format}
+    defaults: {
+        _controller: EventManagementBundle:Event:getEvents,
+        _format: json
+        }
+    methods: [GET]

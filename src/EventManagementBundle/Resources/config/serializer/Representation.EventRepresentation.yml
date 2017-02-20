@@ -1,0 +1,24 @@
+EventManagementBundle\Representation\EventRepresentation:
+    exclusion_policy: ALL
+    properties:
+        id:
+            type: int
+            expose: true
+
+        name:
+            type: string
+            expose: true
+
+        createdAt:
+            expose: true
+
+        eventTerm:
+            expose: true
+
+        description:
+            type: string
+            expose: true
+
+        isActive:
+            type: boolean
+            expose: true

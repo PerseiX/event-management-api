@@ -1,3 +1,7 @@
-api.bundle:
-    resource: "@ApiBundle/Resources/config/routing/routing.yml"
+event_management:
+    resource: "@EventManagementBundle/Resources/config/routing/routing.yml"
     prefix: "/api"
+
+#api.bundle:
+#    resource: "@ApiBundle/Resources/config/routing/routing.yml"
+#    prefix: "/api"

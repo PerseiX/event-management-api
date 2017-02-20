@@ -6,14 +6,3 @@ services:
         class: ApiBundle\Transformer\AbstractTransformer
         abstract: true
         arguments: ['@api.main_transformer']
-
-    example.transformer:
-        class: ApiBundle\Transformer\ExampleTransformer
-        tags:
-            - { name: api.transformer }
-
-    example.colelction.transformer:
-        class: ApiBundle\Transformer\ExampleCollectionTransformer
-        parent: 'abstract.transformer'
-        tags:
-            - { name: api.transformer }

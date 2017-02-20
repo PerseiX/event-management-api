@@ -1,4 +1,0 @@
-get.example:
-    path:      /example.{_format}
-    defaults: { _controller: ApiBundle:Default:getExample, _format: json }
-    methods: [GET]

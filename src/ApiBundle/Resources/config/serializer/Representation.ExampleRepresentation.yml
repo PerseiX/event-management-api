@@ -1,9 +1,0 @@
-ApiBundle\Representation\ExampleRepresentation:
-    exclusion_policy: ALL
-    properties:
-        id:
-            type: int
-            expose: true
-        name:
-            type: string
-            expose: true

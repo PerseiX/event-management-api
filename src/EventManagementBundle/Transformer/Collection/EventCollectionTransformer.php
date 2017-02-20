@@ -1,18 +1,20 @@
 <?php
 
-namespace ApiBundle\Transformer;
+namespace EventManagementBundle\Transformer\Collection;
 
 use ApiBundle\Model\AbstractModelCollection;
-use ApiBundle\Model\ExampleModel;
-use ApiBundle\Representation\ExampleCollectionRepresentation;
 use ApiBundle\Representation\RepresentationInterface;
+use ApiBundle\Transformer\AbstractTransformer;
+use EventManagementBundle\Model\EventModel;
+use EventManagementBundle\Representation\EventCollectionRepresentation;
 
 /**
- * Class ExampleCollectionTransformer
- * @package ApiBundle\Transformer
+ * Class EventCollectionTransformer
+ * @package EventManagementBundle\Transformer\Collection
  */
-class ExampleCollectionTransformer extends AbstractTransformer
+class EventCollectionTransformer extends AbstractTransformer
 {
+
 	/**
 	 * @param $input
 	 *
@@ -20,7 +22,7 @@ class ExampleCollectionTransformer extends AbstractTransformer
 	 */
 	public function support($input): bool
 	{
-		return $input instanceof ExampleModel;
+		return $input instanceof EventModel;
 	}
 
 	/**
@@ -30,8 +32,8 @@ class ExampleCollectionTransformer extends AbstractTransformer
 	 */
 	public function transform($input): RepresentationInterface
 	{
-		$transformer = null;
 		$collection  = [];
+		$transformer = null;
 
 		/** @var AbstractModelCollection $input */
 		foreach ($input->getCollection() as $item) {
@@ -41,6 +43,6 @@ class ExampleCollectionTransformer extends AbstractTransformer
 			$collection[] = $transformer->transform($item);
 		}
 
-		return new ExampleCollectionRepresentation($collection);
+		return new EventCollectionRepresentation($collection);
 	}
 }

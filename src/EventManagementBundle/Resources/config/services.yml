@@ -1,0 +1,11 @@
+services:
+    event.transformer:
+        class: EventManagementBundle\Transformer\EventTransformer
+        tags:
+            - { name: api.transformer }
+
+    event.colelction.transformer:
+        class: EventManagementBundle\Transformer\Collection\EventCollectionTransformer
+        parent: 'abstract.transformer'
+        tags:
+            - { name: api.transformer }
