@@ -2,12 +2,16 @@
 
 namespace EventManagementBundle\Controller;
 
+use ApiBundle\Controller\AbstractApiController;
+use ApiBundle\Representation\RepresentationInterface;
+use Doctrine\ORM\ORMException;
 use EventManagementBundle\Entity\Event;
+use EventManagementBundle\Form\Type\EventType;
 use EventManagementBundle\Model\EventModel;
-use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class EventController extends FOSRestController
+class EventController extends AbstractApiController
 {
 	/**
 	 * @return Response
@@ -18,8 +22,20 @@ class EventController extends FOSRestController
 		                       ->findAll();
 		$representation = $this->get('api.main_transformer')->transform(new EventModel($events));
 
-		$view = $this->view($representation, Response::HTTP_OK);
-
-		return $this->handleView($view);
+		return $this->representationResponse($representation);
 	}
+
+	/**
+	 * @param Request $request
+	 *
+	 * @return Response
+	 */
+	public function createEventAction(Request $request)
+	{
+		$event = new Event();
+		$form = $this->createForm(EventType::class, $event);
+
+		return $this->formResponse($request, $form);
+	}
+
 }

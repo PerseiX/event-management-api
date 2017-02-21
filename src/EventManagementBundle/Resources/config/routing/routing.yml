@@ -5,3 +5,11 @@ get.events:
         _format: json
         }
     methods: [GET]
+
+create.event:
+    path:      /event.{_format}
+    defaults: {
+        _controller: EventManagementBundle:Event:createEvent,
+        _format: json
+        }
+    methods: [POST]

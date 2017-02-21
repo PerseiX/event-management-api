@@ -23,21 +23,21 @@ class Event
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(type="string", length=256)
+	 * @ORM\Column(type="string", length=256, nullable=false)
 	 */
 	protected $name;
 
 	/**
 	 * @var \DateTime
 	 *
-	 * @ORM\Column(type="datetime")
+	 * @ORM\Column(type="datetime", nullable=false)
 	 */
 	protected $eventTerm;
 
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(type="text")
+	 * @ORM\Column(type="text", nullable=false)
 	 */
 	protected $description;
 
@@ -46,7 +46,11 @@ class Event
 	 */
 	public function __construct()
 	{
-		$this->setCreatedAt(new \DateTime());
+		$this->setCreatedAt(new \DateTime())
+		     ->setIsActive(1)
+		     ->setName('')
+		     ->setDescription('')
+		     ->setEventTerm(new \DateTime());
 	}
 
 	/**
