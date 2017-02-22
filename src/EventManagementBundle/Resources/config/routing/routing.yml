@@ -1,15 +1,31 @@
 get.events:
     path:      /events.{_format}
-    defaults: {
-        _controller: EventManagementBundle:Event:getEvents,
+    defaults:
+        _controller: EventManagementBundle:Event:getEvents
         _format: json
-        }
+
     methods: [GET]
 
 create.event:
     path:      /event.{_format}
-    defaults: {
-        _controller: EventManagementBundle:Event:createEvent,
+    defaults:
+        _controller: EventManagementBundle:Event:createEvent
         _format: json
-        }
+
     methods: [POST]
+
+edit.event:
+    path:      /event/{id}
+    defaults:
+        _controller: EventManagementBundle:Event:editEvent
+        _format: json
+
+    methods: [PUT]
+
+delete.event:
+    path:      /event/{id}
+    defaults:
+        _controller: EventManagementBundle:Event:deleteEvent
+        _format: json
+
+    methods: [DELETE]

@@ -28,6 +28,16 @@ class AbstractApiController extends FOSRestController
 	}
 
 	/**
+	 * @param $statusCode
+	 *
+	 * @return Response
+	 */
+	public function response($statusCode)
+	{
+		return $this->handleView($this->view(null, $statusCode));
+	}
+
+	/**
 	 * @param Request $request
 	 * @param Form    $form
 	 *
@@ -38,8 +48,13 @@ class AbstractApiController extends FOSRestController
 	{
 		$form->handleRequest($request);
 
+		$clearMissing = true;
+		if ('PUT' === $request->getMethod()) {
+			$clearMissing = false;
+		}
+
 		if (false === $form->isSubmitted()) {
-			$form->submit($request->request->all());
+			$form->submit($request->request->all(), $clearMissing);
 		}
 
 		if (true === $form->isValid()) {

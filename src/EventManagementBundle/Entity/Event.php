@@ -23,7 +23,7 @@ class Event
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(type="string", length=256, nullable=false)
+	 * @ORM\Column(type="string", length=256)
 	 */
 	protected $name;
 
@@ -37,7 +37,7 @@ class Event
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(type="text", nullable=false)
+	 * @ORM\Column(type="text", nullable=true)
 	 */
 	protected $description;
 
@@ -46,17 +46,13 @@ class Event
 	 */
 	public function __construct()
 	{
-		$this->setCreatedAt(new \DateTime())
-		     ->setIsActive(1)
-		     ->setName('')
-		     ->setDescription('')
-		     ->setEventTerm(new \DateTime());
+		$this->setCreatedAt(new \DateTime());
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getDescription(): string
+	public function getDescription(): ?string
 	{
 		return $this->description;
 	}
@@ -76,7 +72,7 @@ class Event
 	/**
 	 * @return \DateTime
 	 */
-	public function getEventTerm(): \DateTime
+	public function getEventTerm(): ?\DateTime
 	{
 		return $this->eventTerm;
 	}
@@ -96,7 +92,7 @@ class Event
 	/**
 	 * @return string
 	 */
-	public function getName(): string
+	public function getName(): ?string
 	{
 		return $this->name;
 	}
@@ -112,5 +108,4 @@ class Event
 
 		return $this;
 	}
-
 }

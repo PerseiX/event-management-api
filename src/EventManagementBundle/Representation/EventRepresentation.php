@@ -43,7 +43,7 @@ class EventRepresentation implements RepresentationInterface
 	/**
 	 * @return int
 	 */
-	public function getId(): int
+	public function getId(): ?int
 	{
 		return $this->id;
 	}
@@ -53,7 +53,7 @@ class EventRepresentation implements RepresentationInterface
 	 *
 	 * @return $this
 	 */
-	public function setId(int $id)
+	public function setId(?int $id)
 	{
 		$this->id = $id;
 
@@ -63,7 +63,7 @@ class EventRepresentation implements RepresentationInterface
 	/**
 	 * @return string
 	 */
-	public function getName(): string
+	public function getName(): ?string
 	{
 		return $this->name;
 	}
@@ -73,7 +73,7 @@ class EventRepresentation implements RepresentationInterface
 	 *
 	 * @return $this
 	 */
-	public function setName(string $name)
+	public function setName(?string $name)
 	{
 		$this->name = $name;
 
@@ -83,7 +83,7 @@ class EventRepresentation implements RepresentationInterface
 	/**
 	 * @return string
 	 */
-	public function getDescription(): string
+	public function getDescription(): ?string
 	{
 		return $this->description;
 	}
@@ -93,7 +93,7 @@ class EventRepresentation implements RepresentationInterface
 	 *
 	 * @return $this
 	 */
-	public function setDescription(string $description)
+	public function setDescription(?string $description)
 	{
 		$this->description = $description;
 
@@ -103,7 +103,7 @@ class EventRepresentation implements RepresentationInterface
 	/**
 	 * @return \DateTime
 	 */
-	public function getCreateAt(): \DateTime
+	public function getCreateAt(): ?\DateTime
 	{
 		return $this->createAt;
 	}
@@ -113,7 +113,7 @@ class EventRepresentation implements RepresentationInterface
 	 *
 	 * @return $this
 	 */
-	public function setCreateAt(\DateTime $createAt)
+	public function setCreateAt(?\DateTime $createAt)
 	{
 		$this->createAt = $createAt;
 
@@ -123,7 +123,7 @@ class EventRepresentation implements RepresentationInterface
 	/**
 	 * @return \DateTime
 	 */
-	public function getEventTerm(): \DateTime
+	public function getEventTerm(): ?\DateTime
 	{
 		return $this->eventTerm;
 	}
@@ -133,7 +133,7 @@ class EventRepresentation implements RepresentationInterface
 	 *
 	 * @return $this
 	 */
-	public function setEventTerm(\DateTime $eventTerm)
+	public function setEventTerm(?\DateTime $eventTerm)
 	{
 		$this->eventTerm = $eventTerm;
 
@@ -143,7 +143,7 @@ class EventRepresentation implements RepresentationInterface
 	/**
 	 * @return bool
 	 */
-	public function getIsActive(): bool
+	public function getIsActive(): ?bool
 	{
 		return $this->isActive;
 	}
@@ -153,7 +153,7 @@ class EventRepresentation implements RepresentationInterface
 	 *
 	 * @return $this
 	 */
-	public function setIsActive(bool $isActive)
+	public function setIsActive(?bool $isActive)
 	{
 		$this->isActive = $isActive;
 

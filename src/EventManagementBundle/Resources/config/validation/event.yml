@@ -1,0 +1,21 @@
+EventManagementBundle\Entity\Event:
+    properties:
+        description:
+            - NotBlank: ~
+            - Type: string
+
+        isActive:
+            - NotBlank: ~
+            - Type: boolean
+
+        name:
+            - NotBlank: ~
+            - Type: string
+
+        createdAt:
+            - NotBlank: ~
+            - Type: datetime
+
+        eventTerm:
+            - NotBlank: ~
+            - Type: datetime
