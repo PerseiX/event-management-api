@@ -4,7 +4,7 @@ namespace EventManagementBundle\Entity;
 
 use ApiBundle\Entity\Traits\CreatedAtTrait;
 use ApiBundle\Entity\Traits\IDTrait;
-use ApiBundle\Entity\Traits\IsActiveTrait;
+use ApiBundle\Entity\Traits\ActiveTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Event
 {
 	use IDTrait;
-	use IsActiveTrait;
+	use ActiveTrait;
 	use CreatedAtTrait;
 
 	/**

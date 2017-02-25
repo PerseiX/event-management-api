@@ -10,10 +10,10 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class EventType
+ * Class EditEventType
  * @package EventManagementBundle\Form\Type
  */
-class EventType extends AbstractType
+class EditEventType extends AbstractType
 {
 	/**
 	 * {@override}
@@ -23,14 +23,7 @@ class EventType extends AbstractType
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$builder->add('isActive', ChoiceType::class, [
-					'choices' => [
-						'Yes' => true,
-						'No'  => false,
-					]
-				])
-		        ->add('createdAt', DateType::class, ['widget' => 'single_text'])
-		        ->add('name', TextType::class)
+		$builder->add('name', TextType::class)
 		        ->add('eventTerm', DateType::class, ['widget' => 'single_text'])
 		        ->add('description', TextType::class);
 	}

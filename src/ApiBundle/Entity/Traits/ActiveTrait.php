@@ -5,34 +5,34 @@ namespace ApiBundle\Entity\Traits;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class IsActiveTrait
+ * Class ActiveTrait
  * @package ApiBundle\Entity\Traits
  */
-trait IsActiveTrait
+trait ActiveTrait
 {
 	/**
 	 * @var boolean
 	 *
 	 * @ORM\Column(type="boolean", options={"default" = true})
 	 */
-	protected $isActive;
+	protected $active;
 
 	/**
 	 * @return bool
 	 */
-	public function getIsActive(): ?bool
+	public function getActive(): ?bool
 	{
-		return $this->isActive;
+		return $this->active;
 	}
 
 	/**
-	 * @param bool $isActive
+	 * @param bool $active
 	 *
 	 * @return $this
 	 */
-	public function setIsActive(bool $isActive)
+	public function setActive(bool $active)
 	{
-		$this->isActive = $isActive;
+		$this->active = $active;
 
 		return $this;
 	}

@@ -39,7 +39,7 @@ class EventTransformer implements TransformerInterface
 		               ->setCreateAt($input->getCreatedAt())
 		               ->setDescription($input->getDescription())
 		               ->setEventTerm($input->getEventTerm())
-		               ->setIsActive($input->getIsActive());
+		               ->setActive($input->getActive());
 
 		return $representation;
 	}

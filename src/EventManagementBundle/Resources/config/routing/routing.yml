@@ -1,31 +1,51 @@
-get.events:
+##############################
+#           EVENT            #
+##############################
+event.get_collection:
     path:      /events.{_format}
     defaults:
-        _controller: EventManagementBundle:Event:getEvents
+        _controller: EventManagementBundle:Event:collection
         _format: json
-
     methods: [GET]
 
-create.event:
+event.get_single:
+    path:       /event/{eventId}
+    defaults:
+        _controller: EventManagementBundle:Event:single
+        _format: json
+    methods: [GET]
+
+event.create:
     path:      /event.{_format}
     defaults:
-        _controller: EventManagementBundle:Event:createEvent
+        _controller: EventManagementBundle:Event:create
         _format: json
-
     methods: [POST]
 
-edit.event:
-    path:      /event/{id}
+event.edit:
+    path:      /event/{eventId}
     defaults:
-        _controller: EventManagementBundle:Event:editEvent
+        _controller: EventManagementBundle:Event:edit
         _format: json
-
     methods: [PUT]
 
-delete.event:
-    path:      /event/{id}
+event.delete:
+    path:      /event/{eventId}
     defaults:
-        _controller: EventManagementBundle:Event:deleteEvent
+        _controller: EventManagementBundle:Event:delete
         _format: json
-
     methods: [DELETE]
+
+event.single_enable:
+    path:      /event/enable/{eventId}
+    defaults:
+        _controller: EventManagementBundle:Event:enable
+        _format: json
+    methods: [PUT]
+
+event.single_disable:
+    path:       /event/disable/{eventId}
+    defaults:
+        _controller: EventManagementBundle:Event:disable
+        _format: json
+    methods: [PUT]

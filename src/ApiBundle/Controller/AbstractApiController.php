@@ -17,12 +17,13 @@ class AbstractApiController extends FOSRestController
 {
 	/**
 	 * @param RepresentationInterface $representation
+	 * @param int                     $status
 	 *
 	 * @return Response
 	 */
-	protected function representationResponse(RepresentationInterface $representation)
+	protected function representationResponse(RepresentationInterface $representation, $status = Response::HTTP_OK)
 	{
-		$view = $this->view($representation, Response::HTTP_OK);
+		$view = $this->view($representation, $status);
 
 		return $this->handleView($view);
 	}
@@ -112,5 +113,15 @@ class AbstractApiController extends FOSRestController
 		}
 
 		return $errors;
+	}
+
+	/**
+	 * @param $entity
+	 */
+	protected function updateEntity($entity)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$em->persist($entity);
+		$em->flush();
 	}
 }

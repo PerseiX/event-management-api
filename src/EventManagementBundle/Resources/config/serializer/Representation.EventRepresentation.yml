@@ -11,14 +11,16 @@ EventManagementBundle\Representation\EventRepresentation:
 
         createdAt:
             expose: true
+            type: DateTime
 
         eventTerm:
             expose: true
+            type: DateTime
 
         description:
             type: string
             expose: true
 
-        isActive:
+        active:
             type: boolean
             expose: true

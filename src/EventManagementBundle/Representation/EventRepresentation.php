@@ -38,7 +38,7 @@ class EventRepresentation implements RepresentationInterface
 	/**
 	 * @var boolean
 	 */
-	private $isActive;
+	private $active;
 
 	/**
 	 * @return int
@@ -143,19 +143,19 @@ class EventRepresentation implements RepresentationInterface
 	/**
 	 * @return bool
 	 */
-	public function getIsActive(): ?bool
+	public function getActive(): ?bool
 	{
-		return $this->isActive;
+		return $this->active;
 	}
 
 	/**
-	 * @param bool $isActive
+	 * @param bool|null $active
 	 *
 	 * @return $this
 	 */
-	public function setIsActive(?bool $isActive)
+	public function setActive(?bool $active)
 	{
-		$this->isActive = $isActive;
+		$this->active = $active;
 
 		return $this;
 	}
