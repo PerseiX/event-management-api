@@ -35,8 +35,9 @@ class EditEventType extends AbstractType
 	public function configureOptions(OptionsResolver $resolver)
 	{
 		$resolver->setDefaults([
-			'data_class'      => 'EventManagementBundle\Entity\Event',
-			'csrf_protection' => false
+			'data_class'         => 'EventManagementBundle\Entity\Event',
+			'csrf_protection'    => false,
+			'allow_extra_fields' => true
 		]);
 	}
 }

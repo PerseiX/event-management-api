@@ -1,13 +1,13 @@
 EventManagementBundle\Entity\Event:
     properties:
         description:
-            - NotBlank: ~
+            - NotBlank: { message: Opis nie może być pusty }
             - Type: string
 
         name:
-            - NotBlank: ~
+            - NotBlank: { message: Nazwa nie może być puste }
             - Type: string
 
         eventTerm:
-            - NotBlank:
+            - NotBlank: { message: Data wydarzenia nie może być pusta }
             - Type: datetime
