@@ -13,7 +13,7 @@ trait CreatedAtTrait
 	/**
 	 * @var \DateTime
 	 *
-	 * @ORM\Column(type="datetime", nullable=false)
+	 * @ORM\Column(type="datetime", nullable=true)
 	 */
 	protected $createdAt;
 

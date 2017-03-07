@@ -86,3 +86,7 @@ fos_rest:
     body_converter:
         enabled: false
         validate: true
+
+services:
+    jms_serializer.naming_strategy:
+        class: 'JMS\Serializer\Naming\IdenticalPropertyNamingStrategy'

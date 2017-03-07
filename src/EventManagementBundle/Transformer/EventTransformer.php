@@ -36,7 +36,7 @@ class EventTransformer implements TransformerInterface
 		/** @var Event $input */
 		$representation->setId($input->getId())
 		               ->setName($input->getName())
-		               ->setCreateAt($input->getCreatedAt())
+		               ->setCreatedAt($input->getCreatedAt())
 		               ->setDescription($input->getDescription())
 		               ->setEventTerm($input->getEventTerm())
 		               ->setActive($input->getActive());

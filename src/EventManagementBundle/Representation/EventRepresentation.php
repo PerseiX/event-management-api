@@ -28,7 +28,7 @@ class EventRepresentation implements RepresentationInterface
 	/**
 	 * @var \DateTime
 	 */
-	private $createAt;
+	private $createdAt;
 
 	/**
 	 * @var \DateTime
@@ -103,19 +103,19 @@ class EventRepresentation implements RepresentationInterface
 	/**
 	 * @return \DateTime
 	 */
-	public function getCreateAt(): ?\DateTime
+	public function getCreatedAt(): ?\DateTime
 	{
-		return $this->createAt;
+		return $this->createdAt;
 	}
 
 	/**
-	 * @param \DateTime $createAt
+	 * @param \DateTime|null $createdAt
 	 *
 	 * @return $this
 	 */
-	public function setCreateAt(?\DateTime $createAt)
+	public function setCreatedAt(?\DateTime $createdAt)
 	{
-		$this->createAt = $createAt;
+		$this->createdAt = $createdAt;
 
 		return $this;
 	}

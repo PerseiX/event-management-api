@@ -13,7 +13,7 @@ trait ActiveTrait
 	/**
 	 * @var boolean
 	 *
-	 * @ORM\Column(type="boolean", options={"default" = true})
+	 * @ORM\Column(type="boolean", options={"default" = true}, nullable=true)
 	 */
 	protected $active;
 
@@ -30,7 +30,7 @@ trait ActiveTrait
 	 *
 	 * @return $this
 	 */
-	public function setActive(bool $active)
+	public function setActive(?bool $active)
 	{
 		$this->active = $active;
 

@@ -11,11 +11,11 @@ EventManagementBundle\Representation\EventRepresentation:
 
         createdAt:
             expose: true
-            type: DateTime
+            type: DateTime<'Y-m-d'>
 
         eventTerm:
             expose: true
-            type: DateTime
+            type: DateTime<'Y-m-d'>
 
         description:
             type: string

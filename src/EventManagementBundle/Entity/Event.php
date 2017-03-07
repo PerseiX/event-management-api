@@ -46,7 +46,8 @@ class Event
 	 */
 	public function __construct()
 	{
-		$this->setCreatedAt(new \DateTime());
+		$this->createdAt = new \DateTime();
+		$this->active    = false;
 	}
 
 	/**
@@ -62,7 +63,7 @@ class Event
 	 *
 	 * @return $this
 	 */
-	public function setDescription(string $description)
+	public function setDescription(?string $description)
 	{
 		$this->description = $description;
 
@@ -82,7 +83,7 @@ class Event
 	 *
 	 * @return $this
 	 */
-	public function setEventTerm(\DateTime $eventTerm)
+	public function setEventTerm(?\DateTime $eventTerm)
 	{
 		$this->eventTerm = $eventTerm;
 
@@ -102,7 +103,7 @@ class Event
 	 *
 	 * @return $this
 	 */
-	public function setName(string $name)
+	public function setName(?string $name)
 	{
 		$this->name = $name;
 

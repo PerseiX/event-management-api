@@ -23,15 +23,10 @@ class CreateEventType extends AbstractType
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$builder->add('active', ChoiceType::class, [
-					'choices' => [
-						'Yes' => true,
-						'No'  => false,
-					]
-				])
-		        ->add('name', TextType::class)
-		        ->add('eventTerm', DateType::class, ['widget' => 'single_text'])
-		        ->add('description', TextType::class);
+		$builder
+			->add('name', TextType::class)
+			->add('eventTerm', DateType::class, ['widget' => 'single_text'])
+			->add('description', TextType::class);
 	}
 
 	/**
@@ -40,7 +35,8 @@ class CreateEventType extends AbstractType
 	public function configureOptions(OptionsResolver $resolver)
 	{
 		$resolver->setDefaults([
-			'csrf_protection' => false,
+			'data_class'      => 'EventManagementBundle\Entity\Event',
+			'csrf_protection' => false
 		]);
 	}
 }
