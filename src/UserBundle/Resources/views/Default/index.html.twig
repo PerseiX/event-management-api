@@ -1,0 +1,5 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <a href="http://localhost/event-management-api/web/app_dev.php/oauth/v2/auth?client_id={{ client.id }}&amp;redirect_uri={{ client.redirect_url }}&amp;response_type={{ client.response_type }}">Autoryzuj</a>
+{% endblock %}

@@ -90,3 +90,11 @@ fos_rest:
 services:
     jms_serializer.naming_strategy:
         class: 'JMS\Serializer\Naming\IdenticalPropertyNamingStrategy'
+
+
+fos_oauth_server:
+    db_driver:           orm
+    client_class:        UserBundle\Entity\Oauth2\Client
+    access_token_class:  UserBundle\Entity\Oauth2\AccessToken
+    refresh_token_class: UserBundle\Entity\Oauth2\RefreshToken
+    auth_code_class:     UserBundle\Entity\Oauth2\AuthCode
