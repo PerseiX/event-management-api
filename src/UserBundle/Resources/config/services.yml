@@ -1,0 +1,16 @@
+services:
+    guzzle.client:
+        class: GuzzleHttp\Client
+
+    authorization_code_model:
+        class: UserBundle\Model\AuthorizationCodeModel
+
+    generate_access_token:
+        class: UserBundle\Security\GenerateAccessToken
+        arguments:
+            - '@authorization_code_model'
+            - '@guzzle.client'
+
+    code_resolver:
+        class: UserBundle\Resolver\CodeResolver
+        arguments: ['@authorization_code_model']

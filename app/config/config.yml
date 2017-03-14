@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: vendor/fos_oauth_server.yml }
     - { resource: "@ApiBundle/Resources/config/services.yml" }
     - { resource: "@EventManagementBundle/Resources/config/services.yml" }
 
@@ -87,14 +88,15 @@ fos_rest:
         enabled: false
         validate: true
 
+
+user:
+    client_id: 7_68zst57vgdoo0c8kow0s84wsgc0808scooc4sk08kgkkskowo0
+    client_secret: 1vfki9uu7uxww0oo4kkg0gco4ocwgcwkcwwcskk0gcsosw8wsg
+    grant_type: authorization_code
+    redirect_uri:
+        - http://localhost/event-management-api/web/app_dev.php/code
+
 services:
     jms_serializer.naming_strategy:
         class: 'JMS\Serializer\Naming\IdenticalPropertyNamingStrategy'
 
-
-fos_oauth_server:
-    db_driver:           orm
-    client_class:        UserBundle\Entity\Oauth2\Client
-    access_token_class:  UserBundle\Entity\Oauth2\AccessToken
-    refresh_token_class: UserBundle\Entity\Oauth2\RefreshToken
-    auth_code_class:     UserBundle\Entity\Oauth2\AuthCode

@@ -1,13 +1,14 @@
 <?php
 
-namespace UserBundle\Entity\Oauth2;
+namespace ApiBundle\Entity;
 
-use FOS\OAuthServerBundle\Entity\RefreshToken as BaseRefreshToken;
+use FOS\OAuthServerBundle\Entity\AccessToken as BaseAccessToken;
 use Doctrine\ORM\Mapping as ORM;
+
 /**
  * @ORM\Entity
  */
-class RefreshToken extends BaseRefreshToken
+class AccessToken extends BaseAccessToken
 {
 	/**
 	 * @ORM\Id
