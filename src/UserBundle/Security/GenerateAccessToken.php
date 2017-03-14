@@ -3,7 +3,7 @@
 namespace UserBundle\Security;
 
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use UserBundle\Model\AuthorizationCodeModel;
 use GuzzleHttp\Client as Guzzle;
 
@@ -40,23 +40,26 @@ class GenerateAccessToken
 	 */
 	public function generateAccessTokens()
 	{
-
-		$request  = $this->guzzleClient->post(
-			'http://localhost/event-management-api/web/app_dev.php/oauth/v2/token',
-			[
-				'form_params' => [
-					'grant_type'    => $this->authorizationCodeModel->getGrantType(),
-					'client_id'     => $this->authorizationCodeModel->getClientId(),
-					'client_secret' => $this->authorizationCodeModel->getClientSecret(),
-					'code'          => $this->authorizationCodeModel->getCode(),
-					'redirect_uri'  => $this->authorizationCodeModel->getRedirectUri()[0]
-				],
-				'headers'     => [
-					'Content-Type' => 'application/x-www-form-urlencoded'
-				],
-			]
-		);
-		$response = $request->getBody()->getContents();
+		try {
+			$request  = $this->guzzleClient->post(
+				'http://localhost/event-management-api/web/app_dev.php/oauth/v2/token',
+				[
+					'form_params' => [
+						'grant_type'    => $this->authorizationCodeModel->getGrantType(),
+						'client_id'     => $this->authorizationCodeModel->getClientId(),
+						'client_secret' => $this->authorizationCodeModel->getClientSecret(),
+						'code'          => $this->authorizationCodeModel->getCode(),
+						'redirect_uri'  => $this->authorizationCodeModel->getRedirectUri()[0]
+					],
+					'headers'     => [
+						'Content-Type' => 'application/x-www-form-urlencoded'
+					],
+				]
+			);
+			$response = $request->getBody()->getContents();
+		} catch (RequestException $exception) {
+			throw new BadRequestHttpException('Was some problem during send request. '. $exception->getMessage());
+		}
 
 		return $response;
 	}
