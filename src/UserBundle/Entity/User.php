@@ -2,75 +2,26 @@
 
 namespace UserBundle\Entity;
 
+use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Example\UserBundle\Entity\User
- *
  * @ORM\Entity
+ * @ORM\Table(name="fos_user")
  */
-class User implements UserInterface, \Serializable
+class User extends BaseUser
 {
 	/**
-	 * @ORM\Column(type="integer")
 	 * @ORM\Id
+	 * @ORM\Column(type="integer")
 	 * @ORM\GeneratedValue(strategy="AUTO")
 	 */
-	private $id;
-	/**
-	 * @ORM\Column(type="string", length=25, unique=true)
-	 */
-	private $username;
-	/**
-	 * @ORM\Column(type="string", length=64)
-	 */
-	private $password;
-	/**
-	 * @ORM\Column(type="string", length=60, unique=true)
-	 */
-	private $email;
-	/**
-	 * @ORM\Column(name="is_active", type="boolean")
-	 */
-	private $isActive;
+	protected $id;
 
 	public function __construct()
 	{
-		$this->isActive = true;
-	}
-
-	public function getUsername()
-	{
-		return $this->username;
-	}
-
-	public function getSalt()
-	{
-		return null;
-	}
-
-	public function getPassword()
-	{
-		return $this->password;
-	}
-
-	public function getRoles()
-	{
-		return ['ROLE_ADMIN'];
-	}
-
-	public function eraseCredentials()
-	{
-	}
-
-	public function serialize()
-	{
-		return serialize([$this->id, $this->username, $this->password]);
-	}
-
-	public function unserialize($serialized)
-	{
-		list ($this->id, $this->username, $this->password,) = unserialize($serialized);
+		parent::__construct();
+		// your own logic
 	}
 }

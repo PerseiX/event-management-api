@@ -2,13 +2,13 @@
 
 namespace UserBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use ApiBundle\Controller\AbstractApiController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class DefaultController extends Controller
+class DefaultController extends AbstractApiController
 {
 	/**
 	 * @Route("/authorize")
@@ -27,15 +27,14 @@ class DefaultController extends Controller
 	/**
 	 * @param Request $request
 	 *
-	 * @return Response
-	 * @Route("/code")
+	 * @return JsonResponse
 	 */
 	public function codeAction(Request $request)
 	{
 		$this->get('code_resolver')->resolve($request->get('code'));
 		$response = $this->get('generate_access_token')->generateAccessTokens();
 
-		return new Response($response);
+		return new JsonResponse($response);
 	}
 
 	/**
@@ -46,7 +45,7 @@ class DefaultController extends Controller
 		$clientManager = $this->get('fos_oauth_server.client_manager.default');
 		$client        = $clientManager->createClient();
 		$client->setRedirectUris(['http://localhost/event-management-api/web/app_dev.php/code']);
-		$client->setAllowedGrantTypes(['authorization_code']);
+		$client->setAllowedGrantTypes(['authorization_code', 'refresh_token']);
 		$client->setName('Event Management');
 		$clientManager->updateClient($client);
 		$output = sprintf("Added client with id: %s secret: %s", $client->getPublicId(), $client->getSecret());

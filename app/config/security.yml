@@ -1,21 +1,30 @@
 security:
    encoders:
-      UserBundle\Entity\User:
-         algorithm: plaintext
+        FOS\UserBundle\Model\UserInterface: bcrypt
 
    providers:
-      my_provider:
-         entity:
-            class: UserBundle:User
-            property: username
+      fos_userbundle:
+          id: fos_user.user_provider.username_email
 
    firewalls:
       oauth_token:
           pattern:    ^/oauth/v2/token
           security:   false
-      oauth_authorize:
-          pattern:    ^/oauth/v2/auth
-          http_basic: ~
+
+      secure_area:
+         pattern:    ^/
+         fos_oauth: true
+         form_login:
+            provider: fos_userbundle
+            login_path: fos_user_security_login
+            check_path: fos_user_security_check
+            remember_me: true
+         logout:
+            path:   /logout
+            target: /
+         anonymous: ~
+
+
       api:
           pattern:    ^/api
           fos_oauth:  true

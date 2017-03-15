@@ -14,3 +14,8 @@ services:
     code_resolver:
         class: UserBundle\Resolver\CodeResolver
         arguments: ['@authorization_code_model']
+
+    confirmation_window.disable:
+        class: UserBundle\Subscriber\ConfirmationWindow
+        tags:
+          - { name: kernel.event_listener, event: fos_oauth_server.pre_authorization_process, method: onPreAuthorizationProcess }

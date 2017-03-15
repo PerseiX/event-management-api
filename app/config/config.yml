@@ -94,9 +94,8 @@ user:
     client_secret: 1vfki9uu7uxww0oo4kkg0gco4ocwgcwkcwwcskk0gcsosw8wsg
     grant_type: authorization_code
     redirect_uri:
-        - http://localhost/event-management-api/web/app_dev.php/code
+        - http://localhost/event-management/app/#!/
 
 services:
     jms_serializer.naming_strategy:
         class: 'JMS\Serializer\Naming\IdenticalPropertyNamingStrategy'
-
