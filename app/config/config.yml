@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: vendor/fos_oauth_server.yml }
+    - { resource: vendor/fos_user.yml }
     - { resource: "@ApiBundle/Resources/config/services.yml" }
     - { resource: "@EventManagementBundle/Resources/config/services.yml" }
 
