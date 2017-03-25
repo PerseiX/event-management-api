@@ -3,17 +3,20 @@
 namespace UserBundle\Controller;
 
 use ApiBundle\Entity\AccessToken;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use ApiBundle\Entity\RefreshToken;
 use ApiBundle\Controller\AbstractApiController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use UserBundle\Model\AuthenticatedUserModel;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class AuthenticateController extends AbstractApiController
 {
 	/**
-	 * @Route("/authorize")
+	 * @return Response
 	 */
-	public function authorizeAction()
+	public function authorizeAction(): Response
 	{
 		return $this->render('UserBundle:Default:index.html.twig', [
 			'client' => [
@@ -26,11 +29,10 @@ class AuthenticateController extends AbstractApiController
 
 	/**
 	 * @param Request $request
-	 * @Route("/code", name="code")
 	 *
 	 * @return JsonResponse
 	 */
-	public function codeAction(Request $request)
+	public function codeAction(Request $request): JsonResponse
 	{
 		$this->get('code_resolver')->resolve($request->get('code'));
 		$response = $this->get('generate_access_token')->generateAccessTokens();
@@ -39,11 +41,27 @@ class AuthenticateController extends AbstractApiController
 	}
 
 	/**
+	 * @param AccessToken  $accessToken
+	 * @param RefreshToken $refreshToken
 	 *
-	 * @param Request $reuest
+	 * @return Response
+	 *
+	 * @ParamConverter("accessToken", options={
+	 *     "mapping": {
+	 *        "accessToken" = "token"
+	 *      }
+	 * })
+	 *
+	 * @ParamConverter("refreshToken", options={
+	 *     "mapping": {
+	 *        "refreshToken" = "token"
+	 *      }
+	 * })
 	 */
-	public function userDetailAction(AccessToken $accessToken)
+	public function userDetailAction(AccessToken $accessToken, RefreshToken $refreshToken): Response
 	{
+		$authenticatedUser = new AuthenticatedUserModel($accessToken, $refreshToken);
 
+		return $this->representationResponse($this->get('api.main_transformer')->transform($authenticatedUser));
 	}
 }

@@ -11,9 +11,9 @@ use Doctrine\ORM\EntityRepository;
 class AccessTokenRepository extends EntityRepository
 {
 	/**
-	 * @param $accessToken
+	 * @param AccessToken $accessToken
 	 */
-	public function userDetailFromAccessToken($accessToken)
+	public function userDetailFromAccessToken(AccessToken $accessToken)
 	{
 	}
 }

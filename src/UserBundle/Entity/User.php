@@ -22,6 +22,21 @@ class User extends BaseUser
 	public function __construct()
 	{
 		parent::__construct();
-		// your own logic
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getRoles()
+	{
+		return ['ROLE_ADMIN'];
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getId()
+	{
+		return $this->id;
 	}
 }

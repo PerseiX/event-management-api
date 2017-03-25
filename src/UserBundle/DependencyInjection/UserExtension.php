@@ -22,11 +22,9 @@ class UserExtension extends Extension
 		$configuration = new Configuration();
 		$config        = $this->processConfiguration($configuration, $configs);
 
-		$loader = new YamlFileLoader(
-			$container,
-			new FileLocator(__DIR__ . '/../Resources/config')
-		);
+		$loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 		$loader->load('services.yml');
+		$loader->load('transformers.yml');
 
 		$authorizationCodeModel = $container->getDefinition('authorization_code_model');
 		$authorizationCodeModel->addMethodCall('setClientId', [$config['client_id']]);

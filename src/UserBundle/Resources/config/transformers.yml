@@ -1,0 +1,20 @@
+services:
+    access_token.transformer:
+        class: UserBundle\Transformer\AccessTokenTransformer
+        tags:
+            - { name: api.transformer }
+
+    refresh_token.transformer:
+            class: UserBundle\Transformer\RefreshTokenTransformer
+            tags:
+                - { name: api.transformer }
+
+    authenticated_user.transformer:
+            class: UserBundle\Transformer\AuthenticatedUserTransformer
+            tags:
+                - { name: api.transformer }
+
+    user.transformer:
+            class: UserBundle\Transformer\UserTransformer
+            tags:
+                - { name: api.transformer }

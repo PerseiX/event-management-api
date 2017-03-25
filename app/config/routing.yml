@@ -1,11 +1,12 @@
 user:
-    resource: "@UserBundle/Controller/"
-    type:     annotation
+    resource: "@UserBundle/Resources/config/routing/routing.yml"
     prefix:   /
 
 event_management:
     resource: "@EventManagementBundle/Resources/config/routing/routing.yml"
     prefix: "/api"
+
+
 
 #FOSBundle
 fos_oauth_server_token:
