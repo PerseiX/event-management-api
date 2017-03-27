@@ -24,3 +24,60 @@ EventManagementBundle\Representation\EventRepresentation:
         active:
             type: boolean
             expose: true
+
+    relations:
+        -
+            rel: self
+            href:
+                route: event.get_single
+                parameters:
+                    eventId: expr(object.getId())
+                generator: default
+                absolute: true
+        -
+            rel: collection
+            href:
+                route: event.get_collection
+                parameters:
+                    limit: 1
+                    page: 1
+                generatior: default
+                absolute: true
+
+        -
+            rel: edit
+            href:
+                route: event.edit
+                parameters:
+                    eventId: expr(object.getId())
+                generatior: default
+                absolute: true
+
+        -
+            rel: enable
+            href:
+                route: event.single_enable
+                parameters:
+                    eventId: expr(object.getId())
+                generatior: default
+                absolute: true
+
+        -
+            rel: disable
+            href:
+                route: event.single_enable
+                parameters:
+                    eventId: expr(object.getId())
+                generatior: default
+                absolute: true
+
+        -
+            rel: delete
+            href:
+                route: event.delete
+                parameters:
+                    eventId: expr(object.getId())
+                generatior: default
+                absolute: true
+
+

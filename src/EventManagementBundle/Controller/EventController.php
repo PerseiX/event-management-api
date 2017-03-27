@@ -15,15 +15,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 class EventController extends AbstractApiController
 {
 	/**
+	 * @param Request $request
+	 *
 	 * @return Response
 	 */
-	public function collectionAction()
+	public function collectionAction(Request $request)
 	{
-		$events         = $this->getDoctrine()->getRepository('EventManagementBundle:Event')
-		                       ->findAll();
-		$representation = $this->get('api.main_transformer')->transform(new EventModel($events));
+		$query = $this->getDoctrine()->getRepository('EventManagementBundle:Event')
+		              ->eventsCollectionQuery();
 
-		return $this->representationResponse($representation);
+		return $this->paginatedResponse(EventModel::class, $query, $request);
 	}
 
 	/**

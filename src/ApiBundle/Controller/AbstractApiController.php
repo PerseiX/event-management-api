@@ -4,17 +4,54 @@ namespace ApiBundle\Controller;
 
 use ApiBundle\Representation\RepresentationInterface;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\Query;
 use FOS\RestBundle\Controller\FOSRestController;
+use Hateoas\Representation\PaginatedRepresentation;
+use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class AbstaracApiController
+ * Class AbstractApiController
  * @package ApiBundle\Controller
  */
 class AbstractApiController extends FOSRestController
 {
+	/**
+	 * @param         $class
+	 * @param Query   $query
+	 * @param Request $request
+	 * @param array   $parameters
+	 *
+	 * @return Response
+	 */
+	protected function paginatedResponse($class, Query $query, Request $request, $parameters = [])
+	{
+		$limit = $request->get('limit');
+		$page  = $request->get('page');
+
+		$paginator = $this->get('knp_paginator');
+
+		/** @var SlidingPagination $pagination */
+		$pagination = $paginator->paginate($query, $page, $limit, $parameters);
+
+		$representation = $this->get('api.main_transformer')->transform(new $class($pagination->getItems()));
+
+		$paginatedRepresentation = new PaginatedRepresentation(
+			$representation,
+			$request->get('_route'),
+			$parameters,
+			$page,
+			$limit,
+			round($pagination->getTotalItemCount() / $limit)
+		);
+
+		$view = $this->view($paginatedRepresentation, Response::HTTP_OK);
+
+		return $this->handleView($view);
+	}
+
 	/**
 	 * @param RepresentationInterface $representation
 	 * @param int                     $status

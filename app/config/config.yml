@@ -4,6 +4,8 @@ imports:
     - { resource: services.yml }
     - { resource: vendor/fos_oauth_server.yml }
     - { resource: vendor/fos_user.yml }
+    - { resource: vendor/knp_pagination.yml }
+    - { resource: vendor/hateos.yml }
     - { resource: "@ApiBundle/Resources/config/services.yml" }
     - { resource: "@EventManagementBundle/Resources/config/services.yml" }
 

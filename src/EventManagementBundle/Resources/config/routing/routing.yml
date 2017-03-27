@@ -2,11 +2,14 @@
 #           EVENT            #
 ##############################
 event.get_collection:
-    path:      /events.{_format}
+    path:      /events/{limit}/limit/{page}/page
     defaults:
         _controller: EventManagementBundle:Event:collection
         _format: json
     methods: [GET]
+    requirements:
+        limit: '\d+'
+        page: '\d+'
 
 event.get_single:
     path:       /event/{eventId}
