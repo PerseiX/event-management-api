@@ -74,7 +74,7 @@ class EventRepresentation implements RepresentationInterface
 	/**
 	 * @return UserRepresentation
 	 */
-	public function getUser(): UserRepresentation
+	public function getUser(): ?UserRepresentation
 	{
 		return $this->user;
 	}

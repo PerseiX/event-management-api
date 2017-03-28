@@ -29,8 +29,6 @@ EventManagementBundle\Representation\EventRepresentation:
             type: integer
             expose: true
 
-        user:
-            expose: true
 
     relations:
         -
@@ -41,6 +39,15 @@ EventManagementBundle\Representation\EventRepresentation:
                     eventId: expr(object.getId())
                 generator: default
                 absolute: true
+
+        -
+            rel: user
+            embedded:
+                content: expr(object.getUser())
+            exclusion:
+                groups: [event.user]
+                exclude_if: expr(!object.getUser())
+
         -
             rel: collection
             href:

@@ -6,3 +6,11 @@ services:
         class: ApiBundle\Transformer\AbstractTransformer
         abstract: true
         arguments: ['@api.main_transformer']
+
+    api.transformer_scope_repository:
+        class: ApiBundle\Transformer\Scope\ScopeRepository
+
+    api.transformer_scope:
+        class: ApiBundle\Transformer\Scope\TransformerScope
+        arguments:
+            - '@api.transformer_scope_repository'

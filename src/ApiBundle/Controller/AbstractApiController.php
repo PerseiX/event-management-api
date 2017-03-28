@@ -47,9 +47,7 @@ class AbstractApiController extends FOSRestController
 			round($pagination->getTotalItemCount() / $limit)
 		);
 
-		$view = $this->view($paginatedRepresentation, Response::HTTP_OK);
-
-		return $this->handleView($view);
+		return $this->representationResponse($paginatedRepresentation);
 	}
 
 	/**
@@ -60,6 +58,7 @@ class AbstractApiController extends FOSRestController
 	 */
 	protected function representationResponse(RepresentationInterface $representation, $status = Response::HTTP_OK)
 	{
+		$this->get('api.transformer_scope')->handle($representation);
 		$view = $this->view($representation, $status);
 
 		return $this->handleView($view);
