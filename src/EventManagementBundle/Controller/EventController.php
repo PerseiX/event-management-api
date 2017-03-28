@@ -40,7 +40,7 @@ class EventController extends AbstractApiController
 	 */
 	public function singleAction(Event $event)
 	{
-		return $this->representationResponse($this->get('api.main_transformer')->transform($event));
+		return $this->representationResponse($this->transform($event));
 	}
 
 	/**
@@ -52,6 +52,7 @@ class EventController extends AbstractApiController
 	{
 		$event = new Event();
 		$form  = $this->createForm(CreateEventType::class, $event);
+		$event->setUser($this->getUser());
 
 		return $this->formResponse($request, $form);
 	}
@@ -112,7 +113,7 @@ class EventController extends AbstractApiController
 		$event->setActive(true);
 		$this->updateEntity($event);
 
-		return $this->representationResponse($this->get('api.main_transformer')->transform($event), Response::HTTP_ACCEPTED);
+		return $this->representationResponse($this->transform($event), Response::HTTP_ACCEPTED);
 	}
 
 	/**
@@ -131,6 +132,6 @@ class EventController extends AbstractApiController
 		$event->setActive(false);
 		$this->updateEntity($event);
 
-		return $this->representationResponse($this->get('api.main_transformer')->transform($event), Response::HTTP_ACCEPTED);
+		return $this->representationResponse($this->transform($event), Response::HTTP_ACCEPTED);
 	}
 }

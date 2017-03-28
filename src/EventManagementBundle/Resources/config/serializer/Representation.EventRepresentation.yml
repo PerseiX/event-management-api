@@ -25,6 +25,13 @@ EventManagementBundle\Representation\EventRepresentation:
             type: boolean
             expose: true
 
+        userId:
+            type: integer
+            expose: true
+
+        user:
+            expose: true
+
     relations:
         -
             rel: self

@@ -100,6 +100,7 @@ class AbstractApiController extends FOSRestController
 			$manager->beginTransaction();
 			try {
 				$input = $form->getData();
+
 				$manager->persist($input);
 				$manager->flush();
 				$manager->commit();
@@ -160,5 +161,15 @@ class AbstractApiController extends FOSRestController
 		$em = $this->getDoctrine()->getManager();
 		$em->persist($entity);
 		$em->flush();
+	}
+
+	/**
+	 * @param $input
+	 *
+	 * @return RepresentationInterface
+	 */
+	protected function transform($input): RepresentationInterface
+	{
+		return $this->get('api.main_transformer')->transform($input);
 	}
 }

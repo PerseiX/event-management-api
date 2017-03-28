@@ -3,6 +3,7 @@
 namespace EventManagementBundle\Representation;
 
 use ApiBundle\Representation\RepresentationInterface;
+use UserBundle\Representation\UserRepresentation;
 
 /**
  * Class EventRepresentation
@@ -39,6 +40,56 @@ class EventRepresentation implements RepresentationInterface
 	 * @var boolean
 	 */
 	private $active;
+
+	/**
+	 * @var integer
+	 */
+	private $userId;
+
+	/**
+	 * @var UserRepresentation
+	 */
+	private $user;
+
+	/**
+	 * @return int
+	 */
+	public function getUserId(): int
+	{
+		return $this->userId;
+	}
+
+	/**
+	 * @param int $userId
+	 *
+	 * @return $this
+	 */
+	public function setUserId(int $userId)
+	{
+		$this->userId = $userId;
+
+		return $this;
+	}
+
+	/**
+	 * @return UserRepresentation
+	 */
+	public function getUser(): UserRepresentation
+	{
+		return $this->user;
+	}
+
+	/**
+	 * @param UserRepresentation $user
+	 *
+	 * @return $this
+	 */
+	public function setUser(UserRepresentation $user)
+	{
+		$this->user = $user;
+
+		return $this;
+	}
 
 	/**
 	 * @return int
