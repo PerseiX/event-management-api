@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace ApiBundle\Transformer;
 
@@ -8,6 +9,9 @@ namespace ApiBundle\Transformer;
  */
 abstract class AbstractTransformer implements TransformerInterface
 {
+	/**
+	 * @var Transformer
+	 */
 	protected $transformer;
 
 	/**

@@ -10,9 +10,8 @@ services:
         tags:
             - { name: api.transformer }
 
-
-
     event.user_transformer_scope:
         class: EventManagementBundle\Transformer\Scope\UserScope
+        parent: 'api.abstract_transformer_scope'
         tags:
             - { name: api.transformer_scope }

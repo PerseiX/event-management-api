@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
+ * @ORM\Entity(repositoryClass="UserBundle\Entity\Repository\UserRepository")
  */
 class User extends BaseUser
 {
@@ -19,6 +20,9 @@ class User extends BaseUser
 	 */
 	protected $id;
 
+	/**
+	 * User constructor.
+	 */
 	public function __construct()
 	{
 		parent::__construct();

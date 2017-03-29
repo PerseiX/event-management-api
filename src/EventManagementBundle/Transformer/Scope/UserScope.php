@@ -1,20 +1,20 @@
 <?php
+declare(strict_types = 1);
 
 namespace EventManagementBundle\Transformer\Scope;
 
 use ApiBundle\Representation\RepresentationInterface;
-use ApiBundle\Transformer\Scope\ScopeInterface;
+use ApiBundle\Transformer\Scope\AbstractTransformerScope;
 use EventManagementBundle\Representation\EventRepresentation;
-use UserBundle\Entity\User;
+use Negotiation\Exception\InvalidArgument;
 use UserBundle\Representation\UserRepresentation;
 
 /**
  * Class UserScope
  * @package EventManagementBundle\Transformer\Scope
  */
-class UserScope implements ScopeInterface
+class UserScope extends AbstractTransformerScope
 {
-	//TODO EM as abstract inherit
 	/**
 	 * @return string
 	 */
@@ -30,8 +30,14 @@ class UserScope implements ScopeInterface
 	 */
 	public function extendedTransformer($input): RepresentationInterface
 	{
-		$userRepresentation = new UserRepresentation();
-		$userRepresentation->setUsername("TMP");
+		if (!$input instanceof EventRepresentation) {
+			throw new InvalidArgument("Invalid argument. This class is not allowed.");
+		}
+
+		$user = $this->getEm()->getRepository('UserBundle:User')->getUser($input);
+
+		/** @var UserRepresentation $userRepresentation */
+		$userRepresentation = $this->transformer->transform($user);
 
 		/** @var EventRepresentation $input */
 		$input->setUser($userRepresentation);
@@ -46,6 +52,6 @@ class UserScope implements ScopeInterface
 	 */
 	public function support($input): bool
 	{
-		return true;
+		return $this->getAllowedScopesRepository()->scopeIsSupported($this->getScopeName());
 	}
 }

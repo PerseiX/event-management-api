@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace EventManagementBundle\Controller;
 
@@ -40,6 +41,9 @@ class EventController extends AbstractApiController
 	 */
 	public function singleAction(Event $event)
 	{
+		$allowedScopes = $this->get('api.allowed_scopes_repository');
+		$allowedScopes->setSupportedScopes(['event.user']);
+
 		return $this->representationResponse($this->transform($event));
 	}
 
