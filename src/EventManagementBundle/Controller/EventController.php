@@ -12,6 +12,7 @@ use EventManagementBundle\Model\EventModel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use ApiBundle\Annotation\Scope;
 
 class EventController extends AbstractApiController
 {
@@ -38,12 +39,11 @@ class EventController extends AbstractApiController
 	 * })
 	 *
 	 * @return Response
+	 *
+	 * @Scope(scope="event.user")
 	 */
 	public function singleAction(Event $event)
 	{
-		$allowedScopes = $this->get('api.allowed_scopes_repository');
-		$allowedScopes->setSupportedScopes(['event.user']);
-
 		return $this->representationResponse($this->transform($event));
 	}
 

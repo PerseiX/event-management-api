@@ -21,7 +21,7 @@ class AllowedScopesRepository extends ScopeRepository
 	 *
 	 * @return AllowedScopesRepository
 	 */
-	public function setSupportedScopes($scopesName = []): AllowedScopesRepository
+	public function setAllowedScopes($scopesName = []): AllowedScopesRepository
 	{
 		foreach ($scopesName as $scopeName) {
 			$this->addAllowedScope($scopeName);
