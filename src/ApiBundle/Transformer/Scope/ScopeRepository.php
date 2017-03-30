@@ -2,6 +2,8 @@
 
 namespace ApiBundle\Transformer\Scope;
 
+use ApiBundle\Representation\RepresentationInterface;
+
 /**
  * Class ScopeHandler
  * @package ApiBundle\Transformer\Scope
@@ -31,4 +33,16 @@ class ScopeRepository
 		return $this->scopes;
 	}
 
+	/**
+	 * @param RepresentationInterface $input
+	 */
+	public function handle(RepresentationInterface $input)
+	{
+		/** @var ScopeInterface $scope */
+		foreach ($this->scopes as $scope) {
+			if ($scope->support($input)) {
+				$scope->extendedTransformer($input);
+			}
+		}
+	}
 }

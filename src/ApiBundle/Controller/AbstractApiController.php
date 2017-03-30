@@ -2,6 +2,7 @@
 
 namespace ApiBundle\Controller;
 
+use ApiBundle\Representation\AbstractRepresentationCollection;
 use ApiBundle\Representation\RepresentationInterface;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Query;
@@ -46,21 +47,23 @@ class AbstractApiController extends FOSRestController
 			$limit,
 			round($pagination->getTotalItemCount() / $limit)
 		);
-	//TODO fixed representatioIntrface
 
 		return $this->representationResponse($paginatedRepresentation);
 	}
 
 	/**
-	 * @param RepresentationInterface $representation
-	 * @param int                     $status
+	 * @param     $input
+	 * @param int $status
 	 *
 	 * @return Response
 	 */
-	protected function representationResponse(RepresentationInterface $representation, $status = Response::HTTP_OK)
+	protected function representationResponse($input, $status = Response::HTTP_OK)
 	{
-		$this->get('api.transformer_scope')->handle($representation);
-		$view = $this->view($representation, $status);
+		if ($input instanceof RepresentationInterface) {
+			$this->get('api.transformer_scope_repository')->handle($input);
+		}
+
+		$view = $this->view($input, $status);
 
 		return $this->handleView($view);
 	}
@@ -170,6 +173,6 @@ class AbstractApiController extends FOSRestController
 	 */
 	protected function transform($input): RepresentationInterface
 	{
-		return $this->get('api.main_transformer')->transform($input);
+		return $representation = $this->get('api.main_transformer')->transform($input);
 	}
 }

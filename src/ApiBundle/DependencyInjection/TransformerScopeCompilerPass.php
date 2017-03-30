@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\Reference;
 class TransformerScopeCompilerPass implements CompilerPassInterface
 {
 	CONST TAG_NAME                          = "api.transformer_scope";
-	CONST TRANSFORMER_SCOPE_REPOSITORY_NAME = "api.transformer_scope_repository";
+	CONST TRANSFORMER_SCOPE_REPOSITORY_NAME = "api.allowed_scopes_repository";
 	CONST METHOD                            = "addScope";
 
 	/**

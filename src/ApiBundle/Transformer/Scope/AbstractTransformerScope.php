@@ -13,32 +13,23 @@ use Doctrine\Common\Persistence\ObjectManager;
 abstract class AbstractTransformerScope implements ScopeInterface
 {
 	/**
+	 * @var Transformer
+	 */
+	private $transformer;
+
+	/**
 	 * @var ObjectManager
 	 */
 	protected $em;
 
 	/**
-	 * @var Transformer
-	 */
-	protected $transformer;
-
-	/**
-	 * @var AllowedScopesRepository
-	 */
-	protected $allowedScopes;
-
-	/**
 	 * AbstractTransformerScope constructor.
 	 *
-	 * @param ObjectManager           $em
-	 * @param Transformer             $transformer
-	 * @param AllowedScopesRepository $allowedScopesRepository
+	 * @param ObjectManager $em
 	 */
-	public function __construct(ObjectManager $em, Transformer $transformer, AllowedScopesRepository $allowedScopesRepository)
+	public function __construct(ObjectManager $em)
 	{
-		$this->em            = $em;
-		$this->transformer   = $transformer;
-		$this->allowedScopes = $allowedScopesRepository;
+		$this->em = $em;
 	}
 
 	/**
@@ -58,10 +49,14 @@ abstract class AbstractTransformerScope implements ScopeInterface
 	}
 
 	/**
-	 * @return AllowedScopesRepository
+	 * @param Transformer $transformer
+	 *
+	 * @return AbstractTransformerScope
 	 */
-	public function getAllowedScopesRepository(): AllowedScopesRepository
+	public function setTransformer(Transformer $transformer): AbstractTransformerScope
 	{
-		return $this->allowedScopes;
+		$this->transformer = $transformer;
+
+		return $this;
 	}
 }

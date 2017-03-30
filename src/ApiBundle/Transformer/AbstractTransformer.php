@@ -3,6 +3,9 @@ declare(strict_types = 1);
 
 namespace ApiBundle\Transformer;
 
+use ApiBundle\Representation\RepresentationInterface;
+use ApiBundle\Transformer\Scope\ScopeRepository;
+
 /**
  * Class AbstractTransformer
  * @package ApiBundle\Transformer
@@ -15,13 +18,18 @@ abstract class AbstractTransformer implements TransformerInterface
 	protected $transformer;
 
 	/**
+	 * @var ScopeRepository
+	 */
+	protected $scopeRepository;
+
+	/**
 	 * AbstractTransformer constructor.
 	 *
-	 * @param Transformer $transformer
+	 * @param ScopeRepository $scopeRepository
 	 */
-	public function __construct(Transformer $transformer)
+	public function __construct(ScopeRepository $scopeRepository)
 	{
-		$this->transformer = $transformer;
+		$this->scopeRepository = $scopeRepository;
 	}
 
 	/**
@@ -33,14 +41,28 @@ abstract class AbstractTransformer implements TransformerInterface
 	}
 
 	/**
-	 * @param $transformer
+	 * @param Transformer $transformer
 	 *
 	 * @return $this
 	 */
-	public function setTransformer($transformer)
+	public function setTransformer(Transformer $transformer)
 	{
 		$this->transformer = $transformer;
 
 		return $this;
 	}
+
+	/**
+	 * @param $input
+	 *
+	 * @return RepresentationInterface
+	 */
+	public function transformWithScope($input): RepresentationInterface
+	{
+		$representation = $this->transformer->transform($input);
+		$this->scopeRepository->handle($representation);
+
+		return $representation;
+	}
+
 }

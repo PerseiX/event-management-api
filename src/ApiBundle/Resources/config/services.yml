@@ -6,28 +6,23 @@ services:
         class: ApiBundle\Transformer\AbstractTransformer
         abstract: true
         arguments:
-            - '@api.main_transformer'
+            - '@api.transformer_scope_repository'
+        calls:
+            - [setTransformer, ['@api.main_transformer']]
 
     api.transformer_scope_repository:
         class: ApiBundle\Transformer\Scope\ScopeRepository
 
     api.allowed_scopes_repository:
         class: ApiBundle\Transformer\Scope\AllowedScopesRepository
-        parent: api.transformer_scope_repository
-
-    api.transformer_scope:
-        class: ApiBundle\Transformer\Scope\TransformerScope
-        arguments:
-            - '@api.transformer_scope_repository'
 
     api.abstract_transformer_scope:
         class: ApiBundle\Transformer\Scope\AbstractTransformerScope
         abstract: true
         arguments:
             - '@doctrine.orm.entity_manager'
-            - '@api.main_transformer'
-            - '@api.allowed_scopes_repository'
-
+        calls:
+            - [setTransformer, ['@api.main_transformer']]
 
     api.scope_annotation_reader:
         class: ApiBundle\Annotation\ScopeAnnotationReader
@@ -36,3 +31,4 @@ services:
         arguments:
             - '@annotation_reader'
             - '@api.allowed_scopes_repository'
+            - '@api.transformer_scope_repository'

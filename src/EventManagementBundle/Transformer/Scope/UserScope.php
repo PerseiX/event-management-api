@@ -37,7 +37,7 @@ class UserScope extends AbstractTransformerScope
 		$user = $this->getEm()->getRepository('UserBundle:User')->getUser($input);
 
 		/** @var UserRepresentation $userRepresentation */
-		$userRepresentation = $this->transformer->transform($user);
+		$userRepresentation = $this->getTransformer()->transform($user);
 
 		/** @var EventRepresentation $input */
 		$input->setUser($userRepresentation);
@@ -52,6 +52,6 @@ class UserScope extends AbstractTransformerScope
 	 */
 	public function support($input): bool
 	{
-		return $this->getAllowedScopesRepository()->scopeIsSupported($this->getScopeName());
+		return $input instanceof EventRepresentation;
 	}
 }

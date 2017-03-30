@@ -20,6 +20,8 @@ class EventController extends AbstractApiController
 	 * @param Request $request
 	 *
 	 * @return Response
+	 *
+	 * @Scope(scope="event.user")
 	 */
 	public function collectionAction(Request $request)
 	{
