@@ -6,13 +6,15 @@ use ApiBundle\Transformer\Scope\AllowedScopesRepository;
 use ApiBundle\Transformer\Scope\ScopeInterface;
 use ApiBundle\Transformer\Scope\ScopeRepository;
 use Doctrine\Common\Annotations\Reader;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
  * Class ScopeAnnotationReader
  * @package ApiBundle\Annotation
  */
-class ScopeAnnotationReader
+class ScopeAnnotationReader implements EventSubscriberInterface
 {
 	/**
 	 * @var Reader
@@ -44,6 +46,19 @@ class ScopeAnnotationReader
 	}
 
 	/**
+	 * @return array
+	 */
+	public static function getSubscribedEvents()
+	{
+		return [
+			KernelEvents::CONTROLLER =>
+				[
+					['onKernelController', 1]
+				]
+		];
+	}
+
+	/**
 	 * @param FilterControllerEvent $event
 	 */
 	public function onKernelController(FilterControllerEvent $event)
@@ -59,11 +74,10 @@ class ScopeAnnotationReader
 		foreach ($methodAnnotations as $configuration) {
 
 			if (isset($configuration->scope)) {
-
 				/** @var ScopeInterface $scope */
 				foreach ($this->allowedScopeRepository->getAllowedScopes() as $scope) {
 					if ($scope->getScopeName() === $configuration->scope) {
-						$this->scopeRepository->addScope($scope);
+						$this->scopeRepository->addSupportedScopes($scope);
 					}
 				}
 			}

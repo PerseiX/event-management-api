@@ -27,8 +27,16 @@ services:
     api.scope_annotation_reader:
         class: ApiBundle\Annotation\ScopeAnnotationReader
         tags:
-            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+            - { name: kernel.event_subscriber }
         arguments:
             - '@annotation_reader'
             - '@api.allowed_scopes_repository'
             - '@api.transformer_scope_repository'
+
+    api.scope_listener:
+        class: ApiBundle\Annotation\ScopeListener
+        tags:
+            - { name: kernel.event_subscriber }
+        arguments:
+            - '@api.transformer_scope_repository'
+

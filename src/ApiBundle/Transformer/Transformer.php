@@ -81,7 +81,8 @@ class Transformer
 	public function handle(RepresentationInterface $input)
 	{
 		/** @var ScopeInterface $scope */
-		foreach ($this->scopeRepository->getScopes() as $scope) {
+		foreach ($this->scopeRepository->getScopes() as $scopeName) {
+			$scope = $this->scopeRepository->getSupportedScope($scopeName);
 			if ($scope->support($input)) {
 				$scope->extendedTransformer($input);
 			}
