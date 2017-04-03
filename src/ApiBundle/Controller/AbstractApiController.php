@@ -59,10 +59,6 @@ class AbstractApiController extends FOSRestController
 	 */
 	protected function representationResponse($input, $status = Response::HTTP_OK)
 	{
-		if ($input instanceof RepresentationInterface) {
-			$this->get('api.transformer_scope_repository')->handle($input);
-		}
-
 		$view = $this->view($input, $status);
 
 		return $this->handleView($view);

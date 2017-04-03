@@ -1,12 +1,12 @@
 services:
     api.main_transformer:
         class: ApiBundle\Transformer\Transformer
+        arguments:
+            - '@api.transformer_scope_repository'
 
     abstract.transformer:
         class: ApiBundle\Transformer\AbstractTransformer
         abstract: true
-        arguments:
-            - '@api.transformer_scope_repository'
         calls:
             - [setTransformer, ['@api.main_transformer']]
 

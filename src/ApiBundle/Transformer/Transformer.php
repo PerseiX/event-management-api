@@ -2,6 +2,8 @@
 namespace ApiBundle\Transformer;
 
 use ApiBundle\Representation\RepresentationInterface;
+use ApiBundle\Transformer\Scope\ScopeInterface;
+use ApiBundle\Transformer\Scope\ScopeRepository;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
@@ -15,11 +17,19 @@ class Transformer
 	protected $transformers;
 
 	/**
-	 * Transformer constructor.
+	 * @var ScopeRepository
 	 */
-	public function __construct()
+	protected $scopeRepository;
+
+	/**
+	 * Transformer constructor.
+	 *
+	 * @param ScopeRepository $scopeRepository
+	 */
+	public function __construct(ScopeRepository $scopeRepository)
 	{
-		$this->transformers = [];
+		$this->scopeRepository = $scopeRepository;
+		$this->transformers    = [];
 	}
 
 	/**
@@ -42,7 +52,12 @@ class Transformer
 	{
 		$transformer = $this->getTransformer($input);
 
-		return $transformer->transform($input);
+		$representation = $transformer->transform($input);
+		if ($representation instanceof RepresentationInterface) {
+			$this->handle($representation);
+		}
+
+		return $representation;
 	}
 
 	/**
@@ -58,5 +73,18 @@ class Transformer
 			}
 		}
 		throw new NotFoundResourceException(sprintf('Looked for transformer %s doesn\'t found!"', get_class($input)));
+	}
+
+	/**
+	 * @param RepresentationInterface $input
+	 */
+	public function handle(RepresentationInterface $input)
+	{
+		/** @var ScopeInterface $scope */
+		foreach ($this->scopeRepository->getScopes() as $scope) {
+			if ($scope->support($input)) {
+				$scope->extendedTransformer($input);
+			}
+		}
 	}
 }

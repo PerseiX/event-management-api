@@ -5,7 +5,6 @@ namespace EventManagementBundle\Transformer\Collection;
 use ApiBundle\Model\AbstractModelCollection;
 use ApiBundle\Representation\RepresentationInterface;
 use ApiBundle\Transformer\AbstractTransformer;
-use ApiBundle\Transformer\TransformerInterface;
 use EventManagementBundle\Model\EventModel;
 use EventManagementBundle\Representation\EventCollectionRepresentation;
 
@@ -32,12 +31,11 @@ class EventCollectionTransformer extends AbstractTransformer
 	 */
 	public function transform($input): RepresentationInterface
 	{
-		$collection  = [];
-		$transformer = null;
+		$collection = [];
 
 		/** @var AbstractModelCollection $input */
 		foreach ($input->getCollection() as $item) {
-			$collection[] = $this->transformWithScope($item);
+			$collection[] = $this->getTransformer()->transform($item);
 		}
 
 		return new EventCollectionRepresentation($collection);

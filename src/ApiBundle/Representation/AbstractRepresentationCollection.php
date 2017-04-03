@@ -6,7 +6,7 @@ namespace ApiBundle\Representation;
  * Class AbstractRepresentationCollection
  * @package ApiBundle\Representation
  */
-abstract class AbstractRepresentationCollection implements RepresentationInterface
+abstract class AbstractRepresentationCollection implements RepresentationCollectionInterface
 {
 	/**
 	 * @var array
