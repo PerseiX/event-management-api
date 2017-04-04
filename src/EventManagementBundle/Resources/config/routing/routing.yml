@@ -19,7 +19,7 @@ event.get_single:
     methods: [GET]
 
 event.create:
-    path:      /event.{_format}
+    path:      /event
     defaults:
         _controller: EventManagementBundle:Event:create
         _format: json

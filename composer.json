@@ -34,7 +34,8 @@
         "guzzlehttp/guzzle": "^6.2",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "knplabs/knp-paginator-bundle": "^2.5",
-        "willdurand/hateoas-bundle": "^1.2"
+        "willdurand/hateoas-bundle": "^1.2",
+        "nelmio/api-doc-bundle": "^2.13"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

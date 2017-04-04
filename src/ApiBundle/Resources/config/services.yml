@@ -40,3 +40,7 @@ services:
         arguments:
             - '@api.transformer_scope_repository'
 
+    api.nelmio_api_doc.scope_handler:
+        class: ApiBundle\Documentation\ScopeAnnotationHandler
+        tags:
+            - { name: nelmio_api_doc.extractor.handler }

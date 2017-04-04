@@ -6,8 +6,6 @@ use ApiBundle\Transformer\Scope\ScopeInterface;
 use ApiBundle\Transformer\Scope\ScopeRepository;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
@@ -39,7 +37,7 @@ class ScopeListener implements EventSubscriberInterface
 		return [
 			KernelEvents:: CONTROLLER =>
 				[
-					['postRequest', -1]
+					['applyWidthParameter', -1]
 				]
 		];
 	}
@@ -47,15 +45,15 @@ class ScopeListener implements EventSubscriberInterface
 	/**
 	 * @param FilterControllerEvent $event
 	 */
-	public function postRequest(FilterControllerEvent $event)
+	public function applyWidthParameter(FilterControllerEvent $event)
 	{
-		if (!$width = $event->getRequest()->get('width')) {
+		if (!$with = $event->getRequest()->get('with')) {
 			return;
 		}
 
 		/** @var ScopeInterface $supportedScope */
 		foreach ($this->scopeRepository->getSupportedScopes() as $supportedScope) {
-			if ($supportedScope->getScopeName() === $width) {
+			if ($supportedScope->getScopeName() === $with) {
 				$this->scopeRepository->addScope($supportedScope->getScopeName());
 			}
 		}

@@ -13,12 +13,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use ApiBundle\Annotation\Scope;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class EventController extends AbstractApiController
 {
 	/**
 	 * @param Request $request
 	 *
+	 * @ApiDoc(
+	 *     section="Events",
+	 *     resource=true,
+	 *     description="Events collection",
+	 *     output="EventManagementBundle\Representation\EventCollectionRepresentation"
+	 * )
 	 * @return Response
 	 *
 	 * @Scope(scope="event.user")
@@ -33,6 +40,13 @@ class EventController extends AbstractApiController
 
 	/**
 	 * @param Event $event
+	 *
+	 * @ApiDoc(
+	 *     section="Events",
+	 *     resource=true,
+	 *     description="Single event",
+	 *     output="EventManagementBundle\Representation\EventRepresentation"
+	 * )
 	 *
 	 * @ParamConverter("event", options={
 	 *      "mapping": {
@@ -52,6 +66,17 @@ class EventController extends AbstractApiController
 	/**
 	 * @param Request $request
 	 *
+	 * @ApiDoc(
+	 *     section="Events",
+	 *     resource=true,
+	 *     description="Create event",
+	 *     output="EventManagementBundle\Representation\EventRepresentation",
+	 *     input={
+	 *        "class" = "EventManagementBundle\Form\Type\CreateEventType",
+	 *        "name" = ""
+	 *     }
+	 * )
+	 *
 	 * @return Response
 	 */
 	public function createAction(Request $request)
@@ -66,6 +91,17 @@ class EventController extends AbstractApiController
 	/**
 	 * @param Request $request
 	 * @param Event   $event
+	 *
+	 * @ApiDoc(
+	 *     section="Events",
+	 *     resource=true,
+	 *     description="Edit event",
+	 *     output="EventManagementBundle\Representation\EventRepresentation",
+	 *     input={
+	 *        "class" = "EventManagementBundle\Form\Type\EditEventType",
+	 *        "name" = ""
+	 *     }
+	 * )
 	 *
 	 * @ParamConverter("event", options={
 	 *     "mapping": {
@@ -85,6 +121,12 @@ class EventController extends AbstractApiController
 
 	/**
 	 * @param Event $event
+	 *
+	 * @ApiDoc(
+	 *     section="Events",
+	 *     resource=true,
+	 *     description="Delete event"
+	 * )
 	 *
 	 * @ParamConverter("event", options={
 	 *     "mapping": {
@@ -106,6 +148,12 @@ class EventController extends AbstractApiController
 	/**
 	 * @param Event $event
 	 *
+	 * @ApiDoc(
+	 *     section="Events",
+	 *     resource=true,
+	 *     description="Enable event"
+	 * )
+	 *
 	 * @ParamConverter("event", options={
 	 *     "mapping": {
 	 *        "eventId" = "id"
@@ -124,6 +172,12 @@ class EventController extends AbstractApiController
 
 	/**
 	 * @param Event $event
+	 *
+	 * @ApiDoc(
+	 *     section="Events",
+	 *     resource=true,
+	 *     description="Disable event"
+	 * )
 	 *
 	 * @ParamConverter("event", options={
 	 *     "mapping": {

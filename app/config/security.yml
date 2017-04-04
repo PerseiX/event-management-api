@@ -31,6 +31,7 @@ security:
           stateless:  true
 
    access_control:
+      - { path: ^/api/doc, roles: IS_AUTHENTICATED_ANONYMOUSLY }
       - { path: ^/api, roles: ROLE_ADMIN }
 
 
