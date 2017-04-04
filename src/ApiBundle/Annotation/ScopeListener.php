@@ -47,14 +47,16 @@ class ScopeListener implements EventSubscriberInterface
 	 */
 	public function applyWidthParameter(FilterControllerEvent $event)
 	{
-		if (!$with = $event->getRequest()->get('with')) {
+		if (!$withs = $event->getRequest()->get('with')) {
 			return;
 		}
 
 		/** @var ScopeInterface $supportedScope */
-		foreach ($this->scopeRepository->getSupportedScopes() as $supportedScope) {
-			if ($supportedScope->getScopeName() === $with) {
-				$this->scopeRepository->addScope($supportedScope->getScopeName());
+		foreach ($withs as $with) {
+			foreach ($this->scopeRepository->getSupportedScopes() as $supportedScope) {
+				if ($supportedScope->getScopeName() === $with) {
+					$this->scopeRepository->addScope($supportedScope->getScopeName());
+				}
 			}
 		}
 	}

@@ -23,10 +23,10 @@ class ScopeAnnotationHandler implements HandlerInterface
 	{
 		foreach ($annotations as $annotationElement) {
 			if ($annotationElement instanceof Scope) {
-				$annotation->addParameter('with', [
-					"dataType"    => "string",
+				$annotation->addParameter('with[]', [
+					"dataType"    => "array",
 					"required"    => false,
-					"description" => $annotationElement->getScope()
+					"description" => "Array of scopes"
 				]);
 			}
 		}
