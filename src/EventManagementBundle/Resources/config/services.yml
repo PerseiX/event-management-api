@@ -15,3 +15,9 @@ services:
         parent: 'api.abstract_transformer_scope'
         tags:
             - { name: api.transformer_scope }
+
+    event.access_voter:
+        class: EventManagementBundle\Security\Voters\EventAccessVoter
+        parent: 'api.abstract_voter'
+        tags:
+            - { name: security.voter }

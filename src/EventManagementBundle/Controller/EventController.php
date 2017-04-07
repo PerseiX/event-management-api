@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace EventManagementBundle\Controller;
 
 use ApiBundle\Controller\AbstractApiController;
+use ApiBundle\Security\Voter\AbstractVoter;
 use Doctrine\ORM\ORMException;
 use EventManagementBundle\Entity\Event;
 use EventManagementBundle\Form\Type\CreateEventType;
@@ -60,6 +61,8 @@ class EventController extends AbstractApiController
 	 */
 	public function singleAction(Event $event)
 	{
+		$this->denyAccessUnlessGranted(AbstractVoter::VIEW, $this->get('api.main_transformer')->transform($event));
+
 		return $this->representationResponse($this->transform($event));
 	}
 

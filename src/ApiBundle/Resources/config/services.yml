@@ -44,3 +44,11 @@ services:
         class: ApiBundle\Documentation\ScopeAnnotationHandler
         tags:
             - { name: nelmio_api_doc.extractor.handler }
+
+    api.abstract_voter:
+        class: ApiBundle\Security\Voter\AbstractVoter
+        abstract: true
+        public: false
+        arguments:
+            - '@security.access.decision_manager'
+            - '@doctrine.orm.entity_manager'

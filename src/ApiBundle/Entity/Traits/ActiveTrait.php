@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace ApiBundle\Entity\Traits;
 
@@ -30,7 +31,7 @@ trait ActiveTrait
 	 *
 	 * @return $this
 	 */
-	public function setActive(?bool $active)
+	public function setActive(bool $active = null)
 	{
 		$this->active = $active;
 

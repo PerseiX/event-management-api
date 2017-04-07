@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types = 1);
 namespace EventManagementBundle\Entity;
 
 use ApiBundle\Entity\Traits\CreatedAtTrait;
@@ -66,7 +66,7 @@ class Event
 	 *
 	 * @return $this
 	 */
-	public function setDescription(?string $description)
+	public function setDescription(string $description = null)
 	{
 		$this->description = $description;
 
@@ -86,7 +86,7 @@ class Event
 	 *
 	 * @return $this
 	 */
-	public function setEventTerm(?\DateTime $eventTerm)
+	public function setEventTerm(\DateTime $eventTerm = null)
 	{
 		$this->eventTerm = $eventTerm;
 
@@ -106,7 +106,7 @@ class Event
 	 *
 	 * @return $this
 	 */
-	public function setName(?string $name)
+	public function setName(string $name = null)
 	{
 		$this->name = $name;
 
