@@ -33,6 +33,8 @@ class EventController extends AbstractApiController
 	 */
 	public function collectionAction(Request $request)
 	{
+		$this->denyAccessUnlessGranted(AbstractVoter::VIEW_COLLECTION, new Event());
+
 		$query = $this->getDoctrine()->getRepository('EventManagementBundle:Event')
 		              ->eventsCollectionQuery();
 
@@ -61,7 +63,7 @@ class EventController extends AbstractApiController
 	 */
 	public function singleAction(Event $event)
 	{
-		$this->denyAccessUnlessGranted(AbstractVoter::VIEW, $this->get('api.main_transformer')->transform($event));
+		$this->denyAccessUnlessGranted(AbstractVoter::VIEW, $event);
 
 		return $this->representationResponse($this->transform($event));
 	}
@@ -85,8 +87,10 @@ class EventController extends AbstractApiController
 	public function createAction(Request $request)
 	{
 		$event = new Event();
-		$form  = $this->createForm(CreateEventType::class, $event);
 		$event->setUser($this->getUser());
+		$this->denyAccessUnlessGranted(AbstractVoter::CREATE, $event);
+
+		$form = $this->createForm(CreateEventType::class, $event);
 
 		return $this->formResponse($request, $form);
 	}
@@ -117,6 +121,7 @@ class EventController extends AbstractApiController
 	 */
 	public function editAction(Request $request, Event $event)
 	{
+		$this->denyAccessUnlessGranted(AbstractVoter::EDIT, $event);
 		$form = $this->createForm(EditEventType::class, $event, ['method' => $request->getMethod()]);
 
 		return $this->formResponse($request, $form);
@@ -141,6 +146,7 @@ class EventController extends AbstractApiController
 	 */
 	public function deleteAction(Event $event)
 	{
+		$this->denyAccessUnlessGranted(AbstractVoter::DELETE, $event);
 		$em = $this->getDoctrine()->getManager();
 		$em->remove($event);
 		$em->flush();
@@ -167,6 +173,7 @@ class EventController extends AbstractApiController
 	 */
 	public function enableAction(Event $event)
 	{
+		$this->denyAccessUnlessGranted(AbstractVoter::ENABLE, $event);
 		$event->setActive(true);
 		$this->updateEntity($event);
 
@@ -192,6 +199,7 @@ class EventController extends AbstractApiController
 	 */
 	public function disableAction(Event $event)
 	{
+		$this->denyAccessUnlessGranted(AbstractVoter::DISABLE, $event);
 		$event->setActive(false);
 		$this->updateEntity($event);
 

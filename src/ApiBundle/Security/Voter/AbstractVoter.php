@@ -3,7 +3,6 @@ declare(strict_types = 1);
 
 namespace ApiBundle\Security\Voter;
 
-use ApiBundle\Representation\RepresentationInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
@@ -15,9 +14,13 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  */
 abstract class AbstractVoter extends Voter
 {
-	CONST CREATE = 'CREATE_PERMISSION';
-	CONST EDIT   = 'CREATE_PERMISSION';
-	CONST VIEW   = 'VIEW_PERMISSION';
+	CONST CREATE          = 'CREATE_PERMISSION';
+	CONST EDIT            = 'CREATE_PERMISSION';
+	CONST VIEW            = 'VIEW_PERMISSION';
+	CONST VIEW_COLLECTION = 'VIEW_COLLECTION_PERMISSION';
+	CONST DELETE          = 'DELETE_PERMISSION';
+	CONST ENABLE          = 'ENABLE_PERMISSION';
+	CONST DISABLE         = 'DISABLE_PERMISSION';
 
 	/**
 	 * @var AccessDecisionManagerInterface

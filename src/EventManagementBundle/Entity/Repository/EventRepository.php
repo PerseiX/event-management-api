@@ -4,6 +4,7 @@ namespace EventManagementBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
+use EventManagementBundle\Entity\Event;
 
 /**
  * Class EventRepository
@@ -20,5 +21,20 @@ class EventRepository extends EntityRepository
 		              ->getQuery();
 
 		return $query;
+	}
+
+	/**
+	 * @param Event $event
+	 *
+	 * @return Event
+	 */
+	public function getEventWithUser(Event $event): Event
+	{
+		return $this->createQueryBuilder('event')
+		            ->leftJoin('event.user', 'user')
+		            ->andWhere('event.id = :eventId')
+		            ->setParameter('eventId', $event->getId())
+		            ->getQuery()
+		            ->getSingleResult();
 	}
 }
