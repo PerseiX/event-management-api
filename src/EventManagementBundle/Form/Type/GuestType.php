@@ -2,17 +2,19 @@
 
 namespace EventManagementBundle\Form\Type;
 
+use Nelmio\ApiDocBundle\Tests\Fixtures\Form\CollectionType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 /**
- * Class EditEventType
+ * Class GuestType
  * @package EventManagementBundle\Form\Type
  */
-class EditEventType extends AbstractType
+class GuestType extends AbstractType
 {
 	/**
 	 * {@override}
@@ -24,8 +26,12 @@ class EditEventType extends AbstractType
 	{
 		$builder
 			->add('name', TextType::class)
-			->add('eventTerm', DateType::class, ['widget' => 'single_text'])
-			->add('description', TextType::class);
+			->add('surname', TextType::class)
+			->add('tag', EntityType::class, [
+					'class'        => 'EventManagementBundle\Entity\Tag',
+					'by_reference' => true
+				]
+			);
 	}
 
 	/**
@@ -34,9 +40,19 @@ class EditEventType extends AbstractType
 	public function configureOptions(OptionsResolver $resolver)
 	{
 		$resolver->setDefaults([
-			'data_class'         => 'EventManagementBundle\Entity\Event',
+			'data_class'         => 'EventManagementBundle\Entity\Guest',
 			'csrf_protection'    => false,
-			'allow_extra_fields' => true
+			'allow_extra_fields' => true,
 		]);
+	}
+
+	/**
+	 * Returns the name of this type.
+	 *
+	 * @return string The name of this type
+	 */
+	function getName()
+	{
+		return '';
 	}
 }

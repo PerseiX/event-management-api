@@ -108,3 +108,60 @@ tag.single_disable:
         _controller: EventManagementBundle:Tag:disable
         _format: json
     methods: [PUT]
+
+
+##############################
+#           Guest            #
+##############################
+
+guest.get_collection:
+    path:      /guest/{limit}/limit/{page}/page
+    defaults:
+        _controller: EventManagementBundle:Guest:collection
+        _format: json
+    methods: [GET]
+    requirements:
+        limit: '\d+'
+        page: '\d+'
+
+guest.get_single:
+    path:       /guest/{guestId}
+    defaults:
+        _controller: EventManagementBundle:Guest:single
+        _format: json
+    methods: [GET]
+
+guest.create:
+    path:      /guest
+    defaults:
+        _controller: EventManagementBundle:Guest:create
+        _format: json
+    methods: [POST]
+
+guest.edit:
+    path:      /guest/{guestId}
+    defaults:
+        _controller: EventManagementBundle:Guest:edit
+        _format: json
+    methods: [PUT]
+
+guest.delete:
+    path:      /guest/{guestId}
+    defaults:
+        _controller: EventManagementBundle:Guest:delete
+        _format: json
+    methods: [DELETE]
+
+guest.single_enable:
+    path:      /guest/enable/{guestId}
+    defaults:
+        _controller: EventManagementBundle:Guest:enable
+        _format: json
+    methods: [PUT]
+
+guest.single_disable:
+    path:       /guest/disable/{guestId}
+    defaults:
+        _controller: EventManagementBundle:Guest:disable
+        _format: json
+    methods: [PUT]

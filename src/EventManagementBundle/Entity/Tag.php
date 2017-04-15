@@ -5,6 +5,7 @@ namespace EventManagementBundle\Entity;
 use ApiBundle\Entity\Traits\ActiveTrait;
 use ApiBundle\Entity\Traits\CreatedAtTrait;
 use ApiBundle\Entity\Traits\IDTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,6 +27,11 @@ class Tag
 	 * @ORM\Column(type="string", length=128)
 	 */
 	protected $name;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="EventManagementBundle\Entity\Guest", mappedBy="tag")
+	 */
+	protected $guest;
 
 	/**
 	 * Tag constructor.

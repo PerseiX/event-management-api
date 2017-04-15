@@ -33,3 +33,15 @@ services:
         parent: 'abstract.transformer'
         tags:
             - { name: api.transformer }
+
+
+    guest.transformer:
+        class: EventManagementBundle\Transformer\GuestTransformer
+        tags:
+            - { name: api.transformer }
+
+    guest.colelction.transformer:
+        class: EventManagementBundle\Transformer\Collection\GuestCollectionTransformer
+        parent: 'abstract.transformer'
+        tags:
+            - { name: api.transformer }

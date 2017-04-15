@@ -46,10 +46,19 @@ class Guest
 	/**
 	 * @var Tag
 	 *
-	 * @ORM\ManyToOne(targetEntity="EventManagementBundle\Entity\Tag")
+	 * @ORM\ManyToOne(targetEntity="EventManagementBundle\Entity\Tag", inversedBy="guest")
 	 * @ORM\JoinColumn(referencedColumnName="id")
 	 */
 	protected $tag;
+
+	/**
+	 * Guest constructor.
+	 */
+	public function __construct()
+	{
+		$this->active    = true;
+		$this->createdAt = new \DateTime();
+	}
 
 	/**
 	 * @return User
@@ -74,7 +83,7 @@ class Guest
 	/**
 	 * @return string
 	 */
-	public function getName(): string
+	public function getName(): ?string
 	{
 		return $this->name;
 	}
@@ -94,7 +103,7 @@ class Guest
 	/**
 	 * @return string
 	 */
-	public function getSurname(): string
+	public function getSurname(): ?string
 	{
 		return $this->surname;
 	}
@@ -114,7 +123,7 @@ class Guest
 	/**
 	 * @return Tag
 	 */
-	public function getTag(): Tag
+	public function getTag(): ?Tag
 	{
 		return $this->tag;
 	}
