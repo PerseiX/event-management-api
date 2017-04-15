@@ -33,7 +33,7 @@ class User extends BaseUser
 	 */
 	public function getRoles()
 	{
-		return ['ROLE_ADMIN'];
+		return ['ROLE_USER'];
 	}
 
 	/**

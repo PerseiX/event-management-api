@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace EventManagementBundle\Security\Voters;
 
 use ApiBundle\Representation\RepresentationInterface;
@@ -17,18 +18,22 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 class EventAccessVoter extends AbstractVoter
 {
 	/**
-	 * @param string $attribute
-	 * @param mixed  $subject
-	 *
-	 * @return bool
+	 * @return array
 	 */
-	protected function supports($attribute, $subject)
+	protected function getSupportedClass(): array
 	{
-		if (!$subject instanceof Event and !$subject instanceof EventRepresentation) {
-			return false;
-		}
+		return [
+			Event::class,
+			EventRepresentation::class
+		];
+	}
 
-		$supportedAction = [
+	/**
+	 * @return array
+	 */
+	protected function getSupportedPermissions(): array
+	{
+		return [
 			self::CREATE,
 			self::EDIT,
 			self::VIEW,
@@ -37,8 +42,6 @@ class EventAccessVoter extends AbstractVoter
 			self::DISABLE,
 			self::ENABLE
 		];
-
-		return in_array($attribute, $supportedAction);
 	}
 
 	/**
@@ -48,8 +51,9 @@ class EventAccessVoter extends AbstractVoter
 	 *
 	 * @return bool
 	 */
-	protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
+	protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
 	{
+
 		$event = $subject;
 		if ($subject instanceof RepresentationInterface) {
 			$event = $this->getReferredObject(Event::class);
@@ -88,7 +92,7 @@ class EventAccessVoter extends AbstractVoter
 	 *
 	 * @return bool
 	 */
-	protected function canEdit($event, TokenInterface $token)
+	protected function canEdit($event, TokenInterface $token): bool
 	{
 		/** @var Event $event */
 		if ($event->getUser() === $token->getUser()) {
@@ -104,7 +108,30 @@ class EventAccessVoter extends AbstractVoter
 	 *
 	 * @return bool
 	 */
-	protected function canCreate($event, TokenInterface $token)
+	protected function canCreate($event, TokenInterface $token): bool
+	{
+		return $this->decisionManager->decide($token, ['ROLE_USER'], $event);
+	}
+
+	/**
+	 * @param                $event
+	 * @param TokenInterface $token
+	 *
+	 * @return bool
+	 */
+	protected function canViewCollection($event, TokenInterface $token): bool
+	{
+		//TODO ALl user can view collection? Return collection per user
+		return $this->decisionManager->decide($token, ['ROLE_USER'], $event);
+	}
+
+	/**
+	 * @param                $event
+	 * @param TokenInterface $token
+	 *
+	 * @return bool
+	 */
+	protected function canDelete($event, TokenInterface $token): bool
 	{
 		/** @var Event $event */
 		if ($event->getUser() === $token->getUser()) {
@@ -120,34 +147,7 @@ class EventAccessVoter extends AbstractVoter
 	 *
 	 * @return bool
 	 */
-	protected function canViewCollection($event, TokenInterface $token)
-	{
-		return $this->decisionManager->decide($token, ['ROLE_ADMIN'], $event);
-	}
-
-	/**
-	 * @param                $event
-	 * @param TokenInterface $token
-	 *
-	 * @return bool
-	 */
-	protected function canDelete($event, TokenInterface $token)
-	{
-		/** @var Event $event */
-		if ($event->getUser() === $token->getUser()) {
-			return true;
-		}
-
-		return $this->decisionManager->decide($token, ['ROLE_ADMIN'], $event);
-	}
-
-	/**
-	 * @param                $event
-	 * @param TokenInterface $token
-	 *
-	 * @return bool
-	 */
-	protected function canView($event, TokenInterface $token)
+	protected function canView($event, TokenInterface $token): bool
 	{
 		$event = $this->em->getRepository('EventManagementBundle:Event')->getEventWithUser($event);
 
@@ -165,7 +165,7 @@ class EventAccessVoter extends AbstractVoter
 	 *
 	 * @return bool
 	 */
-	protected function canEnable($event, TokenInterface $token)
+	protected function canEnable($event, TokenInterface $token): bool
 	{
 		$event = $this->em->getRepository('EventManagementBundle:Event')->getEventWithUser($event);
 
@@ -187,7 +187,7 @@ class EventAccessVoter extends AbstractVoter
 	 *
 	 * @return bool
 	 */
-	protected function canDisable($event, TokenInterface $token)
+	protected function canDisable($event, TokenInterface $token): bool
 	{
 		$event = $this->em->getRepository('EventManagementBundle:Event')->getEventWithUser($event);
 

@@ -4,13 +4,14 @@ declare(strict_types = 1);
 namespace ApiBundle\Security\Voter;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Proxy\Proxy;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 /**
  * Class AbstractVoter
- * @package ApiBundle\Authorization\Voter
+ * @package ApiBundle\Security\Voter
  */
 abstract class AbstractVoter extends Voter
 {
@@ -45,15 +46,40 @@ abstract class AbstractVoter extends Voter
 	}
 
 	/**
+	 * @param string $attribute
+	 * @param mixed  $subject
+	 *
+	 * @return bool
+	 */
+	protected function supports($attribute, $subject): bool
+	{
+		if (!in_array(get_class($subject), $this->getSupportedClass())) {
+			return false;
+		}
+
+		return in_array($attribute, $this->getSupportedPermissions());
+	}
+
+	/**
 	 * @param $name
 	 *
-	 * @return bool|\Doctrine\Common\Proxy\Proxy|null|object
+	 * @return bool|Proxy|null|object
 	 */
-	public function getReferredObject($name)
+	public function getReferredObject($name): ?Proxy
 	{
 		/** @var EntityManager $entityManager */
 		$entityManager = $this->em;
 
 		return $entityManager->getReference($name, 1);
 	}
+
+	/**
+	 * @return array
+	 */
+	abstract protected function getSupportedClass(): array;
+
+	/**
+	 * @return array
+	 */
+	abstract protected function getSupportedPermissions(): array;
 }

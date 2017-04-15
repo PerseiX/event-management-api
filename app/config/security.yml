@@ -21,7 +21,7 @@ security:
             remember_me: true
          logout:
             path:   /logout
-            target: /
+            target: /login
          anonymous: ~
 
 
@@ -32,6 +32,6 @@ security:
 
    access_control:
       - { path: ^/api/doc, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-      - { path: ^/api, roles: ROLE_ADMIN }
+      - { path: ^/api, roles: ROLE_USER }
 
 

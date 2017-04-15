@@ -15,7 +15,7 @@ authenticate.authorize:
 
 
 authenticate.user_details:
-    path:      /access-token/{accessToken}/refresh-token/{refreshToken}/user-details
+    path:      /api/access-token/{accessToken}/refresh-token/{refreshToken}/user-details
     defaults:
         _controller: UserBundle:Authenticate:userDetail
         _format: json
