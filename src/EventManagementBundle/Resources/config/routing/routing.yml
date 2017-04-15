@@ -52,3 +52,59 @@ event.single_disable:
         _controller: EventManagementBundle:Event:disable
         _format: json
     methods: [PUT]
+
+##############################
+#           Tag              #
+##############################
+
+tag.get_collection:
+    path:      /tags/{limit}/limit/{page}/page
+    defaults:
+        _controller: EventManagementBundle:Tag:collection
+        _format: json
+    methods: [GET]
+    requirements:
+        limit: '\d+'
+        page: '\d+'
+
+tag.get_single:
+    path:       /tag/{tagId}
+    defaults:
+        _controller: EventManagementBundle:Tag:single
+        _format: json
+    methods: [GET]
+
+tag.create:
+    path:      /tag
+    defaults:
+        _controller: EventManagementBundle:Tag:create
+        _format: json
+    methods: [POST]
+
+tag.edit:
+    path:      /tag/{tagId}
+    defaults:
+        _controller: EventManagementBundle:Tag:edit
+        _format: json
+    methods: [PUT]
+
+tag.delete:
+    path:      /tag/{tagId}
+    defaults:
+        _controller: EventManagementBundle:Tag:delete
+        _format: json
+    methods: [DELETE]
+
+tag.single_enable:
+    path:      /tag/enable/{tagId}
+    defaults:
+        _controller: EventManagementBundle:Tag:enable
+        _format: json
+    methods: [PUT]
+
+tag.single_disable:
+    path:       /tag/disable/{tagId}
+    defaults:
+        _controller: EventManagementBundle:Tag:disable
+        _format: json
+    methods: [PUT]

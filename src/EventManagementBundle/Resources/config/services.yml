@@ -21,3 +21,15 @@ services:
         parent: 'api.abstract_voter'
         tags:
             - { name: security.voter }
+
+
+    tag.transformer:
+        class: EventManagementBundle\Transformer\TagTransformer
+        tags:
+            - { name: api.transformer }
+
+    tag.colelction.transformer:
+        class: EventManagementBundle\Transformer\Collection\TagCollectionTransformer
+        parent: 'abstract.transformer'
+        tags:
+            - { name: api.transformer }

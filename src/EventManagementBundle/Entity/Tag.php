@@ -28,9 +28,18 @@ class Tag
 	protected $name;
 
 	/**
+	 * Tag constructor.
+	 */
+	public function __construct()
+	{
+		$this->active    = true;
+		$this->createdAt = new \DateTime();
+	}
+
+	/**
 	 * @return string
 	 */
-	public function getName(): string
+	public function getName(): ?string
 	{
 		return $this->name;
 	}

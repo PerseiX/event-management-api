@@ -3,6 +3,7 @@
 namespace EventManagementBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 
 /**
  * Class TagRepository
@@ -10,5 +11,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class TagRepository extends EntityRepository
 {
+	/**
+	 * @return Query
+	 */
+	public function tagsCollectionQuery(): Query
+	{
+		$query = $this->createQueryBuilder('tag')
+		              ->getQuery();
 
+		return $query;
+	}
 }
