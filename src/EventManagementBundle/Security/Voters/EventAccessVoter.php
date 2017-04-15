@@ -8,7 +8,6 @@ use ApiBundle\Security\Voter\AbstractVoter;
 use EventManagementBundle\Entity\Event;
 use EventManagementBundle\Representation\EventRepresentation;
 use JMS\Serializer\Exception\LogicException;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**

@@ -7,7 +7,6 @@ use ApiBundle\Entity\Traits\IDTrait;
 use ApiBundle\Entity\Traits\ActiveTrait;
 use Doctrine\ORM\Mapping as ORM;
 use UserBundle\Entity\Traits\UserTrait;
-use UserBundle\Entity\User;
 
 /**
  * Class Event
