@@ -1,0 +1,96 @@
+EventManagementBundle\Representation\GuestRepresentation:
+    exclusion_policy: ALL
+    properties:
+        id:
+            type: int
+            expose: true
+
+        name:
+            type: string
+            expose: true
+
+        surname:
+            type: string
+            expose: true
+
+        createdAt:
+            expose: true
+            type: DateTime<'Y-m-d'>
+
+        active:
+            type: boolean
+            expose: true
+
+        createdById:
+            type: integer
+            expose: true
+
+        tagId:
+            type: integer
+            expose: true
+
+    relations:
+        -
+            rel: tag
+            embedded:
+                content: expr(object.getTag())
+            exclusion:
+                groups: [guest.tag]
+                exclude_if: expr(!object.getTag())
+
+        -
+            rel: self
+            href:
+                route: guest.get_single
+                parameters:
+                    guestId: expr(object.getId())
+                generator: default
+                absolute: true
+
+        -
+            rel: collection
+            href:
+                route: guest.get_collection
+                parameters:
+                    limit: 1
+                    page: 1
+                generatior: default
+                absolute: true
+
+        -
+            rel: edit
+            href:
+                route: guest.edit
+                parameters:
+                    guestId: expr(object.getId())
+                generatior: default
+                absolute: true
+
+        -
+            rel: enable
+            href:
+                route: guest.single_enable
+                parameters:
+                    guestId: expr(object.getId())
+                generatior: default
+                absolute: true
+
+        -
+            rel: disable
+            href:
+                route: guest.single_enable
+                parameters:
+                    guestId: expr(object.getId())
+                generatior: default
+                absolute: true
+
+        -
+            rel: delete
+            href:
+                route: guest.delete
+                parameters:
+                    guestId: expr(object.getId())
+                generatior: default
+                absolute: true
+
+

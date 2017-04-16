@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use ApiBundle\Annotation\Scope;
 
 /**
  * Class GuestController
@@ -29,6 +30,7 @@ class GuestController extends AbstractApiController
 	 * )
 	 * @return Response
 	 *
+	 * @Scope(scope="guest.tag")
 	 */
 	public function collectionAction(Request $request)
 	{
@@ -56,6 +58,7 @@ class GuestController extends AbstractApiController
 	 *
 	 * @return Response
 	 *
+	 * @Scope(scope="guest.tag")
 	 */
 	public function singleAction(Guest $guest)
 	{

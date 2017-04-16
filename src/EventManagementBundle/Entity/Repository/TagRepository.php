@@ -4,6 +4,8 @@ namespace EventManagementBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
+use EventManagementBundle\Entity\Tag;
+use EventManagementBundle\Representation\GuestRepresentation;
 
 /**
  * Class TagRepository
@@ -20,5 +22,19 @@ class TagRepository extends EntityRepository
 		              ->getQuery();
 
 		return $query;
+	}
+
+	/**
+	 * @param GuestRepresentation $guestRepresentation
+	 *
+	 * @return Tag|null
+	 */
+	public function getTagToGuest(GuestRepresentation $guestRepresentation): ?Tag
+	{
+		return $this->createQueryBuilder('tag_repository')
+		            ->andWhere('tag_repository.id = :tagId')
+		            ->setParameter('tagId', $guestRepresentation->getTagId())
+		            ->getQuery()
+		            ->getOneOrNullResult();
 	}
 }

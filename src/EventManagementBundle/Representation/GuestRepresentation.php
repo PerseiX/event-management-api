@@ -3,8 +3,8 @@
 namespace EventManagementBundle\Representation;
 
 use ApiBundle\Representation\RepresentationInterface;
-use EventManagementBundle\Entity\Tag;
 use UserBundle\Entity\User;
+use UserBundle\Representation\UserRepresentation;
 
 /**
  * Class GuestRepresentation
@@ -33,7 +33,7 @@ class GuestRepresentation implements RepresentationInterface
 	private $createdById;
 
 	/**
-	 * @var User
+	 * @var UserRepresentation
 	 */
 	private $createdBy;
 
@@ -48,7 +48,7 @@ class GuestRepresentation implements RepresentationInterface
 	private $surname;
 
 	/**
-	 * @var Tag
+	 * @var TagRepresentation
 	 */
 	private $tag;
 
@@ -138,19 +138,19 @@ class GuestRepresentation implements RepresentationInterface
 	}
 
 	/**
-	 * @return User
+	 * @return UserRepresentation
 	 */
-	public function getCreatedBy(): User
+	public function getCreatedBy(): UserRepresentation
 	{
 		return $this->createdBy;
 	}
 
 	/**
-	 * @param User $createdBy
+	 * @param UserRepresentation $createdBy
 	 *
 	 * @return GuestRepresentation
 	 */
-	public function setCreatedBy(User $createdBy): GuestRepresentation
+	public function setCreatedBy(UserRepresentation $createdBy): GuestRepresentation
 	{
 		$this->createdBy = $createdBy;
 
@@ -198,19 +198,19 @@ class GuestRepresentation implements RepresentationInterface
 	}
 
 	/**
-	 * @return Tag
+	 * @return TagRepresentation
 	 */
-	public function getTag(): Tag
+	public function getTag(): TagRepresentation
 	{
 		return $this->tag;
 	}
 
 	/**
-	 * @param Tag $tag
+	 * @param TagRepresentation $tag
 	 *
 	 * @return GuestRepresentation
 	 */
-	public function setTag(Tag $tag): GuestRepresentation
+	public function setTag(TagRepresentation $tag): GuestRepresentation
 	{
 		$this->tag = $tag;
 
