@@ -48,7 +48,7 @@ class GuestRepresentation implements RepresentationInterface
 	private $surname;
 
 	/**
-	 * @var TagRepresentation
+	 * @var TagRepresentation|null
 	 */
 	private $tag;
 
@@ -200,7 +200,7 @@ class GuestRepresentation implements RepresentationInterface
 	/**
 	 * @return TagRepresentation
 	 */
-	public function getTag(): TagRepresentation
+	public function getTag(): ?TagRepresentation
 	{
 		return $this->tag;
 	}

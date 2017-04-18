@@ -1,0 +1,76 @@
+EventManagementBundle\Representation\TagRepresentation:
+    exclusion_policy: ALL
+    properties:
+        id:
+            type: int
+            expose: true
+
+        name:
+            type: string
+            expose: true
+
+        createdAt:
+            expose: true
+            type: DateTime<'Y-m-d'>
+
+        active:
+            type: boolean
+            expose: true
+
+    relations:
+        -
+            rel: self
+            href:
+                route: tag.get_single
+                parameters:
+                    tagId: expr(object.getId())
+                generator: default
+                absolute: true
+
+        -
+            rel: collection
+            href:
+                route: tag.get_collection
+                parameters:
+                    limit: 10
+                    page: 1
+                generatior: default
+                absolute: true
+
+        -
+            rel: edit
+            href:
+                route: tag.edit
+                parameters:
+                    tagId: expr(object.getId())
+                generatior: default
+                absolute: true
+
+        -
+            rel: enable
+            href:
+                route: tag.single_enable
+                parameters:
+                    tagId: expr(object.getId())
+                generatior: default
+                absolute: true
+
+        -
+            rel: disable
+            href:
+                route: tag.single_enable
+                parameters:
+                    tagId: expr(object.getId())
+                generatior: default
+                absolute: true
+
+        -
+            rel: delete
+            href:
+                route: tag.delete
+                parameters:
+                    tagId: expr(object.getId())
+                generatior: default
+                absolute: true
+
+
