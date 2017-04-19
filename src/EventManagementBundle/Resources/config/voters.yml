@@ -1,0 +1,6 @@
+services:
+    event.access_voter:
+        class: EventManagementBundle\Security\Voters\EventAccessVoter
+        parent: 'api.abstract_voter'
+        tags:
+            - { name: security.voter }

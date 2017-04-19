@@ -1,0 +1,10 @@
+services:
+    paginated_request:
+        class: ApiBundle\Request\PaginatedRequest
+
+    paginated_request.resolver:
+        class: ApiBundle\Resolver\PaginatedRequestResolver
+        arguments:
+            - '@paginated_request'
+        tags:
+            - { name: controller.argument_value_resolver, priority: 49 }

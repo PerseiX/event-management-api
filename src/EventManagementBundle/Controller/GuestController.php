@@ -1,8 +1,10 @@
 <?php
+declare(strict_types = 1);
 
 namespace EventManagementBundle\Controller;
 
 use ApiBundle\Controller\AbstractApiController;
+use ApiBundle\Request\PaginatedRequest;
 use Doctrine\ORM\ORMException;
 use EventManagementBundle\Entity\Guest;
 use EventManagementBundle\Form\Type\GuestType;
@@ -20,7 +22,7 @@ use ApiBundle\Annotation\Scope;
 class GuestController extends AbstractApiController
 {
 	/**
-	 * @param Request $request
+	 * @param PaginatedRequest $paginatedRequest
 	 *
 	 * @ApiDoc(
 	 *     section="Guests",
@@ -32,12 +34,12 @@ class GuestController extends AbstractApiController
 	 *
 	 * @Scope(scope="guest.tag")
 	 */
-	public function collectionAction(Request $request)
+	public function collectionAction(PaginatedRequest $paginatedRequest)
 	{
 		$query = $this->getDoctrine()->getRepository('EventManagementBundle:Guest')
 		              ->guestsCollectionQuery();
 
-		return $this->paginatedResponse(GuestModel::class, $query, $request);
+		return $this->paginatedResponse(GuestModel::class, $query, $paginatedRequest);
 	}
 
 	/**

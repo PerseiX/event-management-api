@@ -1,0 +1,33 @@
+services:
+    tag.transformer:
+        class: EventManagementBundle\Transformer\TagTransformer
+        tags:
+            - { name: api.transformer }
+
+    tag.colelction.transformer:
+        class: EventManagementBundle\Transformer\Collection\TagCollectionTransformer
+        parent: 'abstract.transformer'
+        tags:
+            - { name: api.transformer }
+
+    guest.transformer:
+        class: EventManagementBundle\Transformer\GuestTransformer
+        tags:
+            - { name: api.transformer }
+
+    guest.colelction.transformer:
+        class: EventManagementBundle\Transformer\Collection\GuestCollectionTransformer
+        parent: 'abstract.transformer'
+        tags:
+            - { name: api.transformer }
+
+    event.transformer:
+        class: EventManagementBundle\Transformer\EventTransformer
+        tags:
+            - { name: api.transformer }
+
+    event.colelction.transformer:
+        class: EventManagementBundle\Transformer\Collection\EventCollectionTransformer
+        parent: 'abstract.transformer'
+        tags:
+            - { name: api.transformer }

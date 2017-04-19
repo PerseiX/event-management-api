@@ -1,8 +1,10 @@
 <?php
+declare(strict_types = 1);
 
 namespace EventManagementBundle\Controller;
 
 use ApiBundle\Controller\AbstractApiController;
+use ApiBundle\Request\PaginatedRequest;
 use Doctrine\ORM\ORMException;
 use EventManagementBundle\Entity\Tag;
 use EventManagementBundle\Form\Type\TagType;
@@ -19,7 +21,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 class TagController extends AbstractApiController
 {
 	/**
-	 * @param Request $request
+	 * @param PaginatedRequest $paginatedRequest
 	 *
 	 * @ApiDoc(
 	 *     section="Tags",
@@ -29,12 +31,12 @@ class TagController extends AbstractApiController
 	 * )
 	 * @return Response
 	 */
-	public function collectionAction(Request $request)
+	public function collectionAction(PaginatedRequest $paginatedRequest)
 	{
 		$query = $this->getDoctrine()->getRepository('EventManagementBundle:Tag')
 		              ->tagsCollectionQuery();
 
-		return $this->paginatedResponse(TagModel::class, $query, $request);
+		return $this->paginatedResponse(TagModel::class, $query, $paginatedRequest);
 	}
 
 	/**

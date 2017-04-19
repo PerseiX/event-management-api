@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace EventManagementBundle\Controller;
 
 use ApiBundle\Controller\AbstractApiController;
+use ApiBundle\Request\PaginatedRequest;
 use ApiBundle\Security\Voter\AbstractVoter;
 use Doctrine\ORM\ORMException;
 use EventManagementBundle\Entity\Event;
@@ -19,7 +20,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 class EventController extends AbstractApiController
 {
 	/**
-	 * @param Request $request
+	 * @param PaginatedRequest $paginatedRequest
 	 *
 	 * @ApiDoc(
 	 *     section="Events",
@@ -31,14 +32,14 @@ class EventController extends AbstractApiController
 	 *
 	 * @Scope(scope="event.user")
 	 */
-	public function collectionAction(Request $request)
+	public function collectionAction(PaginatedRequest $paginatedRequest)
 	{
 		$this->denyAccessUnlessGranted(AbstractVoter::VIEW_COLLECTION, new Event());
 
 		$query = $this->getDoctrine()->getRepository('EventManagementBundle:Event')
 		              ->eventsCollectionQuery();
 
-		return $this->paginatedResponse(EventModel::class, $query, $request);
+		return $this->paginatedResponse(EventModel::class, $query, $paginatedRequest);
 	}
 
 	/**

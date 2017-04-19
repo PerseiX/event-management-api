@@ -4,6 +4,7 @@ namespace ApiBundle\Controller;
 
 use ApiBundle\Representation\AbstractRepresentationCollection;
 use ApiBundle\Representation\RepresentationInterface;
+use ApiBundle\Request\PaginatedRequest;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Query;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -20,17 +21,17 @@ use Symfony\Component\HttpFoundation\Response;
 class AbstractApiController extends FOSRestController
 {
 	/**
-	 * @param         $class
-	 * @param Query   $query
-	 * @param Request $request
-	 * @param array   $parameters
+	 * @param                  $class
+	 * @param Query            $query
+	 * @param PaginatedRequest $paginatedRequest
+	 * @param array            $parameters
 	 *
 	 * @return Response
 	 */
-	protected function paginatedResponse($class, Query $query, Request $request, $parameters = [])
+	protected function paginatedResponse($class, Query $query, PaginatedRequest $paginatedRequest, $parameters = [])
 	{
-		$limit = $request->get('limit');
-		$page  = $request->get('page');
+		$limit = $paginatedRequest->getLimit();
+		$page  = $paginatedRequest->getPage();
 
 		$paginator = $this->get('knp_paginator');
 
@@ -41,7 +42,7 @@ class AbstractApiController extends FOSRestController
 
 		$paginatedRepresentation = new PaginatedRepresentation(
 			$representation,
-			$request->get('_route'),
+			$paginatedRequest->getRouter(),
 			$parameters,
 			$page,
 			$limit,

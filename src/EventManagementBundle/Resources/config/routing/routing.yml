@@ -2,10 +2,12 @@
 #           EVENT            #
 ##############################
 event.get_collection:
-    path:      /events/{limit}/limit/{page}/page
+    path:      /events
     defaults:
         _controller: EventManagementBundle:Event:collection
         _format: json
+        limit: 10
+        page: 10
     methods: [GET]
     requirements:
         limit: '\d+'
@@ -58,7 +60,7 @@ event.single_disable:
 ##############################
 
 tag.get_collection:
-    path:      /tags/{limit}/limit/{page}/page
+    path:      /tags
     defaults:
         _controller: EventManagementBundle:Tag:collection
         _format: json
@@ -115,7 +117,7 @@ tag.single_disable:
 ##############################
 
 guest.get_collection:
-    path:      /guest/{limit}/limit/{page}/page
+    path:      /guests
     defaults:
         _controller: EventManagementBundle:Guest:collection
         _format: json

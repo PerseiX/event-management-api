@@ -1,4 +1,5 @@
 services:
+    #Transformer
     api.main_transformer:
         class: ApiBundle\Transformer\Transformer
         arguments:
@@ -24,27 +25,7 @@ services:
         calls:
             - [setTransformer, ['@api.main_transformer']]
 
-    api.scope_annotation_reader:
-        class: ApiBundle\Annotation\ScopeAnnotationReader
-        tags:
-            - { name: kernel.event_subscriber }
-        arguments:
-            - '@annotation_reader'
-            - '@api.allowed_scopes_repository'
-            - '@api.transformer_scope_repository'
-
-    api.scope_listener:
-        class: ApiBundle\Annotation\ScopeListener
-        tags:
-            - { name: kernel.event_subscriber }
-        arguments:
-            - '@api.transformer_scope_repository'
-
-    api.nelmio_api_doc.scope_handler:
-        class: ApiBundle\Documentation\ScopeAnnotationHandler
-        tags:
-            - { name: nelmio_api_doc.extractor.handler }
-
+    #Voter
     api.abstract_voter:
         class: ApiBundle\Security\Voter\AbstractVoter
         abstract: true
@@ -52,3 +33,5 @@ services:
         arguments:
             - '@security.access.decision_manager'
             - '@doctrine.orm.entity_manager'
+
+
