@@ -6,6 +6,7 @@ namespace EventManagementBundle\Controller;
 use ApiBundle\Controller\AbstractApiController;
 use ApiBundle\Request\PaginatedRequest;
 use Doctrine\ORM\ORMException;
+use EventManagementBundle\Entity\Event;
 use EventManagementBundle\Entity\Guest;
 use EventManagementBundle\Form\Type\GuestType;
 use EventManagementBundle\Model\GuestModel;
@@ -23,23 +24,29 @@ class GuestController extends AbstractApiController
 {
 	/**
 	 * @param PaginatedRequest $paginatedRequest
-	 *
+	 * @param Event $event
 	 * @ApiDoc(
 	 *     section="Guests",
 	 *     resource=true,
 	 *     description="Guests collection",
 	 *     output="EventManagementBundle\Representation\GuestCollectionRepresentation"
 	 * )
+	 * @ParamConverter("event", options={
+	 *      "mapping": {
+	 *            "eventId" = "id"
+	 *        }
+	 * })
+	 *
 	 * @return Response
 	 *
 	 * @Scope(scope="guest.tag")
 	 */
-	public function collectionAction(PaginatedRequest $paginatedRequest)
+	public function collectionAction(PaginatedRequest $paginatedRequest, Event $event)
 	{
 		$query = $this->getDoctrine()->getRepository('EventManagementBundle:Guest')
-		              ->guestsCollectionQuery();
+		              ->guestsToEventCollectionQuery($event);
 
-		return $this->paginatedResponse(GuestModel::class, $query, $paginatedRequest);
+		return $this->paginatedResponse(GuestModel::class, $query, $paginatedRequest, ['eventId' => $event->getId()]);
 	}
 
 	/**

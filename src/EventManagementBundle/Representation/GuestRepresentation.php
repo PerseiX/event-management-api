@@ -58,6 +58,16 @@ class GuestRepresentation implements RepresentationInterface
 	private $tagId;
 
 	/**
+	 * @var EventRepresentation
+	 */
+	private $event;
+
+	/**
+	 * @var integer
+	 */
+	private $eventId;
+
+	/**
 	 * @return int
 	 */
 	public function getId(): int
@@ -235,5 +245,45 @@ class GuestRepresentation implements RepresentationInterface
 		$this->tagId = $tagId;
 
 		return $this;
+	}
+
+	/**
+	 * @param EventRepresentation $event
+	 *
+	 * @return GuestRepresentation
+	 */
+	public function setEvent(EventRepresentation $event): GuestRepresentation
+	{
+		$this->event = $event;
+
+		return $this;
+	}
+
+	/**
+	 * @param int $eventId
+	 *
+	 * @return GuestRepresentation
+	 */
+	public function setEventId(int $eventId): GuestRepresentation
+	{
+		$this->eventId = $eventId;
+
+		return $this;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getEventId(): int
+	{
+		return $this->eventId;
+	}
+
+	/**
+	 * @return EventRepresentation
+	 */
+	public function getEvent(): EventRepresentation
+	{
+		return $this->event;
 	}
 }

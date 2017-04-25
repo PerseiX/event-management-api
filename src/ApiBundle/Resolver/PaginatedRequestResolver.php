@@ -48,8 +48,8 @@ class PaginatedRequestResolver implements ArgumentValueResolverInterface
 	 */
 	public function resolve(Request $request, ArgumentMetadata $argument): \Generator
 	{
-		$this->paginatedRequest->setLimit($request->query->get('limit', 20));
-		$this->paginatedRequest->setPage($request->query->get('page', 1));
+		$this->paginatedRequest->setLimit((int)$request->query->get('limit', 20));
+		$this->paginatedRequest->setPage((int)$request->query->get('page', 1));
 		$this->paginatedRequest->setRouter($request->get('_route'));
 
 		yield $this->paginatedRequest;

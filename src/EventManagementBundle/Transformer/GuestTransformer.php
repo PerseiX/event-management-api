@@ -39,7 +39,8 @@ class GuestTransformer implements TransformerInterface
 		               ->setCreatedAt($input->getCreatedAt())
 		               ->setCreatedById($input->getCreatedBy()->getId())
 		               ->setSurname($input->getSurname())
-		               ->setTagId($input->getTag()->getId());
+		               ->setTagId($input->getTag()->getId())
+		               ->setEventId($input->getEvent()->getId());
 
 		return $representation;
 	}

@@ -29,6 +29,10 @@ EventManagementBundle\Representation\GuestRepresentation:
             type: integer
             expose: true
 
+        eventId:
+            type: integer
+            expose: true
+
     relations:
         -
             rel: tag
@@ -54,6 +58,7 @@ EventManagementBundle\Representation\GuestRepresentation:
                 parameters:
                     limit: 1
                     page: 1
+                    eventId:  expr(object.getEventId())
                 generatior: default
                 absolute: true
 

@@ -44,6 +44,11 @@ class Event
 	protected $description;
 
 	/**
+	 * @ORM\OneToMany(targetEntity="EventManagementBundle\Entity\Guest", mappedBy="event")
+	 */
+	protected $guest;
+
+	/**
 	 * Event constructor.
 	 */
 	public function __construct()

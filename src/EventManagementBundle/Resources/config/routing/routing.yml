@@ -117,12 +117,13 @@ tag.single_disable:
 ##############################
 
 guest.get_collection:
-    path:      /guests
+    path:      /event/{eventId}/guests
     defaults:
         _controller: EventManagementBundle:Guest:collection
         _format: json
     methods: [GET]
     requirements:
+        eventId: '\d+'
         limit: '\d+'
         page: '\d+'
 

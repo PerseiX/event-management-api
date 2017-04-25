@@ -52,6 +52,14 @@ class Guest
 	protected $tag;
 
 	/**
+	 * @var Event
+	 *
+	 * @ORM\ManyToOne(targetEntity="EventManagementBundle\Entity\Event", inversedBy="guest")
+	 * @ORM\JoinColumn(referencedColumnName="id")
+	 */
+	protected $event;
+
+	/**
 	 * Guest constructor.
 	 */
 	public function __construct()
@@ -136,6 +144,26 @@ class Guest
 	public function setTag(Tag $tag): Guest
 	{
 		$this->tag = $tag;
+
+		return $this;
+	}
+
+	/**
+	 * @return Event
+	 */
+	public function getEvent(): ?Event
+	{
+		return $this->event;
+	}
+
+	/**
+	 * @param Event $event
+	 *
+	 * @return Guest
+	 */
+	public function setEvent(?Event $event): Guest
+	{
+		$this->event = $event;
 
 		return $this;
 	}
