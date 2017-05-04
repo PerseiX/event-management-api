@@ -60,7 +60,7 @@ event.single_disable:
 ##############################
 
 tag.get_collection:
-    path:      /tags
+    path:      /tags/{eventId}
     defaults:
         _controller: EventManagementBundle:Tag:collection
         _format: json
@@ -124,6 +124,18 @@ guest.get_collection:
     methods: [GET]
     requirements:
         eventId: '\d+'
+        limit: '\d+'
+        page: '\d+'
+
+guest.get_collection_special_tag:
+    path:      /event/{eventId}/tag/{tagId}/guests
+    defaults:
+        _controller: EventManagementBundle:Guest:collectionByTag
+        _format: json
+    methods: [GET]
+    requirements:
+        eventId: '\d+'
+        tagId: '\d+'
         limit: '\d+'
         page: '\d+'
 

@@ -8,6 +8,7 @@ use ApiBundle\Request\PaginatedRequest;
 use Doctrine\ORM\ORMException;
 use EventManagementBundle\Entity\Event;
 use EventManagementBundle\Entity\Guest;
+use EventManagementBundle\Entity\Tag;
 use EventManagementBundle\Form\Type\GuestType;
 use EventManagementBundle\Model\GuestModel;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +25,7 @@ class GuestController extends AbstractApiController
 {
 	/**
 	 * @param PaginatedRequest $paginatedRequest
-	 * @param Event $event
+	 * @param Event            $event
 	 * @ApiDoc(
 	 *     section="Guests",
 	 *     resource=true,
@@ -47,6 +48,44 @@ class GuestController extends AbstractApiController
 		              ->guestsToEventCollectionQuery($event);
 
 		return $this->paginatedResponse(GuestModel::class, $query, $paginatedRequest, ['eventId' => $event->getId()]);
+	}
+
+	/**
+	 * @param PaginatedRequest $paginatedRequest
+	 * @param Event            $event
+	 * @param Tag              $tag
+	 *
+	 * @ApiDoc(
+	 *     section="Guests",
+	 *     resource=true,
+	 *     description="Guests collection",
+	 *     output="EventManagementBundle\Representation\GuestCollectionRepresentation"
+	 * )
+	 * @ParamConverter("event", options={
+	 *      "mapping": {
+	 *            "eventId" = "id"
+	 *        }
+	 * })
+	 *
+	 * @ParamConverter("tag", options={
+	 *      "mapping": {
+	 *            "tagId" = "id"
+	 *        }
+	 * })
+	 *
+	 * @return Response
+	 *
+	 * @Scope(scope="guest.tag")
+	 */
+	public function collectionByTagAction(PaginatedRequest $paginatedRequest, Event $event, Tag $tag)
+	{
+		$query = $this->getDoctrine()->getRepository('EventManagementBundle:Guest')
+		              ->guestsToEventAndTagCollectionQuery($event, $tag);
+
+		return $this->paginatedResponse(GuestModel::class, $query, $paginatedRequest, [
+			'eventId' => $event->getId(),
+			'tagId'   => $tag->getId()
+		]);
 	}
 
 	/**

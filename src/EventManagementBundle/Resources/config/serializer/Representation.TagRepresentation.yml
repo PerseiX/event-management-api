@@ -17,6 +17,10 @@ EventManagementBundle\Representation\TagRepresentation:
             type: boolean
             expose: true
 
+        eventId:
+            type: int
+            expose: true
+
     relations:
         -
             rel: self
@@ -34,6 +38,7 @@ EventManagementBundle\Representation\TagRepresentation:
                 parameters:
                     limit: 10
                     page: 1
+                    eventId: expr(object.getEventId())
                 generatior: default
                 absolute: true
 

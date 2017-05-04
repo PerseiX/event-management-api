@@ -6,6 +6,7 @@ namespace EventManagementBundle\Controller;
 use ApiBundle\Controller\AbstractApiController;
 use ApiBundle\Request\PaginatedRequest;
 use Doctrine\ORM\ORMException;
+use EventManagementBundle\Entity\Event;
 use EventManagementBundle\Entity\Tag;
 use EventManagementBundle\Form\Type\TagType;
 use EventManagementBundle\Model\TagModel;
@@ -22,6 +23,7 @@ class TagController extends AbstractApiController
 {
 	/**
 	 * @param PaginatedRequest $paginatedRequest
+	 * @param Event $event
 	 *
 	 * @ApiDoc(
 	 *     section="Tags",
@@ -29,14 +31,21 @@ class TagController extends AbstractApiController
 	 *     description="Tags collection",
 	 *     output="EventManagementBundle\Representation\TagsCollectionRepresentation"
 	 * )
+	 *
+	 * @ParamConverter("event", options={
+	 *      "mapping": {
+	 *            "eventId" = "id"
+	 *        }
+	 * })
+	 *
 	 * @return Response
 	 */
-	public function collectionAction(PaginatedRequest $paginatedRequest)
+	public function collectionAction(PaginatedRequest $paginatedRequest, Event $event)
 	{
 		$query = $this->getDoctrine()->getRepository('EventManagementBundle:Tag')
-		              ->tagsCollectionQuery();
+		              ->tagsCollectionQuery($event);
 
-		return $this->paginatedResponse(TagModel::class, $query, $paginatedRequest);
+		return $this->paginatedResponse(TagModel::class, $query, $paginatedRequest, ['eventId' => $event->getId()]);
 	}
 
 	/**

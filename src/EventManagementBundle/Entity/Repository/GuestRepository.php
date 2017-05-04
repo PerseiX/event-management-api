@@ -5,6 +5,7 @@ namespace EventManagementBundle\Entity\Repository;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use EventManagementBundle\Entity\Event;
+use EventManagementBundle\Entity\Tag;
 
 /**
  * Class GuestRepository
@@ -22,6 +23,24 @@ class GuestRepository extends EntityRepository
 		$query = $this->createQueryBuilder('guest')
 		              ->andWhere('guest.event = :event')
 		              ->setParameter('event', $event)
+		              ->getQuery();
+
+		return $query;
+	}
+
+	/**
+	 * @param Event $event
+	 * @param Tag   $tag
+	 *
+	 * @return Query
+	 */
+	public function guestsToEventAndTagCollectionQuery(Event $event, Tag $tag): Query
+	{
+		$query = $this->createQueryBuilder('guest')
+		              ->andWhere('guest.event = :event')
+		              ->andWhere('guest.tag = :tag')
+		              ->setParameter('event', $event)
+		              ->setParameter('tag', $tag)
 		              ->getQuery();
 
 		return $query;

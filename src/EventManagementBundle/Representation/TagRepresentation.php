@@ -31,6 +31,16 @@ class TagRepresentation implements RepresentationInterface
 	private $createAt;
 
 	/**
+	 * @var int
+	 */
+	private $eventId;
+
+	/**
+	 * @var EventRepresentation
+	 */
+	private $event;
+
+	/**
 	 * @return int
 	 */
 	public function getId(): int
@@ -108,5 +118,45 @@ class TagRepresentation implements RepresentationInterface
 		$this->createAt = $createAt;
 
 		return $this;
+	}
+
+	/**
+	 * @param int $eventId
+	 *
+	 * @return TagRepresentation
+	 */
+	public function setEventId(int $eventId): TagRepresentation
+	{
+		$this->eventId = $eventId;
+
+		return $this;
+	}
+
+	/**
+	 * @param EventRepresentation $event
+	 *
+	 * @return TagRepresentation
+	 */
+	public function setEvent(EventRepresentation $event): TagRepresentation
+	{
+		$this->event = $event;
+
+		return $this;
+	}
+
+	/**
+	 * @return EventRepresentation
+	 */
+	public function getEvent(): EventRepresentation
+	{
+		return $this->event;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getEventId(): int
+	{
+		return $this->eventId;
 	}
 }

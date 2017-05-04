@@ -36,7 +36,8 @@ class TagTransformer implements TransformerInterface
 		$representation->setId($input->getId())
 		               ->setActive($input->getActive())
 		               ->setCreateAt($input->getCreatedAt())
-		               ->setName($input->getName());
+		               ->setName($input->getName())
+		               ->setEventId($input->getEvent()->getId());
 
 		return $representation;
 	}

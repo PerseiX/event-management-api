@@ -4,6 +4,7 @@ namespace EventManagementBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
+use EventManagementBundle\Entity\Event;
 use EventManagementBundle\Entity\Tag;
 use EventManagementBundle\Representation\GuestRepresentation;
 
@@ -14,11 +15,15 @@ use EventManagementBundle\Representation\GuestRepresentation;
 class TagRepository extends EntityRepository
 {
 	/**
+	 * @param Event $event
+	 *
 	 * @return Query
 	 */
-	public function tagsCollectionQuery(): Query
+	public function tagsCollectionQuery(Event $event): Query
 	{
 		$query = $this->createQueryBuilder('tag')
+		              ->andWhere('tag.event = :event')
+		              ->setParameter('event', $event)
 		              ->getQuery();
 
 		return $query;
