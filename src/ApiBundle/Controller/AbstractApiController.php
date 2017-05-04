@@ -46,7 +46,7 @@ class AbstractApiController extends FOSRestController
 			$parameters,
 			$page,
 			$limit,
-			round($pagination->getTotalItemCount() / $limit)
+			ceil($pagination->getTotalItemCount() / $limit)
 		);
 
 		return $this->representationResponse($paginatedRepresentation);
