@@ -11,6 +11,12 @@ security:
           pattern:    ^/oauth/v2/token
           security:   false
 
+      api:
+          pattern:    ^/api
+          fos_oauth:  true
+          stateless:  true
+          anonymous: false
+
       secure_area:
          pattern:    ^/
          fos_oauth: true
@@ -23,12 +29,6 @@ security:
             path:   /logout
             target: /login
          anonymous: ~
-
-
-      api:
-          pattern:    ^/api
-          fos_oauth:  true
-          stateless:  true
 
    access_control:
       - { path: ^/api/doc, roles: IS_AUTHENTICATED_ANONYMOUSLY }
