@@ -60,7 +60,7 @@ event.single_disable:
 ##############################
 
 tag.get_collection:
-    path:      /tags/{eventId}
+    path:      /event/{eventId}/tags
     defaults:
         _controller: EventManagementBundle:Tag:collection
         _format: json
