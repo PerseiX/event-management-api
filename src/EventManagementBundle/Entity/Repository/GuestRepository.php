@@ -37,10 +37,11 @@ class GuestRepository extends EntityRepository
 	public function guestsToEventAndTagCollectionQuery(Event $event, Tag $tag): Query
 	{
 		$query = $this->createQueryBuilder('guest')
+		              ->leftJoin('guest.tag', 'tag')
 		              ->andWhere('guest.event = :event')
-		              ->andWhere('guest.tag = :tag')
+		              ->andWhere('tag  = :tags')
 		              ->setParameter('event', $event)
-		              ->setParameter('tag', $tag)
+		              ->setParameter('tags', $tag->getId())
 		              ->getQuery();
 
 		return $query;

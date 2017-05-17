@@ -29,7 +29,8 @@ class GuestType extends AbstractType
 			->add('surname', TextType::class)
 			->add('tag', EntityType::class, [
 					'class'        => 'EventManagementBundle\Entity\Tag',
-					'by_reference' => true
+					'by_reference' => true,
+					'multiple'     => true
 				]
 			)
 			->add('event', EntityType::class, [

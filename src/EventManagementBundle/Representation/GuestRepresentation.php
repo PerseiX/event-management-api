@@ -3,6 +3,7 @@
 namespace EventManagementBundle\Representation;
 
 use ApiBundle\Representation\RepresentationInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use UserBundle\Entity\User;
 use UserBundle\Representation\UserRepresentation;
 
@@ -48,14 +49,14 @@ class GuestRepresentation implements RepresentationInterface
 	private $surname;
 
 	/**
-	 * @var TagRepresentation|null
+	 * @var ArrayCollection
 	 */
-	private $tag;
+	private $tags;
 
 	/**
-	 * @var integer
+	 * @var array
 	 */
-	private $tagId;
+	private $tagsId;
 
 	/**
 	 * @var EventRepresentation
@@ -66,6 +67,11 @@ class GuestRepresentation implements RepresentationInterface
 	 * @var integer
 	 */
 	private $eventId;
+
+	public function __construct()
+	{
+		$this->tags = new ArrayCollection();
+	}
 
 	/**
 	 * @return int
@@ -208,11 +214,11 @@ class GuestRepresentation implements RepresentationInterface
 	}
 
 	/**
-	 * @return TagRepresentation
+	 * @return ArrayCollection|null
 	 */
-	public function getTag(): ?TagRepresentation
+	public function getTags(): ?ArrayCollection
 	{
-		return $this->tag;
+		return $this->tags;
 	}
 
 	/**
@@ -220,29 +226,30 @@ class GuestRepresentation implements RepresentationInterface
 	 *
 	 * @return GuestRepresentation
 	 */
-	public function setTag(TagRepresentation $tag): GuestRepresentation
+	public function addTag(TagRepresentation $tag): GuestRepresentation
 	{
-		$this->tag = $tag;
+		$this->tags->add($tag);
 
 		return $this;
 	}
 
 	/**
-	 * @return int
+	 * @return array
 	 */
-	public function getTagId(): int
+	public function getTagsId(): array
 	{
-		return $this->tagId;
+
+		return $this->tagsId;
 	}
 
 	/**
-	 * @param int $tagId
+	 * @param array $tagsId
 	 *
 	 * @return GuestRepresentation
 	 */
-	public function setTagId(int $tagId): GuestRepresentation
+	public function setTagsId(array $tagsId): GuestRepresentation
 	{
-		$this->tagId = $tagId;
+		$this->tagsId = $tagsId;
 
 		return $this;
 	}

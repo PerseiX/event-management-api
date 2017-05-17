@@ -32,14 +32,14 @@ class TagRepository extends EntityRepository
 	/**
 	 * @param GuestRepresentation $guestRepresentation
 	 *
-	 * @return Tag|null
+	 * @return array
 	 */
-	public function getTagToGuest(GuestRepresentation $guestRepresentation): ?Tag
+	public function getTagsToGuest(GuestRepresentation $guestRepresentation): array
 	{
 		return $this->createQueryBuilder('tag_repository')
-		            ->andWhere('tag_repository.id = :tagId')
-		            ->setParameter('tagId', $guestRepresentation->getTagId())
+		            ->andWhere('tag_repository.id IN (:tagsId)')
+		            ->setParameter('tagsId', $guestRepresentation->getTagsId())
 		            ->getQuery()
-		            ->getOneOrNullResult();
+		            ->getResult();
 	}
 }

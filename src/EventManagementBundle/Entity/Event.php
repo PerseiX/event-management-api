@@ -121,4 +121,66 @@ class Event
 
 		return $this;
 	}
+
+	/**
+	 * @param Guest $guest
+	 *
+	 * @return $this
+	 */
+	public function addGuest(Guest $guest)
+	{
+		$this->guest[] = $guest;
+
+		return $this;
+	}
+
+	/**
+	 * @param Guest $guest
+	 *
+	 * @return Event
+	 */
+	public function removeGuest(Guest $guest): Event
+	{
+		$this->guest->removeElement($guest);
+
+		return $this;
+	}
+
+	/**
+	 * @return Guest
+	 */
+	public function getGuest(): Guest
+	{
+		return $this->guest;
+	}
+
+	/**
+	 * Add tag
+	 *
+	 * @param \EventManagementBundle\Entity\Tag $tag
+	 *
+	 * @return Event
+	 */
+	public function addTag(Tag $tag)
+	{
+		$this->tag[] = $tag;
+
+		return $this;
+	}
+
+	/**
+	 * @param Tag $tag
+	 */
+	public function removeTag(Tag $tag)
+	{
+		$this->tag->removeElement($tag);
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getTag()
+	{
+		return $this->tag;
+	}
 }

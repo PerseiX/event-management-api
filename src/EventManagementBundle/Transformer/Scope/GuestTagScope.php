@@ -36,12 +36,13 @@ class GuestTagScope extends AbstractTransformerScope
 		}
 
 		/** @var GuestRepresentation $input */
-		$tag = $this->em->getRepository('EventManagementBundle:Tag')->getTagToGuest($input);
+		$tags = $this->em->getRepository('EventManagementBundle:Tag')->getTagsToGuest($input);
 
-		/** @var TagRepresentation $tagRepresentation */
-		$tagRepresentation = $this->getTransformer()->transform($tag);
-
-		$input->setTag($tagRepresentation);
+		foreach ($tags as $tag) {
+			/** @var TagRepresentation $tagRepresentation */
+			$tagRepresentation = $this->getTransformer()->transform($tag);
+			$input->addTag($tagRepresentation);
+		}
 
 		return $input;
 	}

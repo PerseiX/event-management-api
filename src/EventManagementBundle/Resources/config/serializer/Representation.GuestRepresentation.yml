@@ -25,8 +25,8 @@ EventManagementBundle\Representation\GuestRepresentation:
             type: integer
             expose: true
 
-        tagId:
-            type: integer
+        tagsId:
+            type: array
             expose: true
 
         eventId:
@@ -37,10 +37,10 @@ EventManagementBundle\Representation\GuestRepresentation:
         -
             rel: tag
             embedded:
-                content: expr(object.getTag())
+                content: expr(object.getTags())
             exclusion:
                 groups: [guest.tag]
-                exclude_if: expr(!object.getTag())
+                exclude_if: expr(object.getTags().isEmpty())
 
         -
             rel: self

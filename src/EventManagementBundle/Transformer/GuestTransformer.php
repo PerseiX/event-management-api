@@ -31,15 +31,20 @@ class GuestTransformer implements TransformerInterface
 	public function transform($input): RepresentationInterface
 	{
 		$representation = new GuestRepresentation();
+		$tagsId         = [];
 
 		/** @var Guest $input */
+		foreach ($input->getTag() as $tag) {
+			$tagsId[] = $tag->getId();
+		}
+
 		$representation->setName($input->getName())
 		               ->setActive($input->getActive())
 		               ->setId($input->getId())
 		               ->setCreatedAt($input->getCreatedAt())
 		               ->setCreatedById($input->getCreatedBy()->getId())
 		               ->setSurname($input->getSurname())
-		               ->setTagId($input->getTag()->getId())
+		               ->setTagsId($tagsId)
 		               ->setEventId($input->getEvent()->getId());
 
 		return $representation;

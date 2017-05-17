@@ -46,22 +46,23 @@ class Tag
 	{
 		$this->active    = true;
 		$this->createdAt = new \DateTime();
+		$this->guest     = new ArrayCollection();
 	}
 
 	/**
-	 * @return string
+	 * @return int
 	 */
-	public function getName(): ?string
+	public function getId(): ?int
 	{
-		return $this->name;
+		return $this->id;
 	}
 
 	/**
-	 * @param string $name
+	 * @param $name
 	 *
 	 * @return Tag
 	 */
-	public function setName(string $name): Tag
+	public function setName($name): Tag
 	{
 		$this->name = $name;
 
@@ -69,11 +70,47 @@ class Tag
 	}
 
 	/**
-	 * @param mixed $event
+	 * @return string
+	 */
+	public function getName(): string
+	{
+		return $this->name;
+	}
+
+	/**
+	 * @param Guest $guest
 	 *
 	 * @return Tag
 	 */
-	public function setEvent($event)
+	public function addGuest(Guest $guest): Tag
+	{
+		$this->guest[] = $guest;
+
+		return $this;
+	}
+
+	/**
+	 * @param Guest $guest
+	 */
+	public function removeGuest(Guest $guest)
+	{
+		$this->guest->removeElement($guest);
+	}
+
+	/**
+	 * @return ArrayCollection
+	 */
+	public function getGuest(): ArrayCollection
+	{
+		return $this->guest;
+	}
+
+	/**
+	 * @param Event|null $event
+	 *
+	 * @return Tag
+	 */
+	public function setEvent(Event $event = null): Tag
 	{
 		$this->event = $event;
 
@@ -81,9 +118,9 @@ class Tag
 	}
 
 	/**
-	 * @return mixed
+	 * @return Event|null
 	 */
-	public function getEvent()
+	public function getEvent(): ?Event
 	{
 		return $this->event;
 	}

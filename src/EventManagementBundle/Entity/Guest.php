@@ -5,6 +5,7 @@ namespace EventManagementBundle\Entity;
 use ApiBundle\Entity\Traits\ActiveTrait;
 use ApiBundle\Entity\Traits\CreatedAtTrait;
 use ApiBundle\Entity\Traits\IDTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -46,8 +47,8 @@ class Guest
 	/**
 	 * @var Tag
 	 *
-	 * @ORM\ManyToOne(targetEntity="EventManagementBundle\Entity\Tag", inversedBy="guest")
-	 * @ORM\JoinColumn(referencedColumnName="id")
+	 * @ORM\ManyToMany(targetEntity="EventManagementBundle\Entity\Tag", inversedBy="guest")
+	 * @ORM\JoinTable(name="guest_tag")
 	 */
 	protected $tag;
 
@@ -66,6 +67,15 @@ class Guest
 	{
 		$this->active    = true;
 		$this->createdAt = new \DateTime();
+		$this->tag       = new ArrayCollection();
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getId(): ?int
+	{
+		return $this->id;
 	}
 
 	/**
@@ -129,27 +139,7 @@ class Guest
 	}
 
 	/**
-	 * @return Tag
-	 */
-	public function getTag(): ?Tag
-	{
-		return $this->tag;
-	}
-
-	/**
-	 * @param Tag $tag
-	 *
-	 * @return Guest
-	 */
-	public function setTag(Tag $tag): Guest
-	{
-		$this->tag = $tag;
-
-		return $this;
-	}
-
-	/**
-	 * @return Event
+	 * @return Event|null
 	 */
 	public function getEvent(): ?Event
 	{
@@ -166,5 +156,33 @@ class Guest
 		$this->event = $event;
 
 		return $this;
+	}
+
+	/**
+	 * @param Tag $tag
+	 *
+	 * @return Guest
+	 */
+	public function addTag(Tag $tag): Guest
+	{
+		$this->tag[] = $tag;
+
+		return $this;
+	}
+
+	/**
+	 * @param Tag $tag
+	 */
+	public function removeTag(Tag $tag)
+	{
+		$this->tag->removeElement($tag);
+	}
+
+	/**
+	 * @return ArrayCollection|Tag
+	 */
+	public function getTag()
+	{
+		return $this->tag;
 	}
 }
