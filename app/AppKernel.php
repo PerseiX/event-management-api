@@ -25,6 +25,7 @@ class AppKernel extends Kernel
 			new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
 			new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
 			new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+			new SortAndFilterBundle\SortAndFilterBundle(),
 		];
 
 		if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

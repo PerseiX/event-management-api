@@ -103,7 +103,7 @@ class Event
 	}
 
 	/**
-	 * @return string
+	 * @return null|string
 	 */
 	public function getName(): ?string
 	{

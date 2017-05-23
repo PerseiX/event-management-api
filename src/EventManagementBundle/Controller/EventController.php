@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use ApiBundle\Annotation\Scope;
+use SortAndFilterBundle\Annotation\Sort;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class EventController extends AbstractApiController
@@ -31,6 +32,7 @@ class EventController extends AbstractApiController
 	 * @return Response
 	 *
 	 * @Scope(scope="event.user")
+	 * @Sort(availableField={"name", "createdAt"})
 	 */
 	public function collectionAction(PaginatedRequest $paginatedRequest)
 	{
