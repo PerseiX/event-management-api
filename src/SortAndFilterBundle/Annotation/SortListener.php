@@ -19,7 +19,7 @@ class SortListener implements EventSubscriberInterface
 	/**
 	 * @var AvailableSorting
 	 */
-	private $availableFieldToSort;
+	private $availableSorting;
 
 	/**
 	 * @var SortDetail
@@ -29,13 +29,13 @@ class SortListener implements EventSubscriberInterface
 	/**
 	 * SortListener constructor.
 	 *
-	 * @param AvailableSorting $availableFieldToSort
+	 * @param AvailableSorting $availableSorting
 	 * @param SortDetail       $sortDetail
 	 */
-	public function __construct(AvailableSorting $availableFieldToSort, SortDetail $sortDetail)
+	public function __construct(AvailableSorting $availableSorting, SortDetail $sortDetail)
 	{
-		$this->availableFieldToSort = $availableFieldToSort;
-		$this->sortDetail           = $sortDetail;
+		$this->availableSorting = $availableSorting;
+		$this->sortDetail       = $sortDetail;
 	}
 
 	/**
@@ -64,10 +64,10 @@ class SortListener implements EventSubscriberInterface
 		$orderBy   = key($field);
 		$orderType = $field[$orderBy];
 		if ($orderBy === 0) {
-			$orderBy = $this->availableFieldToSort->getDefault();
+			$orderBy = $this->availableSorting->getDefault();
 		}
 
-		if (!in_array($orderBy, $this->availableFieldToSort->getFieldToSort())) {
+		if (!in_array($orderBy, $this->availableSorting->getFieldToSort())) {
 			throw new \InvalidArgumentException(
 				sprintf("This '%s' field to sort is not available.", $orderBy)
 			);
@@ -80,7 +80,7 @@ class SortListener implements EventSubscriberInterface
 		}
 
 		$this->sortDetail->setTypeOrder($orderType);
-		$this->sortDetail->setOrderBy($orderBy);
+		$this->sortDetail->setOrderBy($this->availableSorting->getAlias() . '.' . $orderBy);
 
 		return $this->sortDetail;
 	}

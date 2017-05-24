@@ -14,6 +14,7 @@ use EventManagementBundle\Model\GuestModel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use SortAndFilterBundle\Annotation\Sort;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use ApiBundle\Annotation\Scope;
 
@@ -41,11 +42,11 @@ class GuestController extends AbstractApiController
 	 * @return Response
 	 *
 	 * @Scope(scope="guest.tag")
+	 * @Sort(availableField={"name", "createdAt"}, alias="guest_repository", default="name")
 	 */
 	public function collectionAction(PaginatedRequest $paginatedRequest, Event $event)
 	{
-		$query = $this->getDoctrine()->getRepository('EventManagementBundle:Guest')
-		              ->guestsToEventCollectionQuery($event);
+		$query = $this->get('repository.guest')->guestsToEventCollectionQuery($event);
 
 		return $this->paginatedResponse(GuestModel::class, $query, $paginatedRequest, ['eventId' => $event->getId()]);
 	}
@@ -76,11 +77,11 @@ class GuestController extends AbstractApiController
 	 * @return Response
 	 *
 	 * @Scope(scope="guest.tag")
+	 * @Sort(availableField={"name", "createdAt"}, alias="guest_repository", default="name")
 	 */
 	public function collectionByTagAction(PaginatedRequest $paginatedRequest, Event $event, Tag $tag)
 	{
-		$query = $this->getDoctrine()->getRepository('EventManagementBundle:Guest')
-		              ->guestsToEventAndTagCollectionQuery($event, $tag);
+		$query = $this->get('repository.guest')->guestsToEventAndTagCollectionQuery($event, $tag);
 
 		return $this->paginatedResponse(GuestModel::class, $query, $paginatedRequest, [
 			'eventId' => $event->getId(),

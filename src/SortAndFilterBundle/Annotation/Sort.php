@@ -22,6 +22,11 @@ final class Sort extends Annotation
 	public $default = self::DEFAULT_ORDER_BY;
 
 	/**
+	 * @var string
+	 */
+	public $alias;
+
+	/**
 	 * @var array
 	 */
 	public $availableField;
@@ -40,5 +45,13 @@ final class Sort extends Annotation
 	public function getAvailableField(): array
 	{
 		return $this->availableField;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getAlias(): string
+	{
+		return $this->alias;
 	}
 }

@@ -23,5 +23,6 @@ class EventManagementExtension extends Extension
 		$loader->load('scopes.yml');
 		$loader->load('transformers.yml');
 		$loader->load('voters.yml');
+		$loader->load('repositories.yml');
 	}
 }

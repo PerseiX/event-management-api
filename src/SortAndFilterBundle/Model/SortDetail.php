@@ -33,9 +33,9 @@ class SortDetail
 	/**
 	 * @param $orderBy
 	 *
-	 * @return SortDetail
+	 * @return null|SortDetail
 	 */
-	public function setOrderBy($orderBy): SortDetail
+	public function setOrderBy($orderBy): ?SortDetail
 	{
 		$this->orderBy = $orderBy;
 
@@ -43,9 +43,9 @@ class SortDetail
 	}
 
 	/**
-	 * @return string
+	 * @return null|string
 	 */
-	public function getTypeOrder(): string
+	public function getTypeOrder(): ?string
 	{
 		return $this->typeOrder;
 	}

@@ -20,6 +20,11 @@ class AvailableSorting
 	private $default;
 
 	/**
+	 * @var string
+	 */
+	private $alias;
+
+	/**
 	 * AvailableFieldToSort constructor.
 	 */
 	public function __construct()
@@ -66,6 +71,26 @@ class AvailableSorting
 	public function setDefault(string $default): AvailableSorting
 	{
 		$this->default = $default;
+
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getAlias(): string
+	{
+		return $this->alias;
+	}
+
+	/**
+	 * @param string $alias
+	 *
+	 * @return AvailableSorting
+	 */
+	public function setAlias(string $alias): AvailableSorting
+	{
+		$this->alias = $alias;
 
 		return $this;
 	}

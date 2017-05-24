@@ -13,6 +13,7 @@ use EventManagementBundle\Model\TagModel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use SortAndFilterBundle\Annotation\Sort;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
@@ -23,7 +24,7 @@ class TagController extends AbstractApiController
 {
 	/**
 	 * @param PaginatedRequest $paginatedRequest
-	 * @param Event $event
+	 * @param Event            $event
 	 *
 	 * @ApiDoc(
 	 *     section="Tags",
@@ -39,11 +40,12 @@ class TagController extends AbstractApiController
 	 * })
 	 *
 	 * @return Response
+	 *
+	 * @Sort(availableField={"name"}, alias="tag_repository", default="name")
 	 */
 	public function collectionAction(PaginatedRequest $paginatedRequest, Event $event)
 	{
-		$query = $this->getDoctrine()->getRepository('EventManagementBundle:Tag')
-		              ->tagsCollectionQuery($event);
+		$query = $this->get('repository.tag')->tagsCollectionQuery($event);
 
 		return $this->paginatedResponse(TagModel::class, $query, $paginatedRequest, ['eventId' => $event->getId()]);
 	}

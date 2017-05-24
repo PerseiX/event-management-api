@@ -1,0 +1,36 @@
+services:
+    repository.event:
+        class: Doctrine\ORM\EntityRepository
+        factory:
+            - '@doctrine.orm.default_entity_manager'
+            - getRepository
+        arguments:
+            - 'EventManagementBundle:Event'
+        calls:
+            - method: setCustomerSorting
+              arguments:
+                - '@custom_sorting'
+
+    repository.guest:
+        class: Doctrine\ORM\EntityRepository
+        factory:
+            - '@doctrine.orm.default_entity_manager'
+            - getRepository
+        arguments:
+            - 'EventManagementBundle:Guest'
+        calls:
+            - method: setCustomerSorting
+              arguments:
+                - '@custom_sorting'
+
+    repository.tag:
+        class: Doctrine\ORM\EntityRepository
+        factory:
+            - '@doctrine.orm.default_entity_manager'
+            - getRepository
+        arguments:
+            - 'EventManagementBundle:Tag'
+        calls:
+            - method: setCustomerSorting
+              arguments:
+                - '@custom_sorting'

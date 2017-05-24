@@ -33,14 +33,12 @@ class EventController extends AbstractApiController
 	 * @return Response
 	 *
 	 * @Scope(scope="event.user")
-	 * @Sort(availableField={"name", "createdAt"}, default="name")
+	 * @Sort(availableField={"name", "createdAt"}, alias="event_repository", default="name")
 	 */
 	public function collectionAction(PaginatedRequest $paginatedRequest)
 	{
 		$this->denyAccessUnlessGranted(AbstractVoter::VIEW_COLLECTION, new Event());
-
-		$query = $this->getDoctrine()->getRepository('EventManagementBundle:Event')
-		              ->eventsCollectionQuery();
+		$query = $this->get('repository.event')->eventsCollectionQuery();
 
 		return $this->paginatedResponse(EventModel::class, $query, $paginatedRequest);
 	}

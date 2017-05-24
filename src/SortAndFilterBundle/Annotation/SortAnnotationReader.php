@@ -23,18 +23,18 @@ class SortAnnotationReader implements EventSubscriberInterface
 	/**
 	 * @var AvailableSorting
 	 */
-	private $availableFieldToSort;
+	private $availableSorting;
 
 	/**
 	 * SortAnnotationReader constructor.
 	 *
-	 * @param Reader               $reader
-	 * @param AvailableSorting $availableFieldToSort
+	 * @param Reader           $reader
+	 * @param AvailableSorting $availableSorting
 	 */
-	public function __construct(Reader $reader, AvailableSorting $availableFieldToSort)
+	public function __construct(Reader $reader, AvailableSorting $availableSorting)
 	{
 		$this->reader               = $reader;
-		$this->availableFieldToSort = $availableFieldToSort;
+		$this->availableSorting = $availableSorting;
 	}
 
 	/**
@@ -66,9 +66,10 @@ class SortAnnotationReader implements EventSubscriberInterface
 		foreach ($methodAnnotations as $configuration) {
 			if ($configuration instanceof Sort) {
 				foreach ($configuration->getAvailableField() as $field) {
-					$this->availableFieldToSort->addField($field);
+					$this->availableSorting->addField($field);
 				}
-				$this->availableFieldToSort->setDefault($configuration->getDefault());
+				$this->availableSorting->setDefault($configuration->getDefault());
+				$this->availableSorting->setAlias($configuration->getAlias());
 			}
 		}
 	}
