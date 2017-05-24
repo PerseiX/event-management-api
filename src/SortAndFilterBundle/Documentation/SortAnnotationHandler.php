@@ -23,7 +23,7 @@ class SortAnnotationHandler implements HandlerInterface
 	{
 		foreach ($annotations as $annotationElement) {
 			if ($annotationElement instanceof Sort) {
-				$annotation->addParameter('sort[]', [
+				$annotation->addParameter('sortBy[]', [
 					"dataType"    => "array",
 					"required"    => false,
 					"description" => "Sort element"

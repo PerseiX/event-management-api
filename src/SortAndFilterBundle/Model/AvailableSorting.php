@@ -1,17 +1,23 @@
 <?php
+declare(strict_types = 1);
 
 namespace SortAndFilterBundle\Model;
 
 /**
- * Class AvailableFieldToSort
+ * Class AvailableSorting
  * @package SortAndFilterBundle\Model
  */
-class AvailableFieldToSort
+class AvailableSorting
 {
 	/**
 	 * @var array
 	 */
 	private $fieldToSort;
+
+	/**
+	 * @var string
+	 */
+	private $default;
 
 	/**
 	 * AvailableFieldToSort constructor.
@@ -24,9 +30,9 @@ class AvailableFieldToSort
 	/**
 	 * @param string $field
 	 *
-	 * @return AvailableFieldToSort
+	 * @return AvailableSorting
 	 */
-	public function addField(string $field): AvailableFieldToSort
+	public function addField(string $field): AvailableSorting
 	{
 		if (in_array($field, $this->fieldToSort)) {
 			throw new \InvalidArgumentException(sprintf("This field %s already added", $field));
@@ -42,5 +48,25 @@ class AvailableFieldToSort
 	public function getFieldToSort(): array
 	{
 		return $this->fieldToSort;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDefault(): string
+	{
+		return $this->default;
+	}
+
+	/**
+	 * @param string $default
+	 *
+	 * @return AvailableSorting
+	 */
+	public function setDefault(string $default): AvailableSorting
+	{
+		$this->default = $default;
+
+		return $this;
 	}
 }

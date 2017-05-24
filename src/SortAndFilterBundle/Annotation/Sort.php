@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace SortAndFilterBundle\Annotation;
 
@@ -11,17 +12,14 @@ use Doctrine\Common\Annotations\Annotation;
  * @Annotation
  * @Target("METHOD")
  */
-class Sort extends Annotation
+final class Sort extends Annotation
 {
-	/**
-	 * @var string
-	 */
-	public $field;
+	CONST DEFAULT_ORDER_BY = "createdAt";
 
 	/**
 	 * @var string
 	 */
-	public $orderBy;
+	public $default = self::DEFAULT_ORDER_BY;
 
 	/**
 	 * @var array
@@ -31,17 +29,9 @@ class Sort extends Annotation
 	/**
 	 * @return string
 	 */
-	public function getField(): string
+	public function getDefault(): string
 	{
-		return $this->field;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function getOrderBy()
-	{
-		return $this->orderBy;
+		return $this->default;
 	}
 
 	/**

@@ -1,9 +1,10 @@
 <?php
+declare(strict_types = 1);
 
 namespace SortAndFilterBundle\Annotation;
 
 use Doctrine\Common\Annotations\Reader;
-use SortAndFilterBundle\Model\AvailableFieldToSort;
+use SortAndFilterBundle\Model\AvailableSorting;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -20,7 +21,7 @@ class SortAnnotationReader implements EventSubscriberInterface
 	private $reader;
 
 	/**
-	 * @var AvailableFieldToSort
+	 * @var AvailableSorting
 	 */
 	private $availableFieldToSort;
 
@@ -28,12 +29,12 @@ class SortAnnotationReader implements EventSubscriberInterface
 	 * SortAnnotationReader constructor.
 	 *
 	 * @param Reader               $reader
-	 * @param AvailableFieldToSort $availableFieldToSort
+	 * @param AvailableSorting $availableFieldToSort
 	 */
-	public function __construct(Reader $reader, AvailableFieldToSort $availableFieldToSort)
+	public function __construct(Reader $reader, AvailableSorting $availableFieldToSort)
 	{
-		$this->availableFieldToSort = $availableFieldToSort;
 		$this->reader               = $reader;
+		$this->availableFieldToSort = $availableFieldToSort;
 	}
 
 	/**
@@ -63,11 +64,11 @@ class SortAnnotationReader implements EventSubscriberInterface
 		$methodAnnotations = $this->reader->getMethodAnnotations($method);
 
 		foreach ($methodAnnotations as $configuration) {
-
 			if ($configuration instanceof Sort) {
 				foreach ($configuration->getAvailableField() as $field) {
 					$this->availableFieldToSort->addField($field);
 				}
+				$this->availableFieldToSort->setDefault($configuration->getDefault());
 			}
 		}
 	}
