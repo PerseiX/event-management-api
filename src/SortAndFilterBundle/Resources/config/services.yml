@@ -25,3 +25,8 @@ services:
 
     available_field_to_sort:
         class: SortAndFilterBundle\Model\AvailableSorting
+
+    custom_sorting:
+        class: SortAndFilterBundle\Services\CustomSorting
+        arguments:
+            - '@sort_detail'
