@@ -13,7 +13,6 @@ authenticate.authorize:
         _format: json
     methods: [GET]
 
-
 authenticate.user_details:
     path:      /access-token/{accessToken}/refresh-token/{refreshToken}/user-details
     defaults:

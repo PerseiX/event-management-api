@@ -19,3 +19,8 @@ services:
         class: UserBundle\Subscriber\ConfirmationWindow
         tags:
           - { name: kernel.event_listener, event: fos_oauth_server.pre_authorization_process, method: onPreAuthorizationProcess }
+
+    logout_listener:
+          class: UserBundle\Subscriber\LogoutListener
+          arguments:
+              - "@fos_user.user_manager"
