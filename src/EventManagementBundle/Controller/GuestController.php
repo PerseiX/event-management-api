@@ -42,7 +42,7 @@ class GuestController extends AbstractApiController
 	 * @return Response
 	 *
 	 * @Scope(scope="guest.tag")
-	 * @Sort(availableField={"name", "createdAt"}, alias="guest_repository", default="name")
+	 * @Sort(availableField={"name", "createdAt", "id", "surname"}, alias="guest_repository", default="name")
 	 */
 	public function collectionAction(PaginatedRequest $paginatedRequest, Event $event)
 	{

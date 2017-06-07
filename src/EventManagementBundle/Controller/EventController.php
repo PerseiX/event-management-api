@@ -33,7 +33,7 @@ class EventController extends AbstractApiController
 	 * @return Response
 	 *
 	 * @Scope(scope="event.user")
-	 * @Sort(availableField={"name", "createdAt"}, alias="event_repository", default="name")
+	 * @Sort(availableField={"name", "createdAt", "eventTerm", "id"}, alias="event_repository", default="name")
 	 */
 	public function collectionAction(PaginatedRequest $paginatedRequest)
 	{

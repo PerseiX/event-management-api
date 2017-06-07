@@ -41,7 +41,7 @@ class TagController extends AbstractApiController
 	 *
 	 * @return Response
 	 *
-	 * @Sort(availableField={"name"}, alias="tag_repository", default="name")
+	 * @Sort(availableField={"name", "id"}, alias="tag_repository", default="id")
 	 */
 	public function collectionAction(PaginatedRequest $paginatedRequest, Event $event)
 	{
@@ -143,6 +143,7 @@ class TagController extends AbstractApiController
 	 * })
 	 *
 	 * @return Response
+	 *
 	 */
 	public function deleteAction(Tag $tag)
 	{
