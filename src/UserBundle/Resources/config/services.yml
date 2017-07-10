@@ -23,4 +23,4 @@ services:
     logout_listener:
           class: UserBundle\Subscriber\LogoutListener
           arguments:
-              - "@fos_user.user_manager"
+              - "@fos_user.user_manager.default"

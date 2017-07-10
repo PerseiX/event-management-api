@@ -144,6 +144,7 @@ class AbstractApiController extends FOSRestController
 			}
 		}
 
+		/** @var Form $child */
 		foreach ($form->all() as $child) {
 			if (!$child->isValid()) {
 				$errors[$child->getName()] = $this->getErrorMessages($child);
