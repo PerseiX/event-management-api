@@ -2,6 +2,7 @@
 
 namespace ApiBundle\Entity\Repository;
 
+use ApiBundle\Entity\AccessToken;
 use Doctrine\ORM\EntityRepository;
 
 /**

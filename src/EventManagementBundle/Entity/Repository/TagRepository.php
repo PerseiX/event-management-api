@@ -2,36 +2,18 @@
 
 namespace EventManagementBundle\Entity\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use ApiBundle\Entity\Repository\ApiRepository;
 use Doctrine\ORM\Query;
 use EventManagementBundle\Entity\Event;
-use EventManagementBundle\Entity\Tag;
 use EventManagementBundle\Representation\GuestRepresentation;
-use SortAndFilterBundle\Services\CustomSorting;
+
 
 /**
  * Class TagRepository
  * @package EventManagementBundle\Entity\Repository
  */
-class TagRepository extends EntityRepository
+class TagRepository extends ApiRepository
 {
-	/**
-	 * @var CustomSorting
-	 */
-	private $customerSorting;
-
-	/**
-	 * @param CustomSorting $customerSorting
-	 *
-	 * @return TagRepository
-	 */
-	public function setCustomerSorting(CustomSorting $customerSorting): TagRepository
-	{
-		$this->customerSorting = $customerSorting;
-
-		return $this;
-	}
-
 	/**
 	 * @param Event $event
 	 *
