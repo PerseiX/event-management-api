@@ -3,8 +3,6 @@ authenticate.code:
     defaults:
         _controller: UserBundle:Authenticate:code
     methods: [POST]
-#    requirements:
-#        code: '\s+'
 
 authenticate.authorize:
     path:      /authorize
@@ -14,11 +12,8 @@ authenticate.authorize:
     methods: [GET]
 
 authenticate.user_details:
-    path:      /access-token/{accessToken}/refresh-token/{refreshToken}/user-details
+    path: /access-token/{accessToken}/refresh-token/{refreshToken}/user-details
     defaults:
         _controller: UserBundle:Authenticate:userDetail
         _format: json
     methods: [POST]
-#    requirements:
-#        refreshToken: '\s+'
-#        accessToken: '\d+'
