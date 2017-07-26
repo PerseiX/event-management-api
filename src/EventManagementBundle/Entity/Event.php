@@ -1,10 +1,12 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
+
 namespace EventManagementBundle\Entity;
 
 use ApiBundle\Entity\Traits\CreatedAtTrait;
 use ApiBundle\Entity\Traits\IDTrait;
 use ApiBundle\Entity\Traits\ActiveTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use UserBundle\Entity\Traits\UserTrait;
 
@@ -44,14 +46,32 @@ class Event
 	protected $description;
 
 	/**
+	 * @var ArrayCollection
+	 *
 	 * @ORM\OneToMany(targetEntity="EventManagementBundle\Entity\Guest", mappedBy="event")
 	 */
 	protected $guest;
 
 	/**
+	 * @var ArrayCollection
+	 *
 	 * @ORM\OneToMany(targetEntity="EventManagementBundle\Entity\Tag", mappedBy="event")
 	 */
 	protected $tag;
+
+	/**
+	 * @var float
+	 *
+	 * @ORM\Column(type="float")
+	 */
+	protected $longitude;
+
+	/**
+	 * @var float
+	 *
+	 * @ORM\Column(type="float")
+	 */
+	protected $latitude;
 
 	/**
 	 * Event constructor.
@@ -60,6 +80,8 @@ class Event
 	{
 		$this->createdAt = new \DateTime();
 		$this->active    = false;
+		$this->guest     = new ArrayCollection();
+		$this->tag       = new ArrayCollection();
 	}
 
 	/**
@@ -71,11 +93,11 @@ class Event
 	}
 
 	/**
-	 * @param string $description
+	 * @param string|null $description
 	 *
-	 * @return $this
+	 * @return Event
 	 */
-	public function setDescription(string $description = null)
+	public function setDescription(string $description = null): Event
 	{
 		$this->description = $description;
 
@@ -91,11 +113,11 @@ class Event
 	}
 
 	/**
-	 * @param \DateTime $eventTerm
+	 * @param \DateTime|null $eventTerm
 	 *
-	 * @return $this
+	 * @return Event
 	 */
-	public function setEventTerm(\DateTime $eventTerm = null)
+	public function setEventTerm(\DateTime $eventTerm = null): Event
 	{
 		$this->eventTerm = $eventTerm;
 
@@ -111,11 +133,11 @@ class Event
 	}
 
 	/**
-	 * @param string $name
+	 * @param string|null $name
 	 *
-	 * @return $this
+	 * @return Event
 	 */
-	public function setName(string $name = null)
+	public function setName(string $name = null): Event
 	{
 		$this->name = $name;
 
@@ -125,9 +147,9 @@ class Event
 	/**
 	 * @param Guest $guest
 	 *
-	 * @return $this
+	 * @return Event
 	 */
-	public function addGuest(Guest $guest)
+	public function addGuest(Guest $guest): Event
 	{
 		$this->guest[] = $guest;
 
@@ -147,21 +169,19 @@ class Event
 	}
 
 	/**
-	 * @return Guest
+	 * @return ArrayCollection
 	 */
-	public function getGuest(): Guest
+	public function getGuest(): ArrayCollection
 	{
 		return $this->guest;
 	}
 
 	/**
-	 * Add tag
-	 *
-	 * @param \EventManagementBundle\Entity\Tag $tag
+	 * @param Tag $tag
 	 *
 	 * @return Event
 	 */
-	public function addTag(Tag $tag)
+	public function addTag(Tag $tag): Event
 	{
 		$this->tag[] = $tag;
 
@@ -170,10 +190,14 @@ class Event
 
 	/**
 	 * @param Tag $tag
+	 *
+	 * @return Event
 	 */
-	public function removeTag(Tag $tag)
+	public function removeTag(Tag $tag): Event
 	{
 		$this->tag->removeElement($tag);
+
+		return $this;
 	}
 
 	/**
@@ -182,5 +206,25 @@ class Event
 	public function getTag()
 	{
 		return $this->tag;
+	}
+
+	/**
+	 * @return float
+	 */
+	public function getLongitude(): float
+	{
+		return $this->longitude;
+	}
+
+	/**
+	 * @param float $longitude
+	 *
+	 * @return $this
+	 */
+	public function setLongitude(float $longitude): Event
+	{
+		$this->longitude = $longitude;
+
+		return $this;
 	}
 }
