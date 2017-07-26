@@ -29,6 +29,14 @@ EventManagementBundle\Representation\EventRepresentation:
             type: integer
             expose: true
 
+        latitude:
+            type: float
+            expose: true
+
+        longitude:
+            type: float
+            expose: true
+
 
     relations:
         -

@@ -209,9 +209,9 @@ class Event
 	}
 
 	/**
-	 * @return float
+	 * @return float|null
 	 */
-	public function getLongitude(): float
+	public function getLongitude(): ?float
 	{
 		return $this->longitude;
 	}
@@ -226,5 +226,25 @@ class Event
 		$this->longitude = $longitude;
 
 		return $this;
+	}
+
+	/**
+	 * @param float $latitude
+	 *
+	 * @return Event
+	 */
+	public function setLatitude(float $latitude): Event
+	{
+		$this->latitude = $latitude;
+
+		return $this;
+	}
+
+	/**
+	 * @return float|null
+	 */
+	public function getLatitude(): ?float
+	{
+		return $this->latitude;
 	}
 }
