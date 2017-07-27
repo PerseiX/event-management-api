@@ -74,6 +74,13 @@ class Event
 	protected $latitude;
 
 	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="string")
+	 */
+	protected $address;
+
+	/**
 	 * Event constructor.
 	 */
 	public function __construct()
@@ -246,5 +253,25 @@ class Event
 	public function getLatitude(): ?float
 	{
 		return $this->latitude;
+	}
+
+	/**
+	 * @return null|string
+	 */
+	public function getAddress(): ?string
+	{
+		return $this->address;
+	}
+
+	/**
+	 * @param string $address
+	 *
+	 * @return Event
+	 */
+	public function setAddress(string $address): Event
+	{
+		$this->address = $address;
+
+		return $this;
 	}
 }

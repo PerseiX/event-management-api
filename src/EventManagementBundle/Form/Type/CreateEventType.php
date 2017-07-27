@@ -28,7 +28,8 @@ class CreateEventType extends AbstractType
 			->add('eventTerm', DateType::class, ['widget' => 'single_text'])
 			->add('description', TextType::class)
 			->add('latitude', NumberType::class)
-			->add('longitude', NumberType::class);
+			->add('longitude', NumberType::class)
+			->add('address', TextType::class);
 	}
 
 	/**

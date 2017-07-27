@@ -42,7 +42,8 @@ class EventTransformer implements TransformerInterface
 		               ->setActive($input->getActive())
 		               ->setUserId($input->getUser()->getId())
 		               ->setLatitude($input->getLatitude())
-		               ->setLongitude($input->getLongitude());
+		               ->setLongitude($input->getLongitude())
+		               ->setAddress($input->getAddress());
 
 		return $representation;
 	}

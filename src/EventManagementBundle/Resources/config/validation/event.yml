@@ -11,3 +11,6 @@ EventManagementBundle\Entity\Event:
         eventTerm:
             - NotBlank: { message: Data wydarzenia nie może być pusta }
             - Type: datetime
+
+        address:
+            - Type: string

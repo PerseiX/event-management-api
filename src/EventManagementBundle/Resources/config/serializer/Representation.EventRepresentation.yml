@@ -37,6 +37,10 @@ EventManagementBundle\Representation\EventRepresentation:
             type: float
             expose: true
 
+        address:
+            type: string
+            expose: true
+
 
     relations:
         -

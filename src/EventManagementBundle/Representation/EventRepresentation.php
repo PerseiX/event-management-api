@@ -62,6 +62,11 @@ class EventRepresentation implements RepresentationInterface
 	private $longitude;
 
 	/**
+	 * @var string
+	 */
+	private $address;
+
+	/**
 	 * @return int
 	 */
 	public function getUserId(): int
@@ -259,5 +264,25 @@ class EventRepresentation implements RepresentationInterface
 	public function getLongitude(): float
 	{
 		return $this->longitude;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getAddress(): string
+	{
+		return $this->address;
+	}
+
+	/**
+	 * @param string $address
+	 *
+	 * @return EventRepresentation
+	 */
+	public function setAddress(string $address): EventRepresentation
+	{
+		$this->address = $address;
+
+		return $this;
 	}
 }
