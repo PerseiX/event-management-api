@@ -1,5 +1,5 @@
 services:
-    repository.event:
+    repository.event: &DEFULT_REPOSITORY
         class: Doctrine\ORM\EntityRepository
         factory:
             - '@doctrine.orm.default_entity_manager'
@@ -10,21 +10,13 @@ services:
             - { name: api.sort_and_filtered_repository }
 
     repository.guest:
+        <<: *DEFULT_REPOSITORY
         class: Doctrine\ORM\EntityRepository
-        factory:
-            - '@doctrine.orm.default_entity_manager'
-            - getRepository
         arguments:
             - 'EventManagementBundle:Guest'
-        tags:
-            - { name: api.sort_and_filtered_repository }
 
     repository.tag:
+        <<: *DEFULT_REPOSITORY
         class: Doctrine\ORM\EntityRepository
-        factory:
-            - '@doctrine.orm.default_entity_manager'
-            - getRepository
         arguments:
             - 'EventManagementBundle:Tag'
-        tags:
-            - { name: api.sort_and_filtered_repository }

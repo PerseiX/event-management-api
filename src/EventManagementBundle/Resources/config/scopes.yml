@@ -1,12 +1,10 @@
 services:
-    guest.tag_transformer_scope:
+    event_management_event_transformer_scope.guest_tag_scope: &DEFAULT_SCOPE
         class: EventManagementBundle\Transformer\Scope\GuestTagScope
         parent: 'api.abstract_transformer_scope'
         tags:
             - { name: api.transformer_scope }
 
-    event.user_transformer_scope:
+    event_management_event_transformer_scope.user_scope:
         class: EventManagementBundle\Transformer\Scope\UserScope
-        parent: 'api.abstract_transformer_scope'
-        tags:
-            - { name: api.transformer_scope }
+        <<: *DEFAULT_SCOPE

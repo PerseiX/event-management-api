@@ -1,33 +1,29 @@
 services:
-    tag.transformer:
+    event_management_event_transformer.tag_transformer: &DEFAULT_TRANSFORMER
         class: EventManagementBundle\Transformer\TagTransformer
         tags:
             - { name: api.transformer }
 
-    tag.colelction.transformer:
-        class: EventManagementBundle\Transformer\Collection\TagCollectionTransformer
-        parent: 'abstract.transformer'
-        tags:
-            - { name: api.transformer }
-
-    guest.transformer:
+    event_management_event_transformer.guest_transformer:
         class: EventManagementBundle\Transformer\GuestTransformer
-        tags:
-            - { name: api.transformer }
+        <<: *DEFAULT_TRANSFORMER
 
-    guest.colelction.transformer:
-        class: EventManagementBundle\Transformer\Collection\GuestCollectionTransformer
-        parent: 'abstract.transformer'
-        tags:
-            - { name: api.transformer }
-
-    event.transformer:
+    event_management_event_transformer.event_transformer:
         class: EventManagementBundle\Transformer\EventTransformer
-        tags:
-            - { name: api.transformer }
+        <<: *DEFAULT_TRANSFORMER
 
-    event.colelction.transformer:
+
+#    COLLECTIONS TRANSFORMERS
+    event_management_event_transformer_collection.event_collection_transformer: &DEFAULT_COLLECTION_TRANSFORMER
         class: EventManagementBundle\Transformer\Collection\EventCollectionTransformer
         parent: 'abstract.transformer'
         tags:
             - { name: api.transformer }
+
+    event_management_event_transformer_collection.tag_collection_transformer:
+        class: EventManagementBundle\Transformer\Collection\TagCollectionTransformer
+        <<: *DEFAULT_COLLECTION_TRANSFORMER
+
+    event_management_event_transformer_collection.guest_collection_transformer:
+        class: EventManagementBundle\Transformer\Collection\GuestCollectionTransformer
+        <<: *DEFAULT_COLLECTION_TRANSFORMER
