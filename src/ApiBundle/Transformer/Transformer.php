@@ -1,4 +1,5 @@
 <?php
+
 namespace ApiBundle\Transformer;
 
 use ApiBundle\Representation\RepresentationInterface;
@@ -34,13 +35,17 @@ class Transformer
 
 	/**
 	 * @param TransformerInterface $transformer
+	 *
+	 * @return Transformer
 	 */
-	public function addTransformer(TransformerInterface $transformer): void
+	public function addTransformer(TransformerInterface $transformer): Transformer
 	{
 		if (true === in_array($transformer, $this->transformers)) {
 			throw new Exception('This transformer is already added to transformers collection');
 		}
 		$this->transformers[] = $transformer;
+
+		return $this;
 	}
 
 	/**
@@ -50,11 +55,11 @@ class Transformer
 	 */
 	public function transform($input): RepresentationInterface
 	{
-		$transformer = $this->getTransformer($input);
-
+		//TODO ScopeRepository exchange to Context
+		$transformer    = $this->getTransformer($input);
 		$representation = $transformer->transform($input);
 		if ($representation instanceof RepresentationInterface) {
-			$this->handle($representation);
+			$this->handle($representation, $input);
 		}
 
 		return $representation;
@@ -76,15 +81,17 @@ class Transformer
 	}
 
 	/**
-	 * @param RepresentationInterface $input
+	 * @param RepresentationInterface $representation
+	 * @param                         $input
 	 */
-	public function handle(RepresentationInterface $input)
+	public function handle(RepresentationInterface $representation, $input)
 	{
+//		print_r(unserialize(serialize($this->scopeRepository->getScopes())));
 		/** @var ScopeInterface $scope */
 		foreach ($this->scopeRepository->getScopes() as $scopeName) {
 			$scope = $this->scopeRepository->getSupportedScope($scopeName);
-			if ($scope->support($input)) {
-				$scope->extendedTransformer($input);
+			if ($scope->support($representation, $input)) {
+				$scope->applyScope($representation, $input);
 			}
 		}
 	}

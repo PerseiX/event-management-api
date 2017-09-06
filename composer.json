@@ -36,7 +36,8 @@
         "willdurand/hateoas-bundle": "^1.2",
         "nelmio/api-doc-bundle": "^2.13",
         "friendsofsymfony/rest-bundle": "^2.2",
-        "doctrine/doctrine-migrations-bundle": "^1.0"
+        "doctrine/doctrine-migrations-bundle": "^1.0",
+        "phpunit/phpunit": "^6.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

@@ -10,7 +10,7 @@ use EventManagementBundle\Entity\Event;
 use EventManagementBundle\Entity\Guest;
 use EventManagementBundle\Entity\Tag;
 use EventManagementBundle\Form\Type\GuestType;
-use EventManagementBundle\Model\GuestModel;
+use EventManagementBundle\Model\GuestCollectionModel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -48,7 +48,7 @@ class GuestController extends AbstractApiController
 	{
 		$query = $this->get('repository.guest')->guestsToEventCollectionQuery($event);
 
-		return $this->paginatedResponse(GuestModel::class, $query, $paginatedRequest, ['eventId' => $event->getId()]);
+		return $this->paginatedResponse(GuestCollectionModel::class, $query, $paginatedRequest, ['eventId' => $event->getId()]);
 	}
 
 	/**
@@ -83,7 +83,7 @@ class GuestController extends AbstractApiController
 	{
 		$query = $this->get('repository.guest')->guestsToEventAndTagCollectionQuery($event, $tag);
 
-		return $this->paginatedResponse(GuestModel::class, $query, $paginatedRequest, [
+		return $this->paginatedResponse(GuestCollectionModel::class, $query, $paginatedRequest, [
 			'eventId' => $event->getId(),
 			'tagId'   => $tag->getId()
 		]);

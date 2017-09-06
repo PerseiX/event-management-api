@@ -10,7 +10,7 @@ use Doctrine\ORM\ORMException;
 use EventManagementBundle\Entity\Event;
 use EventManagementBundle\Form\Type\CreateEventType;
 use EventManagementBundle\Form\Type\EditEventType;
-use EventManagementBundle\Model\EventModel;
+use EventManagementBundle\Model\EventCollectionModel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -40,9 +40,8 @@ class EventController extends AbstractApiController
 		$this->denyAccessUnlessGranted(AbstractVoter::VIEW_COLLECTION, new Event());
 		$query = $this->get('repository.event')->eventsCollectionQuery();
 
-		return $this->paginatedResponse(EventModel::class, $query, $paginatedRequest);
+		return $this->paginatedResponse(EventCollectionModel::class, $query, $paginatedRequest);
 	}
-
 	/**
 	 * @param Event $event
 	 *

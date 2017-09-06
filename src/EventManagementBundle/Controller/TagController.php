@@ -9,7 +9,7 @@ use Doctrine\ORM\ORMException;
 use EventManagementBundle\Entity\Event;
 use EventManagementBundle\Entity\Tag;
 use EventManagementBundle\Form\Type\TagType;
-use EventManagementBundle\Model\TagModel;
+use EventManagementBundle\Model\TagCollectionModel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -47,7 +47,7 @@ class TagController extends AbstractApiController
 	{
 		$query = $this->get('repository.tag')->tagsCollectionQuery($event);
 
-		return $this->paginatedResponse(TagModel::class, $query, $paginatedRequest, ['eventId' => $event->getId()]);
+		return $this->paginatedResponse(TagCollectionModel::class, $query, $paginatedRequest, ['eventId' => $event->getId()]);
 	}
 
 	/**

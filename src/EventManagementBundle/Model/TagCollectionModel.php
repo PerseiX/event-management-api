@@ -5,10 +5,10 @@ namespace EventManagementBundle\Model;
 use ApiBundle\Model\AbstractModelCollection;
 
 /**
- * Class EventModel
+ * Class TagCollectionModel
  * @package EventManagementBundle\Model
  */
-class EventModel extends AbstractModelCollection
+class TagCollectionModel extends AbstractModelCollection
 {
 
 }

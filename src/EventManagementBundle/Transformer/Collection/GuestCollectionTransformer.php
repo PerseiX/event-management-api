@@ -5,7 +5,7 @@ namespace EventManagementBundle\Transformer\Collection;
 use ApiBundle\Model\AbstractModelCollection;
 use ApiBundle\Representation\RepresentationInterface;
 use ApiBundle\Transformer\AbstractTransformer;
-use EventManagementBundle\Model\GuestModel;
+use EventManagementBundle\Model\GuestCollectionModel;
 use EventManagementBundle\Representation\GuestCollectionRepresentation;
 
 /**
@@ -21,7 +21,7 @@ class GuestCollectionTransformer extends AbstractTransformer
 	 */
 	public function support($input): bool
 	{
-		return $input instanceof GuestModel;
+		return $input instanceof GuestCollectionModel;
 	}
 
 	/**

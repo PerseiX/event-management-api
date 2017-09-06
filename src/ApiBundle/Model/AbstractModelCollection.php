@@ -11,7 +11,7 @@ abstract class AbstractModelCollection
 	/**
 	 * @var array
 	 */
-	protected $collection;
+	protected $collection = [];
 
 	/**
 	 * AbstractModelCollection constructor.
@@ -32,15 +32,14 @@ abstract class AbstractModelCollection
 	}
 
 	/**
-	 * @param $collection
+	 * @param array $collection
 	 *
 	 * @return $this
 	 */
-	public function setCollection($collection)
+	public function setCollection(array $collection)
 	{
 		$this->collection = $collection;
 
 		return $this;
 	}
-
 }

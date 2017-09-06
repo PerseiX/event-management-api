@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
  * Class AbstractApiController
  * @package ApiBundle\Controller
  */
-class AbstractApiController extends FOSRestController
+abstract class AbstractApiController extends FOSRestController
 {
 	/**
 	 * @param                  $class

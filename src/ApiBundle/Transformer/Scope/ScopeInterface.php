@@ -16,16 +16,18 @@ interface ScopeInterface
 	public function getScopeName(): string;
 
 	/**
-	 * @param $input
+	 * @param RepresentationInterface $representation
+	 * @param                         $input
 	 *
 	 * @return RepresentationInterface
 	 */
-	public function extendedTransformer($input): RepresentationInterface;
+	public function applyScope(RepresentationInterface $representation, $input): RepresentationInterface;
 
 	/**
-	 * @param $input
+	 * @param RepresentationInterface $representation
+	 * @param                         $input
 	 *
 	 * @return bool
 	 */
-	public function support($input): bool;
+	public function support(RepresentationInterface $representation, $input): bool;
 }

@@ -3,10 +3,8 @@
 namespace EventManagementBundle\Entity\Repository;
 
 use ApiBundle\Entity\Repository\ApiRepository;
-use Doctrine\ORM\Query;
 use EventManagementBundle\Entity\Event;
-use EventManagementBundle\Representation\GuestRepresentation;
-
+use Doctrine\ORM\Query;
 
 /**
  * Class TagRepository
@@ -29,17 +27,4 @@ class TagRepository extends ApiRepository
 		return $query;
 	}
 
-	/**
-	 * @param GuestRepresentation $guestRepresentation
-	 *
-	 * @return array
-	 */
-	public function getTagsToGuest(GuestRepresentation $guestRepresentation): array
-	{
-		return $this->createQueryBuilder('tag_repository')
-		            ->andWhere('tag_repository.id IN (:tagsId)')
-		            ->setParameter('tagsId', $guestRepresentation->getTagsId())
-		            ->getQuery()
-		            ->getResult();
-	}
 }

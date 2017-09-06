@@ -5,7 +5,7 @@ namespace EventManagementBundle\Transformer\Collection;
 use ApiBundle\Model\AbstractModelCollection;
 use ApiBundle\Representation\RepresentationInterface;
 use ApiBundle\Transformer\AbstractTransformer;
-use EventManagementBundle\Model\TagModel;
+use EventManagementBundle\Model\TagCollectionModel;
 use EventManagementBundle\Representation\TagCollectionRepresentation;
 
 /**
@@ -21,7 +21,7 @@ class TagCollectionTransformer extends AbstractTransformer
 	 */
 	public function support($input): bool
 	{
-		return $input instanceof TagModel;
+		return $input instanceof TagCollectionModel;
 	}
 
 	/**

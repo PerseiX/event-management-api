@@ -1,13 +1,14 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace EventManagementBundle\Transformer\Scope;
 
-use ApiBundle\Representation\RepresentationInterface;
-use ApiBundle\Transformer\Scope\AbstractTransformerScope;
 use EventManagementBundle\Representation\EventRepresentation;
-use Negotiation\Exception\InvalidArgument;
+use ApiBundle\Transformer\Scope\AbstractTransformerScope;
+use ApiBundle\Representation\RepresentationInterface;
 use UserBundle\Representation\UserRepresentation;
+use Negotiation\Exception\InvalidArgument;
+use EventManagementBundle\Entity\Event;
 
 /**
  * Class UserScope
@@ -15,6 +16,18 @@ use UserBundle\Representation\UserRepresentation;
  */
 class UserScope extends AbstractTransformerScope
 {
+
+	/**
+	 * @param RepresentationInterface $representation
+	 * @param                         $input
+	 *
+	 * @return bool
+	 */
+	public function support(RepresentationInterface $representation, $input): bool
+	{
+		return $representation instanceof EventRepresentation && $input instanceof Event;
+	}
+
 	/**
 	 * @return string
 	 */
@@ -24,20 +37,19 @@ class UserScope extends AbstractTransformerScope
 	}
 
 	/**
-	 * @param $input
+	 * @param RepresentationInterface $representation
+	 * @param                         $input
 	 *
 	 * @return RepresentationInterface
 	 */
-	public function extendedTransformer($input): RepresentationInterface
+	public function applyScope(RepresentationInterface $representation, $input): RepresentationInterface
 	{
-		if (!$input instanceof EventRepresentation) {
+		if (false === $input instanceof Event) {
 			throw new InvalidArgument("Invalid argument. This class is not allowed.");
 		}
 
-		$user = $this->getEm()->getRepository('UserBundle:User')->getUser($input);
-
 		/** @var UserRepresentation $userRepresentation */
-		$userRepresentation = $this->getTransformer()->transform($user);
+		$userRepresentation = $this->getTransformer()->transform($input->getUser());
 
 		/** @var EventRepresentation $input */
 		$input->setUser($userRepresentation);
@@ -45,13 +57,4 @@ class UserScope extends AbstractTransformerScope
 		return $input;
 	}
 
-	/**
-	 * @param $input
-	 *
-	 * @return bool
-	 */
-	public function support($input): bool
-	{
-		return $input instanceof EventRepresentation;
-	}
 }

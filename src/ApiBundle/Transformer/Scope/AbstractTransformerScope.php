@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace ApiBundle\Transformer\Scope;
 
@@ -17,28 +17,28 @@ abstract class AbstractTransformerScope implements ScopeInterface
 	 */
 	private $transformer;
 
-	/**
-	 * @var ObjectManager
-	 */
-	protected $em;
-
-	/**
-	 * AbstractTransformerScope constructor.
-	 *
-	 * @param ObjectManager $em
-	 */
-	public function __construct(ObjectManager $em)
-	{
-		$this->em = $em;
-	}
-
-	/**
-	 * @return ObjectManager
-	 */
-	public function getEm(): ObjectManager
-	{
-		return $this->em;
-	}
+//	/**
+//	 * @var ObjectManager
+//	 */
+//	protected $em;
+//
+//	/**
+//	 * AbstractTransformerScope constructor.
+//	 *
+//	 * @param ObjectManager $em
+//	 */
+//	public function __construct(ObjectManager $em)
+//	{
+//		$this->em = $em;
+//	}
+//
+//	/**
+//	 * @return ObjectManager
+//	 */
+//	public function getEm(): ObjectManager
+//	{
+//		return $this->em;
+//	}
 
 	/**
 	 * @return Transformer

@@ -4,6 +4,7 @@ namespace EventManagementBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,7 +26,10 @@ class EditEventType extends AbstractType
 		$builder
 			->add('name', TextType::class)
 			->add('eventTerm', DateType::class, ['widget' => 'single_text'])
-			->add('description', TextType::class);
+			->add('description', TextType::class)
+			->add('latitude', NumberType::class)
+			->add('longitude', NumberType::class)
+			->add('address', TextType::class);
 	}
 
 	/**

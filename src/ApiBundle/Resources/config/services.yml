@@ -20,8 +20,8 @@ services:
     api.abstract_transformer_scope:
         class: ApiBundle\Transformer\Scope\AbstractTransformerScope
         abstract: true
-        arguments:
-            - '@doctrine.orm.entity_manager'
+#        arguments:
+#            - '@doctrine.orm.entity_manager'
         calls:
             - [setTransformer, ['@api.main_transformer']]
 
