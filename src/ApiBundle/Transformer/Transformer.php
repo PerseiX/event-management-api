@@ -41,7 +41,7 @@ class Transformer
 	public function addTransformer(TransformerInterface $transformer): Transformer
 	{
 		if (true === in_array($transformer, $this->transformers)) {
-			throw new Exception('This transformer is already added to transformers collection');
+			throw new \LogicException('This transformer is already added to transformers collection');
 		}
 		$this->transformers[] = $transformer;
 
@@ -55,7 +55,6 @@ class Transformer
 	 */
 	public function transform($input): RepresentationInterface
 	{
-		//TODO ScopeRepository exchange to Context
 		$transformer    = $this->getTransformer($input);
 		$representation = $transformer->transform($input);
 		if ($representation instanceof RepresentationInterface) {
@@ -72,7 +71,9 @@ class Transformer
 	 */
 	public function getTransformer($input): TransformerInterface
 	{
+
 		foreach ($this->transformers as $transformer) {
+
 			if ($transformer->support($input)) {
 				return $transformer;
 			}
@@ -86,7 +87,6 @@ class Transformer
 	 */
 	public function handle(RepresentationInterface $representation, $input)
 	{
-//		print_r(unserialize(serialize($this->scopeRepository->getScopes())));
 		/** @var ScopeInterface $scope */
 		foreach ($this->scopeRepository->getScopes() as $scopeName) {
 			$scope = $this->scopeRepository->getSupportedScope($scopeName);

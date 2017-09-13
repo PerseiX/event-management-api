@@ -15,5 +15,4 @@
 /web/bundles/
 .idea
 composer.lock
-/tests
 !var/DoctrineMigrations/
