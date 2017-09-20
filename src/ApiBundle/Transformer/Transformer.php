@@ -2,11 +2,10 @@
 
 namespace ApiBundle\Transformer;
 
-use ApiBundle\Representation\RepresentationInterface;
-use ApiBundle\Transformer\Scope\ScopeInterface;
-use ApiBundle\Transformer\Scope\ScopeRepository;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Translation\Exception\NotFoundResourceException;
+use ApiBundle\Representation\RepresentationInterface;
+use ApiBundle\Transformer\Scope\ScopeRepository;
+use ApiBundle\Transformer\Scope\ScopeInterface;
 
 /**
  * Class Transformer
@@ -14,7 +13,9 @@ use Symfony\Component\Translation\Exception\NotFoundResourceException;
  */
 class Transformer
 {
-	/** @var TransformerInterface */
+	/**
+	 * @var TransformerInterface
+	 */
 	protected $transformers;
 
 	/**
@@ -71,9 +72,7 @@ class Transformer
 	 */
 	public function getTransformer($input): TransformerInterface
 	{
-
 		foreach ($this->transformers as $transformer) {
-
 			if ($transformer->support($input)) {
 				return $transformer;
 			}
@@ -88,10 +87,14 @@ class Transformer
 	public function handle(RepresentationInterface $representation, $input)
 	{
 		/** @var ScopeInterface $scope */
-		foreach ($this->scopeRepository->getScopes() as $scopeName) {
-			$scope = $this->scopeRepository->getSupportedScope($scopeName);
-			if ($scope->support($representation, $input)) {
-				$scope->applyScope($representation, $input);
+		$scopes = $this->scopeRepository->getScopes();
+		if (true == is_array($scopes)) {
+			foreach ($scopes as $scopeName) {
+				$scope = $this->scopeRepository->getSupportedScope($scopeName);
+
+				if (true === $scope->support($representation, $input)) {
+					$scope->applyScope($representation, $input);
+				}
 			}
 		}
 	}

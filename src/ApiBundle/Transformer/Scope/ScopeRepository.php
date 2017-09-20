@@ -13,12 +13,21 @@ class ScopeRepository
 	/**
 	 * @var array
 	 */
-	private $scopes = [];
+	private $scopes;
 
 	/**
 	 * @var array
 	 */
-	private $supportedScopes = [];
+	private $supportedScopes;
+
+	/**
+	 * ScopeRepository constructor.
+	 */
+	public function __construct()
+	{
+		$this->scopes          = [];
+		$this->supportedScopes = [];
+	}
 
 	/**
 	 * @param string $scope
