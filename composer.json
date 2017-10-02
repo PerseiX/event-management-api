@@ -37,8 +37,15 @@
         "nelmio/api-doc-bundle": "^2.13",
         "friendsofsymfony/rest-bundle": "^2.2",
         "doctrine/doctrine-migrations-bundle": "^1.0",
-        "phpunit/phpunit": "^6.3"
+        "phpunit/phpunit": "^6.3",
+        "persei/persei-api": "1.0.*"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:PerseiX/persei-api.git"
+        }
+    ],
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.0"

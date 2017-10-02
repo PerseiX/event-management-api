@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace ApiBundle\Entity\Repository;
+namespace SortAndFilterBundle\Model\Repository;
 
-use Doctrine\ORM\EntityRepository;
 use SortAndFilterBundle\Services\CustomSorting;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * Class ApiRepository

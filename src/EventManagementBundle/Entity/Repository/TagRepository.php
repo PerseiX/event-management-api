@@ -2,7 +2,8 @@
 
 namespace EventManagementBundle\Entity\Repository;
 
-use ApiBundle\Entity\Repository\ApiRepository;
+
+use SortAndFilterBundle\Model\Repository\ApiRepository;
 use EventManagementBundle\Entity\Event;
 use Doctrine\ORM\Query;
 
